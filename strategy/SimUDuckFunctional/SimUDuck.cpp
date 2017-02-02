@@ -52,7 +52,7 @@ namespace Quack
 class Duck
 {
 public:
-	Duck(function<void()> flyBehavior, function<void()> quackBehavior, function<void()> danceBehavior)
+	Duck(const function<void()>& flyBehavior, const function<void()>& quackBehavior, const function<void()>& danceBehavior)
 		: m_quackBehavior(quackBehavior),
 		m_danceBehavior(danceBehavior),
 		m_flyBehavior(flyBehavior)
@@ -78,10 +78,10 @@ public:
 	{
 		m_danceBehavior();
 	}
-	void SetFlyBehavior(function<void()> && flyBehavior)
+	void SetFlyBehavior(const function<void()>& flyBehavior)
 	{
 		assert(flyBehavior);
-		m_flyBehavior = move(flyBehavior);
+		m_flyBehavior = flyBehavior;
 	}
 	virtual void Display() const = 0;
 	virtual ~Duck() {};
@@ -183,7 +183,7 @@ void main()
 	DeckoyDuck deckoyDuck;
 	PlayWithDuck(deckoyDuck);
 	ModelDuck modelDuck;
-	PlayWithDuck(modelDuck);
+	PlayWithDuck(modelDuck);	
 	modelDuck.SetFlyBehavior(Fly::WithWings);
 	PlayWithDuck(modelDuck);
 }
