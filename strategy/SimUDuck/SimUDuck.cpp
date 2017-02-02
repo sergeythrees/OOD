@@ -45,7 +45,16 @@ public:
 	void Fly() override
 	{
 		cout << "I'm flying with wings!!" << endl;
+		++m_FlightNumber;
+		PrintFlightState();
 	}
+
+private:
+	void PrintFlightState()
+	{
+		cout << "Number of flight:" << m_FlightNumber << endl;
+	}
+	size_t m_FlightNumber;
 };
 
 class FlyNoWay : public IFlyBehavior
@@ -196,7 +205,11 @@ void PlayWithDuck(Duck & duck)
 {
 	duck.Quack();
 	duck.Dance();
-	duck.Fly();
+	for (size_t i = 0; i < 5; ++i)
+	{
+		duck.Fly();
+	}
+
 	DrawDuck(duck);
 }
 
@@ -204,7 +217,6 @@ void PlayWithDuck(Duck & duck)
 void main()
 {
 	MallardDuck mallarDuck;
-	PlayWithDuck(mallarDuck);
 	RedheadDuck redheadDuck;
 	PlayWithDuck(redheadDuck);
 	RubberDuck rubberDuck;
