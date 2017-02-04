@@ -24,12 +24,15 @@ namespace Dance
 
 namespace Fly
 {
-	auto WithWings = [](size_t flightNumber = 0) mutable 
+	function<void()> MakeFlyWithWingsBehavior()
 	{
-		cout << "I'm flying with wings!!" << endl;
-		++flightNumber;
-		cout << "Number of flight:" << flightNumber << endl;
-	};
+		size_t flightNumber = 0;
+		return [flightNumber]() mutable
+		{
+			++flightNumber;
+			cout << "I'm flying with wings for the " << flightNumber << " time" << endl;
+		};
+	}
 
 	auto NoWay = []() {};
 }
@@ -54,13 +57,11 @@ class Duck
 public:
 	Duck(const function<void()>& flyBehavior, const function<void()>& quackBehavior, const function<void()>& danceBehavior)
 		: m_quackBehavior(quackBehavior),
-		m_danceBehavior(danceBehavior),
-		m_flyBehavior(flyBehavior)
-
+		m_danceBehavior(danceBehavior)
 	{
 		assert(m_quackBehavior);
 		assert(m_danceBehavior);
-		assert(flyBehavior);
+		SetFlyBehavior(flyBehavior);
 	}
 	void Quack() const
 	{
@@ -95,7 +96,7 @@ class MallardDuck : public Duck
 {
 public:
 	MallardDuck()
-		: Duck(Fly::WithWings, Quack::Quack, Dance::Valse)
+		: Duck(Fly::MakeFlyWithWingsBehavior(), Quack::Quack, Dance::Valse)
 	{
 	}
 
@@ -109,7 +110,7 @@ class RedheadDuck : public Duck
 {
 public:
 	RedheadDuck()
-		: Duck(Fly::WithWings, Quack::Quack, Dance::Minuet)
+		: Duck(Fly::MakeFlyWithWingsBehavior(), Quack::Quack, Dance::Minuet)
 	{
 	}
 	void Display() const override
@@ -133,7 +134,7 @@ class RubberDuck : public Duck
 {
 public:
 	RubberDuck()
-		: Duck(Fly::NoWay,Quack::Quack, Dance::NoWay)
+		: Duck(Fly::NoWay, Quack::Quack, Dance::NoWay)
 	{
 	}
 	void Display() const override
@@ -163,13 +164,12 @@ void DrawDuck(Duck const& duck)
 void PlayWithDuck(Duck & duck)
 {
 	duck.Quack();
+	DrawDuck(duck);
 	duck.Dance();
 	for (size_t i = 0; i < 5; ++i)
 	{
 		duck.Fly();
 	}
-
-	DrawDuck(duck);
 }
 
 
@@ -184,6 +184,6 @@ void main()
 	PlayWithDuck(deckoyDuck);
 	ModelDuck modelDuck;
 	PlayWithDuck(modelDuck);	
-	modelDuck.SetFlyBehavior(Fly::WithWings);
+	modelDuck.SetFlyBehavior(Fly::MakeFlyWithWingsBehavior());
 	PlayWithDuck(modelDuck);
 }
