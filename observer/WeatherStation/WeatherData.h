@@ -33,33 +33,61 @@ private:
 class CStatsDisplay : public IObserver<SWeatherInfo>
 {
 private:
+	class Stats
+	{
+	public:
+		double min = std::numeric_limits<double>::infinity();
+		double max = -std::numeric_limits<double>::infinity();
+		double average = 0;
+		void Update(const double& value)
+		{
+			if (min > value)
+			{
+				min = value;
+			}
+			if (max < value)
+			{
+				max = value;
+			}
+			m_acc += value;
+			++m_countAcc;
+			average = m_acc / m_countAcc;
+		}
+		void Print()
+		{
+			std::cout << "	max : " << max << std::endl;
+			std::cout << "	min : " << min << std::endl;
+			std::cout << "	average : " << average << std::endl;
+		}
+	private:
+		double m_acc = 0;
+		unsigned m_countAcc = 0;
+	};
+	
 	/* Метод Update сделан приватным, чтобы ограничить возможность его вызова напрямую
 	Классу CObservable он будет доступен все равно, т.к. в интерфейсе IObserver он
 	остается публичным
 	*/
 	void Update(SWeatherInfo const& data) override
 	{
-		if (m_minTemperature > data.temperature)
-		{
-			m_minTemperature = data.temperature;
-		}
-		if (m_maxTemperature < data.temperature)
-		{
-			m_maxTemperature = data.temperature;
-		}
-		m_accTemperature += data.temperature;
-		++m_countAcc;
+		tempStats.Update(data.temperature);
+		humStats.Update(data.humidity);
+		pressStats.Update(data.pressure);
 
-		std::cout << "Max Temp " << m_maxTemperature << std::endl;
-		std::cout << "Min Temp " << m_minTemperature << std::endl;
-		std::cout << "Average Temp " << (m_accTemperature / m_countAcc) << std::endl;
-		std::cout << "----------------" << std::endl;
+		std::cout << "Temperature stats: " << std::endl;
+		tempStats.Print();
+		std::cout << "Humidify stats: " << std::endl;
+		humStats.Print();
+		std::cout << "Pressure stats: " << std::endl;
+		pressStats.Print();
+
 	}
+	Stats tempStats;
+	Stats humStats;
+	Stats pressStats;
 
-	double m_minTemperature = std::numeric_limits<double>::infinity();
-	double m_maxTemperature = -std::numeric_limits<double>::infinity();
-	double m_accTemperature = 0;
-	unsigned m_countAcc = 0;
+	
+	
 
 };
 
