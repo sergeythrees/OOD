@@ -2,24 +2,16 @@
 
 int main()
 {
-	CWeatherData wd;
-
+	CWeatherData in;
+	CWeatherData out;
 	CDisplay display;
-	wd.RegisterObserver(display, 3);
-
-	CStatsDisplay statsDisplay;
-	wd.RegisterObserver(statsDisplay, 2);
-
-	CDisplay display2;
-	wd.RegisterObserver(display2, 1);
-
-	wd.SetMeasurements(3, 0.7, 760);
-	wd.SetMeasurements(4, 0.8, 761);
-
-	wd.RemoveObserver(statsDisplay);
-
-	wd.SetMeasurements(10, 0.8, 761);
-	wd.SetMeasurements(-10, 0.8, 761);
+	
+	in.SetName("in");
+	out.SetName("out");
+	in.RegisterObserver(display,  1);
+	out.RegisterObserver(display, 1);
+	in.SetMeasurements(12, 4, 5);
+	out.SetMeasurements(0, 2, 4);
 
 	return 0;
 }

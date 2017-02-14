@@ -14,7 +14,7 @@ template <typename T>
 class IObserver
 {
 public:
-	virtual void Update(T const& data) = 0;
+	virtual void Update(T const& data, const std::string& observableName) = 0;
 	virtual ~IObserver() = default;
 };
 
@@ -30,6 +30,8 @@ public:
 	virtual void RegisterObserver(IObserver<T> & observer, unsigned int priority) = 0;
 	virtual void NotifyObservers() = 0;
 	virtual void RemoveObserver(IObserver<T> & observer) = 0;
+	virtual std::string GetName() const = 0;
+	virtual void SetName(const std::string& name) = 0;
 };
 
 // Реализация интерфейса IObservable
@@ -54,7 +56,7 @@ public:
 		T data = GetChangedData();
 		for (auto current : m_priorities)
 		{
-			(current.second)->Update(data);
+			(current.second)->Update(data, m_name);
 		}
 	}
 
@@ -70,13 +72,21 @@ public:
 			}
 		}
 	}
-
+	void SetName(std::string const& name) override
+	{
+		m_name = name;
+	}
+	std::string GetName() const override
+	{
+		return m_name;
+	}
 protected:
 	// Классы-наследники должны перегрузить данный метод, 
 	// в котором возвращать информацию об изменениях в объекте
 	virtual T GetChangedData()const = 0;
 
 private:
+	std::string m_name;
 	std::set<ObserverType *> m_observers;
 	std::map<unsigned int, ObserverType *> m_priorities;
 };

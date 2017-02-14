@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <iostream>
 #include <vector>
+#include <string>
 #include <algorithm>
 #include <climits>
 #include "Observer.h"
@@ -22,8 +23,9 @@ private:
 		остается публичным
 	*/
 
-	void Update(SWeatherInfo const& data) override
+	void Update(SWeatherInfo const& data, const string& observableName) override
 	{
+		std::cout << observableName << endl;
 		std::cout << "Current Temp " << data.temperature << std::endl;
 		std::cout << "Current Hum " << data.humidity << std::endl;
 		std::cout << "Current Pressure " << data.pressure << std::endl;
@@ -70,19 +72,19 @@ private:
 	Классу CObservable он будет доступен все равно, т.к. в интерфейсе IObserver он
 	остается публичным
 	*/
-	void Update(SWeatherInfo const& data) override
+	void Update(SWeatherInfo const& data, const string& observableName) override
 	{
 		tempStats.Update(data.temperature);
 		humStats.Update(data.humidity);
 		pressStats.Update(data.pressure);
 
+		std::cout << observableName << endl;
 		std::cout << "Temperature stats: " << std::endl;
 		tempStats.Print();
 		std::cout << "Humidify stats: " << std::endl;
 		humStats.Print();
 		std::cout << "Pressure stats: " << std::endl;
 		pressStats.Print();
-
 	}
 	Stats tempStats;
 	Stats humStats;
