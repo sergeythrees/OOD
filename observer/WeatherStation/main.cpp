@@ -20,5 +20,6 @@ int main()
 
 	wd.SetMeasurements(10, 0.8, 761);
 	wd.SetMeasurements(-10, 0.8, 761);
+
 	return 0;
 }

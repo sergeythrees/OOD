@@ -43,7 +43,7 @@ public:
 	{
 		if (m_observers.count(&observer) == 0)
 		{
-			m_observers.emplace(&observer);
+			m_observers.insert(&observer);
 			m_priorities.emplace(priority, &observer);
 		}
 		
