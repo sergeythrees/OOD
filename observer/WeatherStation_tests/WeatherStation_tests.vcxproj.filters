@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="WeatherStation_tests.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="..\WeatherStation\WeatherData.h">
+      <Filter>Existing items</Filter>
+    </ClInclude>
+    <ClInclude Include="..\WeatherStation\Observer.h">
+      <Filter>Existing items</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Existing items">
+      <UniqueIdentifier>{6ea379eb-e5b1-454a-8fa2-8d49bebca5af}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
