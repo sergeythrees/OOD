@@ -1,5 +1,6 @@
 ﻿#include "stdafx.h"
 #include <iostream>
+#include <sstream>
 #include "../WeatherStation/Observer.h"
 
 using namespace std;
@@ -12,6 +13,7 @@ BOOST_AUTO_TEST_SUITE(Observer_class)
 	{
 		class Observer : public IObserver<int>
 		{
+		public:
 			Observer(std::ostream& output)
 				:m_output(output)
 			{};
@@ -33,9 +35,24 @@ BOOST_AUTO_TEST_SUITE(Observer_class)
 			}
 		};
 
+		ostringstream output;
+		Observer observer(output);
+		Observable observable1;
+		observable1.SetName("1");
+		Observable observable2;
+		observable2.SetName("2");
 
+		observable1.RegisterObserver(observer, 0);
+		observable2.RegisterObserver(observer, 0);
+		observable1.NotifyObservers();
+		observable2.NotifyObservers();
 
-		BOOST_CHECK(true);
+		BOOST_CHECK(output.str() == "12");
+		output = ostringstream();
+		observable2.NotifyObservers();
+		observable1.NotifyObservers();
+		BOOST_CHECK_EQUAL(output.str(), "21");
+
 	}
 	
 
