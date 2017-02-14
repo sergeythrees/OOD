@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WeatherStation", "WeatherStation\WeatherStation.vcxproj", "{FCDB7FE8-7A0C-43DC-B476-4AB6B6DF5933}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tests", "tests\Observer_tests.vcxproj", "{8E2D2C5D-AC70-4C3F-B8AD-D639683F2CB5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WeatherStation_tests", "WeatherStation_tests\WeatherStation_tests.vcxproj", "{8E2D2C5D-AC70-4C3F-B8AD-D639683F2CB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
