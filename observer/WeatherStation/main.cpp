@@ -1,22 +1,25 @@
 #include "WeatherData.h"
+#include "WeatherDataProDuo.h"
 
 int main()
 {
 	CWeatherData wd;
+	wd.SetName("in");
+	CWeatherDataProDuo wdp;
+	wdp.SetName("out");
 
 	CDisplay display;
-	wd.RegisterObserver(display, 1);
-
+	CDisplayProDuo displayPD;
 	CStatsDisplay statsDisplay;
+	CStatsDisplayProDuo statsDisplayPD;
+	wd.RegisterObserver(display, 1);
 	wd.RegisterObserver(statsDisplay, 2);
-
-	wd.SetMeasurements(3, 0.7, 760, 20, 360);
+	wdp.RegisterObserver(displayPD, 1);
+	wdp.RegisterObserver(statsDisplayPD, 2);
+	
+	wd.SetMeasurements(3, 0.7, 760);
 	std::cout << "----------------" << std::endl;
-	wd.SetMeasurements(4, 0.8, 761, 30, 40);
-	std::cout << "----------------" << std::endl;
-	wd.SetMeasurements(10, 0.8, 761, 80, 80);
-	std::cout << "----------------" << std::endl;
-	wd.SetMeasurements(-10, 0.8, 761, 160, 160);
+	wdp.SetMeasurements(4, 0.8, 761, 30, 40);
 
 	return 0;
 }

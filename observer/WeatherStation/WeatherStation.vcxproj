@@ -149,8 +149,12 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CStats.h" />
+    <ClInclude Include="CWindDirection.h" />
     <ClInclude Include="Observer.h" />
+    <ClInclude Include="stdafx.h" />
     <ClInclude Include="WeatherData.h" />
+    <ClInclude Include="WeatherDataProDuo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
