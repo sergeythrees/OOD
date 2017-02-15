@@ -52,7 +52,8 @@ public:
 	void NotifyObservers() override
 	{
 		T data = GetChangedData();
-		for (auto current : m_priorities)
+		auto prioritiesCopy(m_priorities);
+		for (auto current : prioritiesCopy)
 		{
 			(current.second)->Update(data);
 		}
