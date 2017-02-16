@@ -1,7 +1,7 @@
 ﻿#include "stdafx.h"
 #include <iostream>
 #include <sstream>
-#include "../WeatherStation/Observer.h"
+#include "../WeatherStationDuo/Observer.h"
 
 using namespace std;
 using namespace boost;
@@ -19,10 +19,10 @@ BOOST_AUTO_TEST_SUITE(Observer_class)
 			{};
 		private:
 			ostream& m_output;
-			void Update(int const& data, const string& observableName) override
+			void Update(int const& data, const IObservable<int>& observable) override
 			{
 				data;
-				m_output << observableName;
+				m_output << observable.GetName();
 			}
 
 		};
