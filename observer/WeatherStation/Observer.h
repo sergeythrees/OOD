@@ -41,12 +41,7 @@ public:
 
 	void RegisterObserver(ObserverType & observer, unsigned int priority) override
 	{
-		if (m_observers.count(&observer) == 0)
-		{
-			m_observers.insert(&observer);
-			m_priorities.emplace(priority, &observer);
-		}
-		
+		m_priorities.emplace(priority, &observer);
 	}
 
 	void NotifyObservers() override
@@ -61,7 +56,6 @@ public:
 
 	void RemoveObserver(ObserverType & observer) override
 	{
-		m_observers.erase(&observer);
 		for (auto current : m_priorities)
 		{
 			if (current.second == &observer)
@@ -78,6 +72,5 @@ protected:
 	virtual T GetChangedData()const = 0;
 
 private:
-	std::set<ObserverType *> m_observers;
 	std::map<unsigned int, ObserverType *> m_priorities;
 };
