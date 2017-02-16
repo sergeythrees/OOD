@@ -8,58 +8,51 @@ using namespace boost;
 BOOST_AUTO_TEST_SUITE(Observervable_class)
 
 	
-	BOOST_AUTO_TEST_CASE(should_notify_observers_in_order_of_their_priority)
+BOOST_AUTO_TEST_CASE(should_know_from_which_observable_object_notification_came)
+{
+	class Observer : public IObserver<int>
 	{
-		class Observer : public IObserver<int>
+	public:
+		Observer(std::ostream& output)
+			:m_output(output)
+		{};
+	private:
+		ostream& m_output;
+		void Update(int const& data, const IObservable<int>& observable) override
 		{
-		public:
-			void SetNotificationsOutput(vector<IObserver<int>*>& output)
-			{
-				m_notificationsOutput = &output;
-			}
-		private:
-			vector<IObserver<int>*>* m_notificationsOutput;
-			void Update(const int & data) override
-			{
-				data;
-				m_notificationsOutput->push_back(this);
-			}
-		};
-		class Observable : public CObservable<int>
-		{
-		protected:
-			int GetChangedData()const override
-			{
-				return 0;
-			}
-		};
-
-		vector<IObserver<int>*> notifications;
-		BOOST_CHECK(notifications == vector<IObserver<int>*>());
-
-		vector<Observer> observers;
-		observers.assign(4, Observer());
-		for (auto &current : observers)
-		{
-			current.SetNotificationsOutput(notifications);
+			data;
+			m_output << observable.GetName();
 		}
-		
-		Observable observable;
-		observable.RegisterObserver(observers[0], 2);
-		observable.RegisterObserver(observers[1], 4);
-		observable.RegisterObserver(observers[2], 3);
-		observable.NotifyObservers();
 
-		BOOST_CHECK(notifications == vector<IObserver<int>*>
-			({ &observers[0], &observers[2], &observers[1] }));
-		notifications.clear();
-		observable.RegisterObserver(observers[3], 1);
-		observable.NotifyObservers();
-		BOOST_CHECK(notifications == vector<IObserver<int>*>
-			({ &observers[3], &observers[0], &observers[2], &observers[1] }));
+	};
+	class Observable : public CObservable<int>
+	{
+	protected:
+		int GetChangedData()const override
+		{
+			return 0;
+		}
+	};
 
-		BOOST_CHECK(true);
-	}
+	ostringstream output;
+	Observer observer(output);
+	Observable observable1;
+	observable1.SetName("1");
+	Observable observable2;
+	observable2.SetName("2");
+
+	observable1.RegisterObserver(observer, 0);
+	observable2.RegisterObserver(observer, 0);
+	observable1.NotifyObservers();
+	observable2.NotifyObservers();
+
+	BOOST_CHECK(output.str() == "12");
+	output = ostringstream();
+	observable2.NotifyObservers();
+	observable1.NotifyObservers();
+	BOOST_CHECK_EQUAL(output.str(), "21");
+
+}
 	
 
 
