@@ -11,7 +11,13 @@ BOOST_AUTO_TEST_SUITE(Observer_class)
 	
 	BOOST_AUTO_TEST_CASE(should_know_from_which_observable_object_notification_came)
 	{
-		class Observer : public IObserver<int>
+	struct info
+	{
+		string observableName;
+	};
+		
+
+		class Observer : public IObserver<info>
 		{
 		public:
 			Observer(std::ostream& output)
@@ -19,20 +25,33 @@ BOOST_AUTO_TEST_SUITE(Observer_class)
 			{};
 		private:
 			ostream& m_output;
-			void Update(int const& data, const IObservable<int>& observable) override
+			void Update(info const& data, const IObservable<info>& observable) override
 			{
-				data;
-				m_output << observable.GetName();
+				observable;
+				m_output << data.observableName;
 			}
 
 		};
-		class Observable : public CObservable<int>
+		class Observable : public CObservable<info>
 		{
-		protected:
-			int GetChangedData()const override
+		public:
+			void SetName(std::string const& name)
 			{
-				return 0;
+				m_name = name;
 			}
+			std::string GetName() const
+			{
+				return m_name;
+			}
+		protected:
+			info GetChangedData()const override
+			{
+				info data;
+				data.observableName = this->GetName();
+				return data;
+			}
+		private:
+			std::string m_name;
 		};
 
 		ostringstream output;

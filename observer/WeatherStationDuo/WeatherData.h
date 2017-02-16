@@ -13,6 +13,64 @@ struct SWeatherInfo
 	double temperature = 0;
 	double humidity = 0;
 	double pressure = 0;
+	std::string observableName;
+};
+
+class CWeatherData : public CObservable<SWeatherInfo>
+{
+public:
+	// Температура в градусах Цельсия
+	double GetTemperature()const
+	{
+		return m_temperature;
+	}
+	// Относительная влажность (0...100)
+	double GetHumidity()const
+	{
+		return humidity;
+	}
+	// Атмосферное давление (в мм.рт.ст)
+	double GetPressure()const
+	{
+		return pressure;
+	}
+
+	void MeasurementsChanged()
+	{
+		NotifyObservers();
+	}
+
+	void SetMeasurements(double temp, double humidity, double pressure)
+	{
+		humidity = humidity;
+		m_temperature = temp;
+		pressure = pressure;
+
+		MeasurementsChanged();
+	}
+	void SetName(std::string const& name)
+	{
+		m_name = name;
+	}
+	std::string GetName() const
+	{
+		return m_name;
+	}
+protected:
+	SWeatherInfo GetChangedData()const override
+	{
+		SWeatherInfo info;
+		info.temperature = GetTemperature();
+		info.humidity = GetHumidity();
+		info.pressure = GetPressure();
+		info.observableName = GetName();
+		return info;
+	}
+private:
+	std::string m_name;
+	double m_temperature = 0.0;
+	double humidity = 0.0;
+	double pressure = 760.0;
 };
 
 class CDisplay: public IObserver<SWeatherInfo>
@@ -25,7 +83,7 @@ private:
 
 	void Update(SWeatherInfo const& data, const IObservable<SWeatherInfo>& observable) override
 	{
-		std::cout << observable.GetName() << endl;
+		std::cout << data.observableName << endl;
 		std::cout << "Current Temp " << data.temperature << std::endl;
 		std::cout << "Current Hum " << data.humidity << std::endl;
 		std::cout << "Current Pressure " << data.pressure << std::endl;
@@ -78,7 +136,7 @@ private:
 		humStats.Update(data.humidity);
 		pressStats.Update(data.pressure);
 
-		std::cout << observable.GetName() << endl;
+		std::cout << data.observableName << endl;
 		std::cout << "Temperature stats: " << std::endl;
 		tempStats.Print();
 		std::cout << "Humidify stats: " << std::endl;
@@ -93,51 +151,4 @@ private:
 	
 	
 
-};
-
-class CWeatherData : public CObservable<SWeatherInfo>
-{
-public:
-	// Температура в градусах Цельсия
-	double GetTemperature()const
-	{
-		return m_temperature;
-	}
-	// Относительная влажность (0...100)
-	double GetHumidity()const
-	{
-		return humidity;
-	}
-	// Атмосферное давление (в мм.рт.ст)
-	double GetPressure()const
-	{
-		return pressure;
-	}
-
-	void MeasurementsChanged()
-	{
-		NotifyObservers();
-	}
-
-	void SetMeasurements(double temp, double humidity, double pressure)
-	{
-		humidity = humidity;
-		m_temperature = temp;
-		pressure = pressure;
-
-		MeasurementsChanged();
-	}
-protected:
-	SWeatherInfo GetChangedData()const override
-	{
-		SWeatherInfo info;
-		info.temperature = GetTemperature();
-		info.humidity = GetHumidity();
-		info.pressure = GetPressure();
-		return info;
-	}
-private:
-	double m_temperature = 0.0;
-	double humidity = 0.0;	
-	double pressure = 760.0;	
 };
