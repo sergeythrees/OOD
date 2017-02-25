@@ -149,6 +149,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CWindDirection.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="WeatherData.h" />
   </ItemGroup>

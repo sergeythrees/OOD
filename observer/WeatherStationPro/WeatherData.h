@@ -4,41 +4,55 @@
 #include <algorithm>
 #include <climits>
 #include "Observer.h"
+#include "CWindDirection.h"
 
 using namespace std;
 
-class WindDirection
+template <typename T>
+class Stats
 {
 public:
-	WindDirection(unsigned int direction)
+	double GetMin()
 	{
-		if (direction > 360)
+		return m_min;
+	}
+	double GetMax()
+	{
+		return m_max;
+	}
+	double GetAverage()
+	{
+		return m_average;
+	}
+	void Update(const T& value)
+	{
+		if (m_min > value)
 		{
-			direction = direction % 360;
+			m_min = value;
 		}
-		m_direction = direction;
-	}
-	operator unsigned int()
-	{
-		return m_direction;
-	}
-	operator unsigned int() const
-	{
-		return m_direction;
-	}
-	WindDirection operator +(WindDirection& second)
-	{
-		auto result = second.m_direction + this->m_direction;
-		if ((second.m_direction - this->m_direction) > 180
-			|| (this->m_direction - second.m_direction) > 180)
+		if (m_max < value)
 		{
-			result = result - 180;
+			m_max = value;
 		}
-		return result;
+		m_acc = m_acc + value;
+		++m_countAcc;
+		m_average = m_acc / m_countAcc;
+	}
+	void Print()
+	{
+		std::cout << "	max : " << m_max << std::endl;
+		std::cout << "	min : " << m_min << std::endl;
+		std::cout << "	average : " << m_average << std::endl;
 	}
 private:
-	unsigned int m_direction = 0;
+	double m_min = std::numeric_limits<double>::infinity();;
+	double m_max = -std::numeric_limits<double>::infinity();;
+	double m_average = 0;
+	T m_acc = 0;
+	unsigned m_countAcc = 0;
 };
+
+
 struct SWeatherInfo
 {
 	double temperature = 0;
@@ -70,69 +84,7 @@ private:
 
 class CStatsDisplay : public IObserver<SWeatherInfo>
 {
-private:
-	class Stats
-	{
-	public:
-		double GetMin()
-		{
-			return m_min;
-		}
-		double GetMax()
-		{
-			return m_max;
-		}
-		double GetAverage()
-		{
-			return m_average;
-		}
-		void Update(const double& value)
-		{
-			if (m_min > value)
-			{
-				m_min = value;
-			}
-			if (m_max < value)
-			{
-				m_max = value;
-			}
-			m_acc += value;
-			++m_countAcc;
-			m_average = m_acc / m_countAcc;
-		}
-		void Update(const WindDirection& direction)
-		{
-			if (m_directionMin >= direction)
-			{
-				m_directionMin = direction;
-				m_min = m_directionMin;
-			}
-			if (m_directionMax <= direction)
-			{
-				m_directionMax = direction;
-				m_max = m_directionMax;
-			}
-			m_directionAcc = m_directionAcc + direction;
-			++m_countAcc;
-			m_average = m_directionAcc / m_countAcc;
-		}
-		void Print()
-		{
-			std::cout << "	max : " << m_max << std::endl;
-			std::cout << "	min : " << m_min << std::endl;
-			std::cout << "	average : " << m_average << std::endl;
-		}
-	private:
-		double m_min = std::numeric_limits<double>::infinity();
-		double m_max = -std::numeric_limits<double>::infinity();
-		unsigned int m_directionMin = 360;
-		unsigned int m_directionMax = 0;
-		WindDirection m_directionAcc = 0;
-		double m_average = 0;
-		double m_acc = 0;
-		unsigned m_countAcc = 0;
-	};
-	
+private:	
 	/* Метод Update сделан приватным, чтобы ограничить возможность его вызова напрямую
 	Классу CObservable он будет доступен все равно, т.к. в интерфейсе IObserver он
 	остается публичным
@@ -157,15 +109,11 @@ private:
 		std::cout << "Wind Direction stats: " << std::endl;
 		windDir.Print();
 	}
-	Stats tempStats;
-	Stats humStats;
-	Stats pressStats;
-	Stats windSpeed;
-	Stats windDir;
-
-	
-	
-
+	Stats<double> tempStats;
+	Stats<double> humStats;
+	Stats<double> pressStats;
+	Stats<double> windSpeed;
+	Stats<WindDirection> windDir;
 };
 
 class CWeatherData : public CObservable<SWeatherInfo>
