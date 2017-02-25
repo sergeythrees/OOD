@@ -10,7 +10,7 @@ struct SWeatherInfo
 {
 	double temperature = 0;
 	double humidity = 0;
-	double pressure = 0;
+	double pressure = 760.0;
 };
 
 class CDisplay : public IObserver<SWeatherInfo>
@@ -54,12 +54,13 @@ private:
 		std::cout << "Pressure stats: " << std::endl;
 		pressStats.Print();
 	}
-	Stats tempStats;
-	Stats humStats;
-	Stats pressStats;
+	Stats<double> tempStats;
+	Stats<double> humStats;
+	Stats<double> pressStats;
 };
 
-class CWeatherData : public CObservable<SWeatherInfo>
+template <typename T>
+class CWeatherData : public CObservable<T>
 {
 public:
 	// Температура в градусах Цельсия
@@ -81,24 +82,6 @@ public:
 	void MeasurementsChanged()
 	{
 		NotifyObservers();
-	}
-
-	void SetMeasurements(double temp, double humidity, double pressure)
-	{
-		m_humidity = humidity;
-		m_temperature = temp;
-		m_pressure = pressure;
-
-		MeasurementsChanged();
-	}
-protected:
-	SWeatherInfo GetChangedData()const override
-	{
-		SWeatherInfo info;
-		info.temperature = GetTemperature();
-		info.humidity = GetHumidity();
-		info.pressure = GetPressure();
-		return info;
 	}
 private:
 	double m_temperature = 0.0;

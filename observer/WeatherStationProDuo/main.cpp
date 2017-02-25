@@ -3,7 +3,7 @@
 
 int main()
 {
-	CWeatherData wd;
+	WeatherData wd;
 	wd.SetName("in");
 	CWeatherDataProDuo wdp;
 	wdp.SetName("out");

@@ -3,14 +3,12 @@
 #include "Observer.h"
 #include "CStats.h"
 #include "CWindDirection.h"
+#include "WeatherData.h"
 
 using namespace std;
 
-struct SWeatherInfoPro
+struct SWeatherInfoPro : public SWeatherInfo
 {
-	double temperature = 0;
-	double humidity = 0;
-	double pressure = 0;
 	double windSpeed = 0;
 	WindDirection windDirection = 0;
 };
@@ -64,31 +62,42 @@ private:
 		std::cout << "Wind Direction stats: " << std::endl;
 		windDir.Print();
 	}
-	Stats tempStats;
-	Stats humStats;
-	Stats pressStats;
-	Stats windSpeed;
-	Stats windDir;
+	Stats<double> tempStats;
+	Stats<double> humStats;
+	Stats<double> pressStats;
+	Stats<double> windSpeed;
+	Stats<WindDirection> windDir;
 };
 
-class CWeatherDataProDuo : public CObservable<SWeatherInfoPro>
+class WeatherData : public CWeatherData<SWeatherInfo>
 {
 public:
-	// Температура в градусах Цельсия
-	double GetTemperature()const
+	void SetMeasurements(double temp, double humidity, double pressure)
 	{
-		return m_temperature;
+		m_humidity = humidity;
+		m_temperature = temp;
+		m_pressure = pressure;
+
+		MeasurementsChanged();
 	}
-	// Относительная влажность (0...100)
-	double GetHumidity()const
+protected:
+	SWeatherInfo GetChangedData()const override
 	{
-		return m_humidity;
+		SWeatherInfo info;
+		info.temperature = GetTemperature();
+		info.humidity = GetHumidity();
+		info.pressure = GetPressure();
+		return info;
 	}
-	// Атмосферное давление (в мм.рт.ст)
-	double GetPressure()const
-	{
-		return m_pressure;
-	}
+private:
+	double m_temperature = 0.0;
+	double m_humidity = 0.0;
+	double m_pressure = 760.0;
+};
+
+class CWeatherDataProDuo : public CWeatherData<SWeatherInfoPro>
+{
+public:
 	double GetWindSpeed()const
 	{
 		return m_windSpeed;
@@ -96,11 +105,6 @@ public:
 	WindDirection GetWindDirection()const
 	{
 		return m_windDirection;
-	}
-
-	void MeasurementsChanged()
-	{
-		NotifyObservers();
 	}
 
 	void SetMeasurements(double temp, double humidity, double pressure, 
