@@ -173,6 +173,13 @@ int main()
 				MakeCondiment<CLemon>(2)(make_unique<CTea>())
 				);
 		*/
+		auto OolongLemonIceTea =
+			make_unique<CTea>(TeaVariete::Oolong)	// Берем чай
+			<< MakeCondiment<CLemon>(2)	// добавляем пару долек лимона
+			<< MakeCondiment<CIceCubes>(3, IceCubeType::Water); // и 3 кубика льда
+
+		cout << oneMoreLemonIceTea->GetDescription() << ", Cost: " << oneMoreLemonIceTea->GetCost() << endl;
+		cout << OolongLemonIceTea->GetDescription() << ", Cost: " << OolongLemonIceTea->GetCost() << endl;
 	}
 
 	// Аналог предыдущего решения с добавкой синтаксического сахара

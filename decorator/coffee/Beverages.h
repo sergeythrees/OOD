@@ -61,11 +61,37 @@ public:
 };
 
 // Чай
+enum TeaVariete
+{
+	Black,
+	Oolong,
+	Green,
+	White
+};
+std::string ToString(const TeaVariete& variete)
+{
+	switch (variete)
+	{
+	case TeaVariete::Oolong:
+		return "Oolong Tea";
+	case TeaVariete::Black:
+		return "Black Tea";
+	case TeaVariete::Green:
+		return "Green Tea";
+	case TeaVariete::White:
+		return "White Tea";
+	default:
+		break;
+	}
+	return "Tea";
+
+}
+
 class CTea : public CBeverage
 {
 public:
-	CTea() 
-		:CBeverage("Tea") 
+	CTea(const TeaVariete& teaVariete = TeaVariete::Black) 
+		:CBeverage(ToString(teaVariete)) 
 	{}
 
 	double GetCost() const override 
