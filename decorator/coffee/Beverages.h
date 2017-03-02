@@ -38,7 +38,7 @@ enum class CoffeeSize
 	Double
 };
 
-std::string ToString(const CoffeeSize& coffeeSize)
+std::string ToString(CoffeeSize coffeeSize)
 {
 	switch (coffeeSize)
 	{
@@ -54,7 +54,7 @@ std::string ToString(const CoffeeSize& coffeeSize)
 class CCapuccino : public CCoffee
 {
 public:
-	CCapuccino(const CoffeeSize& coffeeSize = CoffeeSize::Single) 
+	CCapuccino(CoffeeSize coffeeSize = CoffeeSize::Single) 
 		:CCoffee(ToString(coffeeSize) + "Capuccino") , 
 		m_coffeeSize(coffeeSize)
 	{}
@@ -79,7 +79,7 @@ private:
 class CLatte : public CCoffee
 {
 public:
-	CLatte(const CoffeeSize& coffeeSize = CoffeeSize::Single)
+	CLatte(CoffeeSize coffeeSize = CoffeeSize::Single)
 		:CCoffee(ToString(coffeeSize) + "Latte")
 	{}
 
@@ -107,7 +107,7 @@ enum TeaVariete
 	Green,
 	White
 };
-std::string ToString(const TeaVariete& variete)
+std::string ToString(TeaVariete variete)
 {
 	switch (variete)
 	{
@@ -129,7 +129,7 @@ std::string ToString(const TeaVariete& variete)
 class CTea : public CBeverage
 {
 public:
-	CTea(const TeaVariete& teaVariete = TeaVariete::Black) 
+	CTea(TeaVariete teaVariete = TeaVariete::Black) 
 		:CBeverage(ToString(teaVariete) + " Tea") 
 	{}
 
@@ -147,7 +147,7 @@ enum class MilkshakePortion
 	Big
 };
 
-std::string ToString(const MilkshakePortion& portion)
+std::string ToString(MilkshakePortion portion)
 {
 	switch (portion)
 	{
@@ -166,7 +166,7 @@ std::string ToString(const MilkshakePortion& portion)
 class CMilkshake : public CBeverage
 {
 public:
-	CMilkshake(const MilkshakePortion& portion = MilkshakePortion::Big) 
+	CMilkshake(MilkshakePortion portion = MilkshakePortion::Big) 
 		:CBeverage(ToString(portion)),
 		m_portion(portion)
 	{}
