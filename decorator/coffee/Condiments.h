@@ -209,7 +209,7 @@ enum ChocolatePiecesCount
 class CChocolatePiece : public CCondimentDecorator
 {
 public:
-	CChocolatePiece(IBeveragePtr && beverage, ChocolatePiecesCount count = One)
+	CChocolatePiece(IBeveragePtr && beverage, ChocolatePiecesCount count = Two)
 		:CCondimentDecorator(move(beverage))
 		, m_count(count)
 	{
