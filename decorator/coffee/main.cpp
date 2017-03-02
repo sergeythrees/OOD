@@ -197,6 +197,48 @@ int main()
 	}
 
 	{
+		auto beverage =
+			make_unique<CLatte>(CoffeeSize::Double)							// Наливаем чашечку латте,
+			<< MakeCondiment<CCinnamon>()					// оборачиваем корицей,
+			<< MakeCondiment<CLemon>(2)						// добавляем пару долек лимона
+			<< MakeCondiment<CIceCubes>(2, IceCubeType::Dry)// брасаем пару кубиков сухого льда
+			<< MakeCondiment<CChocolateCrumbs>(2);			// посыпаем шоколадной крошкой
+
+															// Выписываем счет покупателю
+		cout << beverage->GetDescription() << " costs " << beverage->GetCost() << endl;
+	}
+
+	{
+		auto beverage =
+			make_unique<CCapuccino>()							// Наливаем чашечку латте,
+			<< MakeCondiment<CCinnamon>()					// оборачиваем корицей,
+			<< MakeCondiment<CChocolateCrumbs>(2);			// посыпаем шоколадной крошкой
+
+															// Выписываем счет покупателю
+		cout << beverage->GetDescription() << " costs " << beverage->GetCost() << endl;
+	}
+
+	{
+		auto beverage =
+			make_unique<CCapuccino>(CoffeeSize::Double)							// Наливаем чашечку латте,
+			<< MakeCondiment<CCinnamon>()					// оборачиваем корицей,
+			<< MakeCondiment<CChocolateCrumbs>(2);			// посыпаем шоколадной крошкой
+
+															// Выписываем счет покупателю
+		cout << beverage->GetDescription() << " costs " << beverage->GetCost() << endl;
+	}
+
+	{
+		auto beverage =
+			make_unique<CCapuccino>(CoffeeSize::Single)							// Наливаем чашечку латте,
+			<< MakeCondiment<CCinnamon>()					// оборачиваем корицей,
+			<< MakeCondiment<CChocolateCrumbs>(2);			// посыпаем шоколадной крошкой
+
+															// Выписываем счет покупателю
+		cout << beverage->GetDescription() << " costs " << beverage->GetCost() << endl;
+	}
+
+	{
 		auto beverage = 
 			make_unique<CMilkshake>()					// Наливаем молочный коктейль
 			<< MakeCondiment<CSyrup>(SyrupType::Maple)	// заливаем кленовым сиропом
