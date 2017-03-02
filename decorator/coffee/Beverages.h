@@ -140,15 +140,53 @@ public:
 };
 
 // Молочный коктейль
+enum class MilkshakePortion
+{
+	Little,
+	Medium,
+	Big
+};
+
+std::string ToString(const MilkshakePortion& portion)
+{
+	switch (portion)
+	{
+	case MilkshakePortion::Little:
+		return "Little Milkshake";
+	case MilkshakePortion::Medium:
+		return "Medium Milkshake";
+	case MilkshakePortion::Big:
+		return "Big Milkshake";
+	default:
+		break;
+	}
+	return std::string();
+}
+
 class CMilkshake : public CBeverage
 {
 public:
-	CMilkshake() 
-		:CBeverage("Milkshake") 
+	CMilkshake(const MilkshakePortion& portion = MilkshakePortion::Big) 
+		:CBeverage(ToString(portion)),
+		m_portion(portion)
 	{}
 
 	double GetCost() const override 
 	{ 
-		return 80; 
+		double cost = 80;
+		switch (m_portion)
+		{
+		case MilkshakePortion::Little:
+			cost = 50;
+		case MilkshakePortion::Medium:
+			cost = 60;
+		case MilkshakePortion::Big:
+			cost = 80;
+		default:
+			break;
+		}
+		return cost; 
 	}
+private:
+	MilkshakePortion m_portion;
 };

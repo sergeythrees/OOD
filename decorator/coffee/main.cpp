@@ -247,4 +247,22 @@ int main()
 		// Выписываем счет покупателю
 		cout << beverage->GetDescription() << " costs " << beverage->GetCost() << endl;
 	}
+	{
+		auto beverage =
+			make_unique<CMilkshake>(MilkshakePortion::Little)					// Наливаем молочный коктейль
+			<< MakeCondiment<CSyrup>(SyrupType::Maple)	// заливаем кленовым сиропом
+			<< MakeCondiment<CCoconutFlakes>(8);		// посыпаем кокосовой стружкой
+
+														// Выписываем счет покупателю
+		cout << beverage->GetDescription() << " costs " << beverage->GetCost() << endl;
+	}
+	{
+		auto beverage =
+			make_unique<CMilkshake>(MilkshakePortion::Medium)					// Наливаем молочный коктейль
+			<< MakeCondiment<CSyrup>(SyrupType::Maple)	// заливаем кленовым сиропом
+			<< MakeCondiment<CCoconutFlakes>(8);		// посыпаем кокосовой стружкой
+
+														// Выписываем счет покупателю
+		cout << beverage->GetDescription() << " costs " << beverage->GetCost() << endl;
+	}
 }
