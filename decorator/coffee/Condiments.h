@@ -197,10 +197,19 @@ protected:
 	}
 };
 
+enum ChocolatePiecesCount
+{
+	One = 1, 
+	Two = 2, 
+	Three = 3, 
+	Four = 4, 
+	Five = 5
+};
+
 class CChocolatePiece : public CCondimentDecorator
 {
 public:
-	CChocolatePiece(IBeveragePtr && beverage, unsigned count)
+	CChocolatePiece(IBeveragePtr && beverage, ChocolatePiecesCount count = One)
 		:CCondimentDecorator(move(beverage))
 		, m_count(count)
 	{
