@@ -138,7 +138,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CColor.h" />
+    <ClInclude Include="Color.h" />
     <ClInclude Include="CTriangle.h" />
     <ClInclude Include="Designer.h" />
     <ClInclude Include="ICanvas.h" />

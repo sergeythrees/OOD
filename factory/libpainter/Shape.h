@@ -1,20 +1,20 @@
 #pragma once
-#include "CColor.h"
+#include "Color.h"
 #include "ICanvas.h"
 
 class CShape
 {
 public:
-	CShape(CColor color = CColor::Black)
+	CShape(Color color = Color::Black)
 		:m_color(color)
 	{}
 	virtual ~CShape();
 	virtual void Draw(ICanvas& canvas) const = 0;
-	CColor GetColor() const
+	Color GetColor() const
 	{
 		return m_color;
 	}
 private:
-	CColor m_color;
+	Color m_color;
 };
 

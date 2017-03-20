@@ -6,7 +6,7 @@
 class CTriangle : public CShape
 {
 public:
-	CTriangle(CColor color, Point vertice1, Point vertice2, Point vertice3)
+	CTriangle(Color color, Point vertice1, Point vertice2, Point vertice3)
 		:CShape(color),
 		m_vertices({vertice1, vertice2, vertice3})
 	{

@@ -1,6 +1,6 @@
 #pragma once
 
-enum class CColor
+enum class Color
 {
 	Green,
 	Red,

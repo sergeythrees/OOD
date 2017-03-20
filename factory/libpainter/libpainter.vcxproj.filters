@@ -54,13 +54,13 @@
     <ClInclude Include="ICanvas.h">
       <Filter>Source Files\Canvas</Filter>
     </ClInclude>
-    <ClInclude Include="CColor.h">
-      <Filter>Source Files\Shapes</Filter>
-    </ClInclude>
     <ClInclude Include="Point.h">
       <Filter>Source Files\Shapes</Filter>
     </ClInclude>
     <ClInclude Include="CTriangle.h">
+      <Filter>Source Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
       <Filter>Source Files\Shapes</Filter>
     </ClInclude>
   </ItemGroup>
