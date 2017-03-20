@@ -18,10 +18,6 @@ public:
 	{
 		canvas;
 	}
-	CColor GetColor() const override
-	{
-		return CColor();
-	}
 	string descr;
 };
 

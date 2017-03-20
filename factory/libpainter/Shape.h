@@ -5,9 +5,16 @@
 class CShape
 {
 public:
-	CShape();
+	CShape(CColor color = CColor::Black)
+		:m_color(color)
+	{}
 	virtual ~CShape();
 	virtual void Draw(ICanvas& canvas) const = 0;
-	virtual CColor GetColor() const = 0;
+	CColor GetColor() const
+	{
+		return m_color;
+	}
+private:
+	CColor m_color;
 };
 
