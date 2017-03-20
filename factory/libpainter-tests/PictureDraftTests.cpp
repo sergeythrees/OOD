@@ -3,6 +3,21 @@
 #include "../libpainter/Shape.h"
 
 using namespace std;
+
+class CMockShape : public CShape
+{
+public:
+	CMockShape() = default;
+	void Draw(ICanvas& canvas) const override
+	{
+		canvas;
+	}
+	CColor GetColor() const override
+	{
+		return CColor();
+	}
+	string descr;
+};
 struct Picture_draft_
 {
 	CPictureDraft draft;
@@ -22,11 +37,11 @@ BOOST_FIXTURE_TEST_SUITE(Picture_draft, Picture_draft_)
 
 	struct after_adding_a_shape_ : Picture_draft_
 	{
-		unique_ptr<CShape> shape1 = make_unique<CShape>();
+		unique_ptr<CShape> shape1 = make_unique<CMockShape>();
 		CShape & refShape1 = *shape1;
-		unique_ptr<CShape> shape2 = make_unique<CShape>();
+		unique_ptr<CShape> shape2 = make_unique<CMockShape>();
 		CShape & refShape2 = *shape2;
-		unique_ptr<CShape> shape3 = make_unique<CShape>();
+		unique_ptr<CShape> shape3 = make_unique<CMockShape>();
 		CShape & refShape3 = *shape3;
 
 		after_adding_a_shape_()

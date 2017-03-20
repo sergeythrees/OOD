@@ -14,6 +14,14 @@ public:
 		:descr(descr)
 	{
 	}
+	void Draw(ICanvas& canvas) const override
+	{
+		canvas;
+	}
+	CColor GetColor() const override
+	{
+		return CColor();
+	}
 	string descr;
 };
 
