@@ -16,14 +16,17 @@
     <Filter Include="Support Files">
       <UniqueIdentifier>{ba73d31c-980c-4e12-9d5c-c88efdd5c0d3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Shapes">
-      <UniqueIdentifier>{44d427e4-3d63-49c0-80bf-3b9ff9dfc07d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Canvas">
       <UniqueIdentifier>{d02c0c03-4e99-4878-ad5a-49328e73c38f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Designer">
       <UniqueIdentifier>{d591d95e-293c-4bc6-8cd5-30add364bdd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ShapesControllers">
+      <UniqueIdentifier>{44d427e4-3d63-49c0-80bf-3b9ff9dfc07d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shapes">
+      <UniqueIdentifier>{79fcc3a1-c80a-44d0-ac66-e09baeb1bce5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -40,12 +43,21 @@
       <Filter>Source Files\Designer</Filter>
     </ClInclude>
     <ClInclude Include="PictureDraft.h">
-      <Filter>Source Files\Shapes</Filter>
+      <Filter>Source Files\ShapesControllers</Filter>
+    </ClInclude>
+    <ClInclude Include="IShapeFactory.h">
+      <Filter>Source Files\ShapesControllers</Filter>
     </ClInclude>
     <ClInclude Include="Shape.h">
       <Filter>Source Files\Shapes</Filter>
     </ClInclude>
-    <ClInclude Include="IShapeFactory.h">
+    <ClInclude Include="ICanvas.h">
+      <Filter>Source Files\Canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="CColor.h">
+      <Filter>Source Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
       <Filter>Source Files\Shapes</Filter>
     </ClInclude>
   </ItemGroup>
@@ -57,7 +69,7 @@
       <Filter>Source Files\Designer</Filter>
     </ClCompile>
     <ClCompile Include="PictureDraft.cpp">
-      <Filter>Source Files\Shapes</Filter>
+      <Filter>Source Files\ShapesControllers</Filter>
     </ClCompile>
     <ClCompile Include="Shape.cpp">
       <Filter>Source Files\Shapes</Filter>
