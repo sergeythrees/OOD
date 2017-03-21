@@ -140,6 +140,7 @@
   <ItemGroup>
     <ClInclude Include="CEllipse.h" />
     <ClInclude Include="CRectangle.h" />
+    <ClInclude Include="CRegularPolygon.h" />
     <ClInclude Include="OStreamCanvas.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="CTriangle.h" />

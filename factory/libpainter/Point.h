@@ -1,12 +1,12 @@
 #pragma once
 struct Point
 {
-	Point(int x, int y)
+	Point(double x, double y)
 		: x(x), y(y)
 	{
 	}
-	int x = 0;
-	int y = 0;
+	double x = 0;
+	double y = 0;
 
 	bool operator == (Point b)
 	{
