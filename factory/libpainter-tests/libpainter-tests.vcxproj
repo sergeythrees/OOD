@@ -165,6 +165,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CEllipseTests.cpp" />
     <ClCompile Include="CTriangleTests.cpp">
       <FileType>CppHeader</FileType>
     </ClCompile>
