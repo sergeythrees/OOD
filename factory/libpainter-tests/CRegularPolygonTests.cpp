@@ -17,6 +17,15 @@ namespace
 			BOOST_CHECK_CLOSE(a[i].y, b[i].y, 0.1);
 		}
 	}
+
+	template <typename Ex, typename Fn>
+	void VerifyException(Fn && fn, const string & expectedDescription)
+	{
+		BOOST_CHECK_EXCEPTION(fn(), Ex, [&](const Ex& e) {
+			BOOST_CHECK_EQUAL(e.what(), expectedDescription);
+			return e.what() == expectedDescription;
+		});
+	}
 }
 
 struct polygonFixture
@@ -40,12 +49,26 @@ struct polygonFixture
 	ostringstream strm;
 };
 BOOST_FIXTURE_TEST_SUITE(RegularPolygon_class, polygonFixture)
-	BOOST_AUTO_TEST_CASE(can_calculate_anything_polygon_vertices)
-	{
-		vector<Point> expectedVertices({ { 6,0 }, { -3,5.2 }, { -3,-5.2 } });
-		auto result(CRegularPolygon::CalculatePolygonVertices({ 0,0 }, 6, 3));
-		CheckVerticesVectorEquality(expectedVertices, result);
-	}
+	BOOST_AUTO_TEST_SUITE(CalculatePolygonVertices_function)
+		BOOST_AUTO_TEST_CASE(can_calculate_anything_polygon_vertices)
+		{
+			vector<Point> expectedVertices({ { 6,0 }, { -3,5.2 }, { -3,-5.2 } });
+			auto result(CRegularPolygon::CalculatePolygonVertices({ 0,0 }, 6, 3));
+			CheckVerticesVectorEquality(expectedVertices, result);
+		}
+		BOOST_AUTO_TEST_CASE(should_throw_appropriate_exception_if_radius_is_not_positive)
+		{
+			VerifyException<invalid_argument>([]() {
+				CRegularPolygon::CalculatePolygonVertices({ 0,0 }, 0, 3); }, 
+				"Radius must have a positive value");
+		}
+		BOOST_AUTO_TEST_CASE(should_throw_appropriate_exception_if_vertices_count_is_less_than_three)
+		{
+			VerifyException<invalid_argument>([]() {
+				CRegularPolygon::CalculatePolygonVertices({ 0,0 }, 1, 2); }, 
+				"Regular polygon must have at least 3 vertices");
+		}
+	BOOST_AUTO_TEST_SUITE_END()
 	BOOST_AUTO_TEST_CASE(can_be_drawn)
 	{
 		stringstream expectedOutput;
