@@ -138,6 +138,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CRectangle.h" />
     <ClInclude Include="OStreamCanvas.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="CTriangle.h" />

@@ -7,4 +7,9 @@ struct Point
 	}
 	int x = 0;
 	int y = 0;
+
+	bool operator == (Point b)
+	{
+		return (this->x == b.x && this->y == b.y);
+	}
 };

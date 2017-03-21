@@ -66,6 +66,9 @@
     <ClInclude Include="OStreamCanvas.h">
       <Filter>Source Files\Canvas</Filter>
     </ClInclude>
+    <ClInclude Include="CRectangle.h">
+      <Filter>Source Files\Shapes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
