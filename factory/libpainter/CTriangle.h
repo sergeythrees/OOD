@@ -17,6 +17,10 @@ public:
 		canvas.DrawLine(GetColor(), m_vertices[1], m_vertices[2]);
 		canvas.DrawLine(GetColor(), m_vertices[0], m_vertices[2]);
 	}
+	vector<Point> GetVertices()
+	{
+		return m_vertices;
+	}
 private:
 	std::vector<Point> m_vertices;
 };
