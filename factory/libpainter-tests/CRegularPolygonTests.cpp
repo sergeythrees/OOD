@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include <sstream>
+#include "VerifyExceptions.h"
 #include "../libpainter/CRegularPolygon.h"
 #include "../libpainter/OStreamCanvas.h"
 
@@ -16,15 +17,6 @@ namespace
 			BOOST_CHECK_CLOSE(a[i].x, b[i].x, 0.1);
 			BOOST_CHECK_CLOSE(a[i].y, b[i].y, 0.1);
 		}
-	}
-
-	template <typename Ex, typename Fn>
-	void VerifyException(Fn && fn, const string & expectedDescription)
-	{
-		BOOST_CHECK_EXCEPTION(fn(), Ex, [&](const Ex& e) {
-			BOOST_CHECK_EQUAL(e.what(), expectedDescription);
-			return e.what() == expectedDescription;
-		});
 	}
 }
 
