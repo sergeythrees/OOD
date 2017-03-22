@@ -3,6 +3,7 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <boost\algorithm\string.hpp>
 #include "Shapes.h"
 #define CREATE_SHAPE_FUNCTION(function) {\
 	[&](std::istream & args) {return this->function(args); }}
@@ -20,7 +21,7 @@ CShapeFactory::CShapeFactory()
 
 std::unique_ptr<CShape> CShapeFactory::CreateShape(const std::string & description)
 {
-	istringstream strm(description);
+	istringstream strm(boost::to_lower_copy(description));
 	string shapeName;
 	strm >> shapeName;
 	if (shapeName.empty() ||

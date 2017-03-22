@@ -45,7 +45,12 @@ BOOST_FIXTURE_TEST_SUITE(CShapeFactory_class, factoryFixture)
 		auto shapePtr = factory.CreateShape("ellipse pink 0 1 6 3");
 		BOOST_CHECK(ellipse == *dynamic_cast<CEllipse *>(shapePtr.get()));
 	}
-	
+	BOOST_AUTO_TEST_CASE(is_case_insensitive)
+	{
+		CEllipse ellipse(Color::Pink, { 0,1 }, 6, 3);
+		auto shapePtr = factory.CreateShape("Ellipse Pink 0 1 6 3");
+		BOOST_CHECK(ellipse == *dynamic_cast<CEllipse *>(shapePtr.get()));
+	}
 	BOOST_AUTO_TEST_SUITE(should_throw_apptoptiate_exception)
 		BOOST_AUTO_TEST_CASE(if_shape_name_in_description_is_incorrect)
 		{
