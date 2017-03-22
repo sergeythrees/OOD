@@ -28,7 +28,7 @@ BOOST_FIXTURE_TEST_SUITE(OStreamCanvas_class, canvasFixture)
 			Color expectedColor = Color::Pink;
 			vector<Point> expectedPoints({ { 0,0 },  { 1,1 } });
 			stringstream expectedStream;
-			expectedStream << ToString(expectedColor) << " " << expectedPoints[0].x << " " << expectedPoints[0].y
+			expectedStream << "line " << ToString(expectedColor) << " " << expectedPoints[0].x << " " << expectedPoints[0].y
 				<< " " << expectedPoints[1].x << " " << expectedPoints[1].y << endl;
 
 			canvas.DrawLine(expectedColor, expectedPoints[0], expectedPoints[1]);
@@ -42,7 +42,7 @@ BOOST_FIXTURE_TEST_SUITE(OStreamCanvas_class, canvasFixture)
 			unsigned expectedHRadius = 2;
 			unsigned expectedWRadius = 4;
 			stringstream expectedStream;
-			expectedStream << ToString(expectedColor) << " " << expectedCenter.x << " " << expectedCenter.y
+			expectedStream << "ellipse " << ToString(expectedColor) << " " << expectedCenter.x << " " << expectedCenter.y
 				<< " " << expectedWRadius << " " << expectedHRadius << endl;
 
 			canvas.DrawEllipse(expectedColor, expectedCenter, expectedWRadius, expectedHRadius);

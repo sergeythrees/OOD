@@ -20,12 +20,12 @@ public:
 	}
 	void DrawLine(Color color, Point from, Point to) override
 	{
-		m_output << ToString(color) << " " << from.x << " " << from.y 
+		m_output << "line " << ToString(color) << " " << from.x << " " << from.y 
 			<< " " << to.x << " " << to.y << std::endl;
 	}
 	void DrawEllipse(Color color, Point center, unsigned wRadius, unsigned hRadius) override
 	{
-		m_output << ToString(color) << " " << center.x << " " << center.y 
+		m_output << "ellipse " << ToString(color) << " " << center.x << " " << center.y
 			<< " " << wRadius << " " << hRadius << std::endl;
 	}
 private:
