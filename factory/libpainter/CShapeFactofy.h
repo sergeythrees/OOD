@@ -4,8 +4,9 @@
 #include <map>
 #include <functional>
 #include "Shape.h"
+#include "IShapeFactory.h"
 
-struct CShapeFactory
+struct CShapeFactory : public IShapeFactory
 {
 	CShapeFactory();
 	~CShapeFactory() = default;
