@@ -1,9 +1,7 @@
 ﻿#pragma once
 #include <iosfwd>
-
-class CPictureDraft;
-
-struct IShapeFactory;
+#include "IShapeFactory.h"
+#include "PictureDraft.h"
 
 class CDesigner
 {

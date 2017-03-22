@@ -167,6 +167,7 @@
   <ItemGroup>
     <ClCompile Include="..\libpainter\CShapeFactofy.cpp" />
     <ClCompile Include="CEllipseTests.cpp" />
+    <ClCompile Include="CPainterTest.cpp" />
     <ClCompile Include="CRegularPolygonTests.cpp" />
     <ClCompile Include="CShapeFactoryTests.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
