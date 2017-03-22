@@ -67,6 +67,9 @@ BOOST_FIXTURE_TEST_SUITE(CShapeFactory_class, factoryFixture)
 				factory.CreateShape("triangle unknownColor 1 0 2 2 3 0"); }, 
 				"Unknown color name");
 			VerifyException<invalid_argument>([&]() {
+				factory.CreateShape("triangle pink 1 0 2 "); },
+				"Invalid triangle description");
+			VerifyException<invalid_argument>([&]() {
 				factory.CreateShape("rectangle pink 1 0 2 "); },
 				"Invalid rectangle description");
 			VerifyException<invalid_argument>([&]() {
