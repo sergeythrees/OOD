@@ -30,6 +30,18 @@
     <ClInclude Include="CTriangleTests.cpp">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="VerifyExceptions.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpainter\CShapeFactofy.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpainter\OStreamCanvas.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libpainter\Shapes.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -58,6 +70,12 @@
     </ClCompile>
     <ClCompile Include="CRegularPolygonTests.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CShapeFactoryTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libpainter\CShapeFactofy.cpp">
+      <Filter>ExistingItems</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

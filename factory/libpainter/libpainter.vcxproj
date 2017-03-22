@@ -141,6 +141,7 @@
     <ClInclude Include="CEllipse.h" />
     <ClInclude Include="CRectangle.h" />
     <ClInclude Include="CRegularPolygon.h" />
+    <ClInclude Include="CShapeFactofy.h" />
     <ClInclude Include="OStreamCanvas.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="CTriangle.h" />
@@ -150,10 +151,12 @@
     <ClInclude Include="PictureDraft.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Shape.h" />
+    <ClInclude Include="Shapes.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CShapeFactofy.cpp" />
     <ClCompile Include="Designer.cpp" />
     <ClCompile Include="PictureDraft.cpp" />
     <ClCompile Include="Shape.cpp" />

@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <map>
 
 
 enum class Color
@@ -15,33 +16,36 @@ enum class Color
 
 namespace
 {
+	std::map<std::string, Color> colorMap = {
+		{ "green", Color::Green },
+		{ "red", Color::Red },
+		{ "blue", Color::Blue },
+		{ "yellow", Color::Yellow },
+		{ "pink", Color::Pink },
+		{ "black", Color::Black },
+		{ "white", Color::White }
+	};
+
 	std::string ToString(Color color)
 	{
 		std::string result;
-		switch (color)
+		for (auto colorInMap : colorMap)
 		{
-		case Color::Black:
-			return "black";
-			break;
-		case Color::Blue:
-			return "black";
-			break;
-		case Color::Green:
-			return "green";
-			break;
-		case Color::Pink:
-			return "pink";
-			break;
-		case Color::Red:
-			return "red";
-			break;
-		case Color::White:
-			return "white";
-			break;
-		case Color::Yellow:
-			return "yellow";
-			break;
+			if (colorInMap.second == color)
+				result = colorInMap.first;
 		}
-		return "black";
+		return result;
+	}
+	Color StringToColor(const std::string& colorName)
+	{
+		std::string result = "black";
+		try
+		{
+			return colorMap.at(colorName);
+		}
+		catch (const std::out_of_range&)
+		{
+			throw std::invalid_argument("Unknown color name");
+		}
 	}
 }

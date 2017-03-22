@@ -75,6 +75,12 @@
     <ClInclude Include="CRegularPolygon.h">
       <Filter>Source Files\Shapes</Filter>
     </ClInclude>
+    <ClInclude Include="CShapeFactofy.h">
+      <Filter>Source Files\ShapesControllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Shapes.h">
+      <Filter>Source Files\Shapes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -88,6 +94,9 @@
     </ClCompile>
     <ClCompile Include="Shape.cpp">
       <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="CShapeFactofy.cpp">
+      <Filter>Source Files\ShapesControllers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

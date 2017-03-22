@@ -18,11 +18,11 @@ public:
 		canvas.DrawLine(GetColor(), m_leftTop, {m_leftTop.x, m_rightBottom.y });
 		canvas.DrawLine(GetColor(), { m_leftTop.x, m_rightBottom.y }, m_rightBottom);
 	}
-	Point GetLeftTop()
+	Point GetLeftTop() const
 	{
 		return m_leftTop;
 	}
-	Point GetRightBottom()
+	Point GetRightBottom() const
 	{
 		return m_rightBottom;
 	}
