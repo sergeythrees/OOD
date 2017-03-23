@@ -8,12 +8,12 @@ public:
 	SVG_Canvas(const std::string& filePath, Color color = Color::White)
 		:m_output(filePath.c_str()),
 		m_color(color),
-		m_headerWasWrote(false)
+		m_headerWasWritten(false)
 	{
 	}
 	~SVG_Canvas()
 	{
-		if (m_headerWasWrote)
+		if (m_headerWasWritten)
 			WriteEndOfSVG();
 	}
 	void SetColor(Color color) override
@@ -26,7 +26,7 @@ public:
 	}
 	void DrawLine(Color color, Point from, Point to) override
 	{
-		if (!m_headerWasWrote)
+		if (!m_headerWasWritten)
 			WriteHeader();
 
 		m_output << "<line x1=\"" << from.x << "\" y1=\"" << from.y << 
@@ -35,7 +35,7 @@ public:
 	}
 	void DrawEllipse(Color color, Point center, unsigned wRadius, unsigned hRadius) override
 	{
-		if (!m_headerWasWrote)
+		if (!m_headerWasWritten)
 			WriteHeader();
 
 		m_output << "<ellipse cx=\"" << center.x << "\" cy=\"" << center.y 
@@ -45,14 +45,14 @@ public:
 	}
 private:
 	std::ofstream m_output;
-	bool m_headerWasWrote;
+	bool m_headerWasWritten;
 	Color m_color;
 
 	void WriteHeader()
 	{
 		m_output << "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\">" << std::endl
 			<< "<rect width = \"100%\" height = \"100%\" fill = \" "<<ColorToHex(m_color) << "\"/>" << std::endl;
-		m_headerWasWrote = true;
+		m_headerWasWritten = true;
 	}
 	void WriteEndOfSVG()
 	{
