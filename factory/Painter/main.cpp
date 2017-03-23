@@ -3,24 +3,19 @@
 
 #include "stdafx.h"
 #include <iostream>
-#include "../libpainter/CPainter.h"
-#include "../libpainter/CShapeFactofy.h"
-#include "../libpainter/PictureDraft.h"
-#include "../libpainter/OStreamCanvas.h"
-#include "../libpainter/Designer.h"
-
+#include <SFML/Graphics.hpp>
 using namespace std;
 
 int main()
 {
-	CShapeFactory factory;
-	CDesigner designer  = CDesigner(factory);
-	CPictureDraft picture(designer.CreateDraft(cin));
-	OStreamCanvas canvas;
-	CPainter painter;
+	sf::CircleShape shape(100.f);
+	shape.setFillColor(sf::Color::Green);
+	sf::ContextSettings settings;
+	settings.antialiasingLevel = 8;
 
-	painter.DrawPicture(picture, canvas);
-
+	// Create the window of the application
+	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Analog Clock", sf::Style::Close, settings);
+	
 	return 0;
 }
 

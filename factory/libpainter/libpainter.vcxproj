@@ -152,6 +152,7 @@
     <ClInclude Include="IShapeFactory.h" />
     <ClInclude Include="PictureDraft.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="SFML_Canvas.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="Shapes.h" />
     <ClInclude Include="stdafx.h" />
