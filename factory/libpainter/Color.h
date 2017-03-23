@@ -48,4 +48,27 @@ namespace
 			throw std::invalid_argument("Unknown color name");
 		}
 	}
+
+	std::map<Color, std::string> hexColorMap = {
+		{ Color::Green, "#00ff00"},
+		{ Color::Red ,"#ff0000"},
+		{ Color::Blue, "#00ffff" },
+		{ Color::Yellow, "#ffff00" },
+		{ Color::Pink,"#ff0060"},
+		{  Color::Black, "#000000" },
+		{  Color::White, "#ffffff" }
+	};
+
+	std::string ColorToHex(Color color)
+	{
+		try
+		{
+			return hexColorMap.at(color);
+		}
+		catch (const std::out_of_range&)
+		{
+			throw std::invalid_argument("Unknown color");
+		}
+	}
+
 }

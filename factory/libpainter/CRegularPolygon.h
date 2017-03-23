@@ -42,10 +42,10 @@ public:
 
 		for (unsigned vertexIndex = 0; vertexIndex < verticesCount; ++vertexIndex)
 		{
-			double radian = (M_PI * 2.0) / double(verticesCount) * vertexIndex;
+			double radian = (M_PI * 2.0) / double(verticesCount) * double(vertexIndex);
 			vertices.push_back({
-				radius * std::cos(radian) + center.x,
-				radius * std::sin(radian) + center.y });
+				double(radius) * std::cos(radian) + center.x,
+				double(radius) * std::sin(radian) + center.y });
 		}
 		return vertices;
 	}

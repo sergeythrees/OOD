@@ -1,0 +1,11 @@
+polygon pink 250 150 100 15
+polygon blue 250 150 90 15
+polygon pink 250 150 80 15
+polygon blue 250 150 70 15
+ellipse white 250 150 220 110
+rectangle blue 180 300 180 360
+rectangle blue 180 360 210 360 
+rectangle blue 300 300 300 360
+rectangle blue 300 360 330 360 
+ellipse blue 250 330 20 30
+ellipse blue 250 330 19 29

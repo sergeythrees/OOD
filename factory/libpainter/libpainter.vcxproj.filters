@@ -87,6 +87,9 @@
     <ClInclude Include="IPainter.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="SVG_Canvas.h">
+      <Filter>Source Files\Canvas</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
