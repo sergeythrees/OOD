@@ -9,7 +9,8 @@
 
 #include <stdio.h>
 #include <tchar.h>
-
+#include <vector>
+#include <memory>
 #include <sstream>
 
 #define BOOST_TEST_INCLUDED
