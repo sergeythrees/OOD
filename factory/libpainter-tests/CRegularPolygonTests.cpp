@@ -36,9 +36,9 @@ struct polygonFixture
 	Point center;
 	unsigned radius;
 	unsigned verticesCount;
+	ostringstream strm;
 	OStreamCanvas canvas;
 	Color color;
-	ostringstream strm;
 };
 BOOST_FIXTURE_TEST_SUITE(RegularPolygon_class, polygonFixture)
 	BOOST_AUTO_TEST_SUITE(CalculatePolygonVertices_function)

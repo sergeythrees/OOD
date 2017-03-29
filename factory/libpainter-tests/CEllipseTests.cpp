@@ -21,9 +21,9 @@ struct ellipseFixture
 	Point center;
 	unsigned wRadius;
 	unsigned hRadius;
+	ostringstream strm;
 	OStreamCanvas canvas;
 	Color color;
-	ostringstream strm;
 };
 BOOST_FIXTURE_TEST_SUITE(Ellipse_class, ellipseFixture)
 	BOOST_AUTO_TEST_CASE(can_be_drawn)

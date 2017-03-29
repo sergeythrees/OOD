@@ -11,7 +11,7 @@ namespace {
 		bool result = true;
 		if (a.size() != b.size())
 			return false;
-		for (unsigned i = 0; i < a.size(); ++i)
+		for (size_t i = 0; i < a.size(); ++i)
 		{
 			if (!(a[i] == b[i]))
 				return false;

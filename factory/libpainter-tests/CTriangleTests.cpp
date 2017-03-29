@@ -17,9 +17,9 @@ struct triangleFixture
 
 	CTriangle triangle;
 	vector<Point> vertices;
+	ostringstream strm;
 	OStreamCanvas canvas;
 	Color color;
-	ostringstream strm;
 };
 BOOST_FIXTURE_TEST_SUITE(Triangle_class, triangleFixture)
 		BOOST_AUTO_TEST_CASE(can_be_drawn)

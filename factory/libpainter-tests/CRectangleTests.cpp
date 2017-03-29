@@ -19,9 +19,9 @@ struct rectangleFixture
 	CRectangle rectangle;
 	Point leftTop;
 	Point rightBottom;
+	ostringstream strm;
 	OStreamCanvas canvas;
 	Color color;
-	ostringstream strm;
 };
 BOOST_FIXTURE_TEST_SUITE(Rectangle_class, rectangleFixture)
 	BOOST_AUTO_TEST_CASE(can_be_drawn)

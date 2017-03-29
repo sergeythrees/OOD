@@ -10,6 +10,6 @@ struct Point
 
 	bool operator == (const Point& b) const
 	{
-		return (this->x == b.x && this->y == b.y);
+		return ((this->x - b.x) < DBL_EPSILON && (this->y - b.y) < DBL_EPSILON);
 	}
 };

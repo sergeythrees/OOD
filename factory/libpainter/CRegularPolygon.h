@@ -16,7 +16,7 @@ public:
 	}
 	void Draw(ICanvas& canvas) const override
 	{
-		for (unsigned i = 0; i < m_vertices.size() - 1; ++i)
+		for (size_t i = 0; i < m_vertices.size() - 1; ++i)
 			canvas.DrawLine(GetColor(), m_vertices[i], m_vertices[i + 1]);
 		canvas.DrawLine(GetColor(), m_vertices[0], m_vertices[m_vertices.size() - 1]);
 	}
@@ -32,7 +32,7 @@ public:
 	{
 		return m_radius;
 	}
-	static std::vector<Point> CalculatePolygonVertices(Point center, unsigned radius, unsigned verticesCount)
+	static std::vector<Point> CalculatePolygonVertices(const Point& center, unsigned radius, unsigned verticesCount)
 	{
 		std::vector<Point> vertices;
 		if (verticesCount < 3)

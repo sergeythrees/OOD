@@ -38,7 +38,6 @@ namespace
 	}
 	Color StringToColor(const std::string& colorName)
 	{
-		std::string result = "black";
 		try
 		{
 			return colorMap.at(colorName);
