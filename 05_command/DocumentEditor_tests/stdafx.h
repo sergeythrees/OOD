@@ -11,6 +11,7 @@
 #include <tchar.h>
 #include <vector>
 #include <memory>
+#include <string>
 #include <sstream>
 
 #define BOOST_TEST_INCLUDED

@@ -181,6 +181,7 @@
     <ClCompile Include="..\DocumentEditor\History.cpp" />
     <ClCompile Include="..\DocumentEditor\Paragraph.cpp" />
     <ClCompile Include="AbstractCommandTests.cpp" />
+    <ClCompile Include="ChangeStringCommandTests.cpp" />
     <ClCompile Include="CParagraphTests.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp">
