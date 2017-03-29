@@ -6,6 +6,16 @@
     <ClCompile Include="..\DocumentEditor\AbstractCommand.cpp">
       <Filter>ExistingItems</Filter>
     </ClCompile>
+    <ClCompile Include="..\DocumentEditor\Paragraph.cpp">
+      <Filter>ExistingItems</Filter>
+    </ClCompile>
+    <ClCompile Include="CParagraphTests.cpp" />
+    <ClCompile Include="..\DocumentEditor\History.cpp">
+      <Filter>ExistingItems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DocumentEditor\ChangeStringCommand.cpp">
+      <Filter>ExistingItems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -13,6 +23,18 @@
     <ClInclude Include="VerifyExceptions.h" />
     <ClInclude Include="AbstractCommandMock.h" />
     <ClInclude Include="..\DocumentEditor\AbstractCommand.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DocumentEditor\Paragraph.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DocumentEditor\History.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DocumentEditor\IParagraph.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DocumentEditor\ChangeStringCommand.h">
       <Filter>ExistingItems</Filter>
     </ClInclude>
   </ItemGroup>

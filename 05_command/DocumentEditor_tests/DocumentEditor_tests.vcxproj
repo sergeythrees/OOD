@@ -166,6 +166,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\DocumentEditor\AbstractCommand.h" />
+    <ClInclude Include="..\DocumentEditor\ChangeStringCommand.h" />
+    <ClInclude Include="..\DocumentEditor\History.h" />
+    <ClInclude Include="..\DocumentEditor\IParagraph.h" />
+    <ClInclude Include="..\DocumentEditor\Paragraph.h" />
     <ClInclude Include="AbstractCommandMock.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -173,7 +177,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\DocumentEditor\AbstractCommand.cpp" />
+    <ClCompile Include="..\DocumentEditor\ChangeStringCommand.cpp" />
+    <ClCompile Include="..\DocumentEditor\History.cpp" />
+    <ClCompile Include="..\DocumentEditor\Paragraph.cpp" />
     <ClCompile Include="AbstractCommandTests.cpp" />
+    <ClCompile Include="CParagraphTests.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

@@ -1,5 +1,5 @@
 #pragma once
-
+#include <deque>
 #include "ICommand_fwd.h"
 
 class CHistory
