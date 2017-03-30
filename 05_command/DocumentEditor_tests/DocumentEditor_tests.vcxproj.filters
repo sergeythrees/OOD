@@ -17,6 +17,13 @@
       <Filter>ExistingItems</Filter>
     </ClCompile>
     <ClCompile Include="ChangeStringCommandTests.cpp" />
+    <ClCompile Include="CImageTests.cpp" />
+    <ClCompile Include="..\DocumentEditor\Image.cpp">
+      <Filter>ExistingItems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DocumentEditor\ResizeImageCommand.cpp">
+      <Filter>ExistingItems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -36,6 +43,15 @@
       <Filter>ExistingItems</Filter>
     </ClInclude>
     <ClInclude Include="..\DocumentEditor\ChangeStringCommand.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DocumentEditor\IImage.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DocumentEditor\Image.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DocumentEditor\ResizeImageCommand.h">
       <Filter>ExistingItems</Filter>
     </ClInclude>
   </ItemGroup>

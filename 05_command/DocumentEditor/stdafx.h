@@ -20,6 +20,7 @@
 #include <deque>
 #include <cassert>
 #include <boost/scope_exit.hpp>
+#include <boost/filesystem.hpp>
 
 
 // TODO: reference additional headers your program requires here

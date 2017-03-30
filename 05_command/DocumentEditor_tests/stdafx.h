@@ -13,6 +13,7 @@
 #include <memory>
 #include <string>
 #include <sstream>
+#include <boost/filesystem.hpp>
 
 #define BOOST_TEST_INCLUDED
 #pragma warning (push, 3)
