@@ -5,7 +5,7 @@
 class CImage : public IImage
 {
 public:
-	CImage(const std::string & path, int width, int height, CHistory & history);
+	CImage(const std::string & path, int width, int height);
 	~CImage();
 
 	std::string GetPath()const override;
@@ -19,5 +19,4 @@ private:
 	std::string m_fileName;
 	int m_width;
 	int m_height;
-	CHistory & m_history;
 };

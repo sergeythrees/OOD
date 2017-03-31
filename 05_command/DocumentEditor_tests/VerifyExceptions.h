@@ -1,4 +1,6 @@
 #pragma once
+#include "stdafx.h"
+
 namespace
 {
 	template <typename Ex, typename Fn>

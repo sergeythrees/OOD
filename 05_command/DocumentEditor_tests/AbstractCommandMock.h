@@ -1,28 +1,34 @@
-#pragma once
 #include "stdafx.h"
+#include <map>
 #include "../DocumentEditor/AbstractCommand.h"
 
-typedef std::vector<std::shared_ptr<ICommand>> commandsArray;
+typedef std::map<int, bool> commandsArray;
 
 class CommandMock : public CAbstractCommand
 {
 public:
-	CommandMock()
-		:m_isExecuted(false) {}
-
-	bool IsExecuted() const
+	CommandMock(commandsArray& commands, int id)
+		:m_commands(commands),
+		m_id(id),
+		m_isExecuted(false) 
 	{
-		return m_isExecuted;
+		commands.emplace(id, false);
+	}
+	~CommandMock()
+	{
+		m_commands.erase(m_id);
 	}
 protected:
 	void DoExecute() override
 	{
-		m_isExecuted = true;
+		m_commands.at(m_id) = true;
 	}
 	void DoUnexecute() override
 	{
-		m_isExecuted = false;
+		m_commands.at(m_id) = false;
 	}
 private:
+	commandsArray& m_commands;
+	int m_id;
 	bool m_isExecuted;
 };

@@ -14,10 +14,13 @@
 #include <vector>
 #include <memory>
 #include <iostream>
+#include <boost\optional.hpp>
+#include <boost\none.hpp>
 #include <boost/range/algorithm/find_if.hpp>
 #include <functional>
 #include <sstream>
 #include <deque>
+#include <list>
 #include <cassert>
 #include <boost/scope_exit.hpp>
 #include <boost/filesystem.hpp>

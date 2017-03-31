@@ -24,12 +24,35 @@
     <ClCompile Include="..\DocumentEditor\ResizeImageCommand.cpp">
       <Filter>ExistingItems</Filter>
     </ClCompile>
+    <ClCompile Include="CDocumentTests.cpp" />
+    <ClCompile Include="..\DocumentEditor\Document.cpp">
+      <Filter>ExistingItems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DocumentEditor\DocumentItem.cpp">
+      <Filter>ExistingItems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DocumentEditor\InsertParagraphCommand.cpp">
+      <Filter>ExistingItems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DocumentEditor\ConstDocumentItem.cpp">
+      <Filter>ExistingItems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DocumentEditor\InsertImageCommand.cpp">
+      <Filter>ExistingItems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DocumentEditor\DeleteImageCommand.cpp">
+      <Filter>ExistingItems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DocumentEditor\DeleteParagraphCommand.cpp">
+      <Filter>ExistingItems</Filter>
+    </ClCompile>
+    <ClCompile Include="CHistoryTests.cpp" />
+    <ClCompile Include="AbstractCommandMock.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="VerifyExceptions.h" />
-    <ClInclude Include="AbstractCommandMock.h" />
     <ClInclude Include="..\DocumentEditor\AbstractCommand.h">
       <Filter>ExistingItems</Filter>
     </ClInclude>
@@ -54,6 +77,28 @@
     <ClInclude Include="..\DocumentEditor\ResizeImageCommand.h">
       <Filter>ExistingItems</Filter>
     </ClInclude>
+    <ClInclude Include="..\DocumentEditor\Document.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DocumentEditor\DocumentItem.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DocumentEditor\InsertParagraphCommand.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DocumentEditor\ConstDocumentItem.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DocumentEditor\InsertImageCommand.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DocumentEditor\DeleteImageCommand.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DocumentEditor\DeleteParagraphCommand.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="CompareFiles.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

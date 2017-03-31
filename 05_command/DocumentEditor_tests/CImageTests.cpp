@@ -1,43 +1,42 @@
 #include "stdafx.h"
 #include "../DocumentEditor/Image.h"
 #include <boost/filesystem.hpp>
+#include "CompareFiles.h"
+#include "VerifyExceptions.h"
 
 using namespace std;
 using namespace boost;
 
-void CompareTxtFiles(const string& path1, const string& path2)
-{
-	std::ifstream ifs1(path1);
-	std::ifstream ifs2(path2);
-
-	std::istream_iterator<char> b1(ifs1), e1;
-	std::istream_iterator<char> b2(ifs2), e2;
-
-	BOOST_CHECK_EQUAL_COLLECTIONS(b1, e1, b2, e2);
-}
-
 struct imageFixture
 {
 	imageFixture()
-		:fileName("test.txt"),
+		:fileName("testImage.txt"),
 		width(100),
 		height(100),
-		history(),
-		image(fileName, width, height, history)
+		image(string("src\\" + fileName), width, height)
 	{}
 	string fileName;
 	int width;
 	int height;
-	CHistory history;
 	CImage image;
 };
 
 BOOST_FIXTURE_TEST_SUITE(CImage_, imageFixture)
-
+	BOOST_AUTO_TEST_SUITE(while_construct)
+		BOOST_AUTO_TEST_CASE(throw_exception_if_source_image_is_not_accessible)
+		{
+			VerifyException<invalid_argument>([]() {
+				CImage("C:\\oops.png", 100, 100); },
+				"Invalid file path or not accessible file");
+		
+		}
+	BOOST_AUTO_TEST_SUITE_END()
 	BOOST_AUTO_TEST_SUITE(after_construction)
 		BOOST_AUTO_TEST_CASE(copy_source_image_to_images_catalog)
 		{
-			CompareTxtFiles(fileName, string("images\\" + fileName));
+			ifstream source("src\\" + fileName);
+			ifstream out("images\\" + fileName);
+			CompareTxtFiles(source, out);
 		}
 	BOOST_AUTO_TEST_SUITE_END()
 	BOOST_AUTO_TEST_CASE(can_get_width_and_height)
@@ -52,15 +51,19 @@ BOOST_FIXTURE_TEST_SUITE(CImage_, imageFixture)
 	BOOST_AUTO_TEST_SUITE(after_destruction)
 		BOOST_AUTO_TEST_CASE(must_be_deleted_if_Must_Delete_value_turn_in_true)
 		{
-			image.MustDelete(true);
-			image.~CImage();
+			{
+				CImage temp(string("src\\" + fileName), width, height);
+				temp.MustDelete(true);
+			}
 			ifstream file(string("images\\" + fileName));
 			BOOST_CHECK(!file.is_open());
 		}
 		BOOST_AUTO_TEST_CASE(must_not_be_deleted_if_Must_Delete_value_turn_in_false)
 		{
-			image.MustDelete(false);
-			image.~CImage();
+			{
+				CImage temp(string("src\\" + fileName), width, height);
+				temp.MustDelete(false);
+			}
 			ifstream file(string("images\\" + fileName));
 			BOOST_CHECK(file.is_open());
 		}
@@ -72,30 +75,6 @@ BOOST_FIXTURE_TEST_SUITE(CImage_, imageFixture)
 			image.Resize(200, 200);
 			BOOST_CHECK_EQUAL(image.GetWidth(), 200);
 			BOOST_CHECK_EQUAL(image.GetHeight(), 200);
-		}
-		BOOST_AUTO_TEST_CASE(can_undo)
-		{
-			image.Resize(200, 200);
-			image.Resize(300, 300);
-			history.Undo();
-			BOOST_CHECK_EQUAL(image.GetWidth(), 200);
-			BOOST_CHECK_EQUAL(image.GetHeight(), 200);
-			history.Undo();
-			BOOST_CHECK_EQUAL(image.GetWidth(), 100);
-			BOOST_CHECK_EQUAL(image.GetHeight(), 100);
-		}
-		BOOST_AUTO_TEST_CASE(can_redo)
-		{
-			image.Resize(200, 200);
-			image.Resize(300, 300);
-			history.Undo();
-			history.Undo();
-			history.Redo();
-			BOOST_CHECK_EQUAL(image.GetWidth(), 200);
-			BOOST_CHECK_EQUAL(image.GetHeight(), 200);
-			history.Redo();
-			BOOST_CHECK_EQUAL(image.GetWidth(), 300);
-			BOOST_CHECK_EQUAL(image.GetHeight(), 300);
 		}
 	BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
