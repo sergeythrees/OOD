@@ -4,7 +4,7 @@
 using namespace std;
 
 CInsertImageCommand::CInsertImageCommand(std::vector<CDocumentItem>& items,
-	std::shared_ptr<IImage> image, boost::optional<size_t> position)
+	std::shared_ptr<IImage> image, const boost::optional<size_t>& position)
 	:m_items(items),
 	m_item(CDocumentItem(image)),
 	m_position(position)

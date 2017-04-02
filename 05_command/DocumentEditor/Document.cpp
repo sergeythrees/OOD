@@ -28,7 +28,7 @@ std::string CDocument::GetTitle() const
 }
 
 std::shared_ptr<IParagraph> CDocument::InsertParagraph(const std::string & text, 
-	boost::optional<size_t> position)
+	const boost::optional<size_t>& position)
 {
 	auto paragraph = make_shared<CParagraph>(text);
 	m_history.AddAndExecuteCommand(
@@ -38,7 +38,7 @@ std::shared_ptr<IParagraph> CDocument::InsertParagraph(const std::string & text,
 
 std::shared_ptr<IImage> CDocument::InsertImage(const std::string & path, 
 	int width, int height, 
-	boost::optional<size_t> position)
+	const boost::optional<size_t>& position)
 {
 	auto image = make_shared<CImage>(path, width, height);
 	m_history.AddAndExecuteCommand(

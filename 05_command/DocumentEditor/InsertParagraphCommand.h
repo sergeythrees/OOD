@@ -8,7 +8,7 @@ class CInsertParagraphCommand : public CAbstractCommand
 {
 public:
 	CInsertParagraphCommand(std::vector<CDocumentItem> & items, 
-		std::shared_ptr<IParagraph> paragraph, boost::optional<size_t> position);
+		std::shared_ptr<IParagraph> paragraph, const boost::optional<size_t>& position);
 protected:
 	void DoExecute() override;
 	void DoUnexecute() override;

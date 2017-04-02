@@ -11,10 +11,10 @@ public:
 	std::string GetTitle() const override;
 
 	std::shared_ptr<IParagraph> InsertParagraph(const std::string& text,
-		boost::optional<size_t> position = boost::none) override;
+		const boost::optional<size_t>& position = boost::none) override;
 
 	std::shared_ptr<IImage> InsertImage(const std::string& path, int width, int height,
-		boost::optional<size_t> position = boost::none);
+		const boost::optional<size_t>& position = boost::none);
 	
 	void ReplaceText(size_t index, const std::string& text) override;
 	void ResizeImage(size_t index, int width, int height)override;

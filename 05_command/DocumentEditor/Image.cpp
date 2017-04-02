@@ -19,11 +19,15 @@ CImage::CImage(const string & filePath, int width, int height)
 	copy_file(filePath, temp_directory_path() / "images" / m_fileName, copy_option::overwrite_if_exists);
 }
 
-CImage::~CImage() try
+CImage::~CImage() 
 {
-	remove(temp_directory_path() / "images" / m_fileName);
+	try
+	{
+		remove(temp_directory_path() / "images" / m_fileName);
+	}
+	catch (...) {}
 }
-catch(...) {}
+
 
 std::string CImage::GetPath() const
 {

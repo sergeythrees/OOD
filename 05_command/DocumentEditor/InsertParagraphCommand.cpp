@@ -4,7 +4,7 @@
 using namespace std;
 
 CInsertParagraphCommand::CInsertParagraphCommand(std::vector<CDocumentItem>& items,
-	std::shared_ptr<IParagraph> paragraph, boost::optional<size_t> position)
+	std::shared_ptr<IParagraph> paragraph, const boost::optional<size_t>& position)
 	:m_items(items),
 	m_item(CDocumentItem(paragraph)),
 	m_position(position)
