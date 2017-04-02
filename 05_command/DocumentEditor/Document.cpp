@@ -10,6 +10,7 @@
 #include "DeleteParagraphCommand.h"
 #include "ResizeImageCommand.h"
 #include "SetTextInParagraphCommand.h"
+#include "DecodeHtmlEntities.h"
 
 using namespace std;
 using namespace boost;
@@ -133,7 +134,9 @@ void CDocument::Save(const std::string & filePath) const
 	{
 		if (item.GetParagraph())
 		{
-			body << "    <p>" << item.GetParagraph()->GetText() << "</p>" << endl;
+			body << "    <p>" 
+				<< DecodeToHtml(item.GetParagraph()->GetText()) 
+				<< "</p>" << endl;
 		}
 		else if (item.GetImage())
 		{
@@ -148,6 +151,6 @@ void CDocument::Save(const std::string & filePath) const
 	}
 
 	out << "<!DOCTYPE html>\n<html>\n<head>" << endl 
-		 << "<title>" << GetTitle() << "</title>\n</head>\n"
+		 << "<title>" << DecodeToHtml(GetTitle()) << "</title>\n</head>\n"
 		 << "<body>\n" << body.str() << "</body>\n</html>";
 }

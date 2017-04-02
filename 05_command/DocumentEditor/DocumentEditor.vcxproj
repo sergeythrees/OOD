@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClInclude Include="AbstractCommand.h" />
     <ClInclude Include="ConstDocumentItem.h" />
+    <ClInclude Include="DecodeHtmlEntities.h" />
     <ClInclude Include="DeleteImageCommand.h" />
     <ClInclude Include="DeleteParagraphCommand.h" />
     <ClInclude Include="Document.h" />
