@@ -84,7 +84,7 @@ CConstDocumentItem CDocument::GetItem(size_t index) const
 	if (index >= m_items.size())
 		throw out_of_range("Position is out of range");
 	
-	return *next(m_items.begin(), index);
+	return *(m_items.begin() + index);
 }
 
 CDocumentItem CDocument::GetItem(size_t index)
@@ -92,7 +92,7 @@ CDocumentItem CDocument::GetItem(size_t index)
 	if (index >= m_items.size())
 		throw out_of_range("Position is out of range");
 
-	return *next(m_items.begin(), index);
+	return *(m_items.begin() + index);
 }
 
 size_t CDocument::GetItemsCount() const

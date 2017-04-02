@@ -16,8 +16,7 @@ CInsertImageCommand::CInsertImageCommand(std::vector<CDocumentItem>& items,
 void CInsertImageCommand::DoExecute()
 {
 	if (m_position)
-		m_items.insert(
-			next(m_items.begin(), *m_position), m_item);
+		m_items.insert(m_items.begin() + *m_position, m_item);
 	else
 		m_items.push_back(m_item);
 }
@@ -25,8 +24,7 @@ void CInsertImageCommand::DoExecute()
 void CInsertImageCommand::DoUnexecute()
 {
 	if (m_position)
-		m_items.erase(
-			next(m_items.begin(), *m_position));
+		m_items.erase(m_items.begin() + *m_position);
 	else
 		m_items.pop_back();
 }

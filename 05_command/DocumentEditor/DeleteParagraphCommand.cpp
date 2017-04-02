@@ -13,10 +13,10 @@ DeleteParagraphCommand::DeleteParagraphCommand(std::vector<CDocumentItem> & item
 
 void DeleteParagraphCommand::DoExecute()
 {
-	m_items.erase(next(m_items.begin(), m_position));
+	m_items.erase(m_items.begin() + m_position);
 }
 
 void DeleteParagraphCommand::DoUnexecute()
 {
-	m_items.insert(next(m_items.begin(), m_position), m_item);
+	m_items.insert(m_items.begin()+ m_position, m_item);
 }

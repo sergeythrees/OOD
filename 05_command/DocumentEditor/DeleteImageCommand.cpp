@@ -12,12 +12,10 @@ CDeleteImageCommand::CDeleteImageCommand(std::vector<CDocumentItem>& items,
 
 void CDeleteImageCommand::DoExecute()
 {
-	m_items.erase(
-		next(m_items.begin(), m_position));
+	m_items.erase(m_items.begin()+ m_position);
 }
 
 void CDeleteImageCommand::DoUnexecute()
 {
-	m_items.insert(
-		next(m_items.begin(), m_position), m_item);
+	m_items.insert(m_items.begin() + m_position, m_item);
 }
