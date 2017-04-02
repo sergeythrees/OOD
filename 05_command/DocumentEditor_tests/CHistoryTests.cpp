@@ -17,11 +17,12 @@ public:
 	{
 		commands.emplace(id, false);
 	}
-	~CommandMock()
+	~CommandMock()	try
 	{
 		if (!m_commands.empty())
 			m_commands.erase(m_id);
 	}
+	catch (...) {}
 protected:
 	void DoExecute() override
 	{
