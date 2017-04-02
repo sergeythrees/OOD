@@ -8,14 +8,14 @@
 #include "InsertImageCommand.h"
 #include "DeleteImageCommand.h"
 #include "DeleteParagraphCommand.h"
+#include "ResizeImageCommand.h"
+#include "SetTextInParagraphCommand.h"
 
 using namespace std;
+using namespace boost;
+using namespace filesystem;
 
-CDocument::CDocument(const std::string & title, CHistory& history)
-	:m_title(title),
-	m_history(history)
-{
-}
+
 
 void CDocument::SetTitle(const std::string & title)
 {
@@ -44,6 +44,26 @@ std::shared_ptr<IImage> CDocument::InsertImage(const std::string & path,
 	m_history.AddAndExecuteCommand(
 		make_unique<CInsertImageCommand>(m_items, image, position));
 	return image;
+}
+
+void CDocument::ReplaceText(size_t index, const std::string & text)
+{
+	if (index >= m_items.size())
+		throw out_of_range("Position is out of range");
+
+	m_history.AddAndExecuteCommand(
+		make_unique<SetTextInParagraphCommand>(
+			m_items[index].GetParagraph(), text));
+}
+
+void CDocument::ResizeImage(size_t index, int width, int height)
+{
+	if (index >= m_items.size())
+		throw out_of_range("Position is out of range");
+
+	m_history.AddAndExecuteCommand(
+		make_unique<CResizeImageCommand>(
+			m_items[index].GetImage(), width, height));
 }
 
 void CDocument::DeleteItem(size_t index)
@@ -100,8 +120,14 @@ void CDocument::Redo()
 	m_history.Redo();
 }
 
-void CDocument::Save(std::ostream& out) const
+void CDocument::Save(const std::string & filePath) const
 {
+	path docPath(filePath);
+	
+	if (docPath.has_parent_path())
+		create_directories(docPath.parent_path());
+
+	std::ofstream out(filePath);
 	stringstream body;
 	for (auto item : m_items)
 	{
@@ -116,6 +142,8 @@ void CDocument::Save(std::ostream& out) const
 				<< "\" height=\"" << image->GetHeight()
 				<< "\" width=\"" << image->GetWidth()
 				<< "\">" << endl;
+			create_directories(docPath.parent_path() / "images");
+			image->Save(docPath.parent_path().generic_string());
 		}
 	}
 

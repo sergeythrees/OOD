@@ -32,6 +32,9 @@ public:
 	//// Удаляет элемент из документа
 	virtual void DeleteItem(size_t index) = 0;
 
+	virtual void ReplaceText(size_t index, const std::string& text ) = 0;
+	virtual void ResizeImage(size_t index, int width, int height) = 0;
+
 	// Возвращает заголовок документа
 	virtual std::string GetTitle()const = 0;
 	// Изменяет заголовок документа
@@ -49,7 +52,7 @@ public:
 
 	//// Сохраняет документ в формате html. Изображения сохраняются в подкаталог images.
 	//// Пути к изображениям указываются относительно пути к сохраняемому HTML файлу
-	virtual void Save(std::ostream& out)const = 0;
+	virtual void Save(const std::string & filePath)const = 0;
 
 	virtual ~IDocument() = default;
 };

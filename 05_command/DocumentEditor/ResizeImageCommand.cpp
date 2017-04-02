@@ -5,7 +5,8 @@ using namespace std;
 
 CResizeImageCommand::CResizeImageCommand(std::shared_ptr<IImage> image,
 	int newWidth, int newHeight)
-	: m_width(image->GetWidth()), m_height(image->GetHeight()),
+	: m_image(image),
+	m_width(image->GetWidth()), m_height(image->GetHeight()),
 	m_newWidth(newWidth) ,m_newHeight(newHeight)
 {
 }

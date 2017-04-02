@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include <iterator>
 #include "DeleteParagraphCommand.h"
 
 using namespace std;

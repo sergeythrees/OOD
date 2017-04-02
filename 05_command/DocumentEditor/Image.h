@@ -12,10 +12,9 @@ public:
 	int GetWidth()const override;
 	int GetHeight()const override;
 	void Resize(int width, int height) override;
-	void MustDelete(bool mustDelete) override;
+	void Save(const std::string & path) override;
 
 private:
-	bool m_mustDelete;
 	std::string m_fileName;
 	int m_width;
 	int m_height;

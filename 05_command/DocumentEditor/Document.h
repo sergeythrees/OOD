@@ -7,7 +7,6 @@
 class CDocument:public IDocument
 {
 public:
-	CDocument(const std::string& title, CHistory& history);
 	void SetTitle(const std::string & title) override;
 	std::string GetTitle() const override;
 
@@ -17,6 +16,9 @@ public:
 	std::shared_ptr<IImage> InsertImage(const std::string& path, int width, int height,
 		boost::optional<size_t> position = boost::none);
 	
+	void ReplaceText(size_t index, const std::string& text) override;
+	void ResizeImage(size_t index, int width, int height)override;
+
 	void DeleteItem(size_t index) override;
 
 	CConstDocumentItem GetItem(size_t index)const override;
@@ -28,9 +30,9 @@ public:
 	bool CanRedo() const override;
 	void Redo() override;
 
-	void Save(std::ostream& out) const;
+	void Save(const std::string & filePath) const;
 private:
 	std::vector<CDocumentItem> m_items;
 	std::string m_title;
-	CHistory& m_history;
+	CHistory m_history;
 };

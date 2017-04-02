@@ -46,7 +46,14 @@ bool CMenu::ExecuteCommand(const string & command)
 	});
 	if (it != m_items.end())
 	{
-		it->command(iss);
+		try
+		{
+			it->command(iss);
+		}
+		catch (exception & e)
+		{
+			cout << e.what() << endl;
+		}
 	}
 	else
 	{

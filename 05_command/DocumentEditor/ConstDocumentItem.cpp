@@ -17,12 +17,12 @@ CConstDocumentItem::CConstDocumentItem(std::shared_ptr<IImage> image)
 {
 }
 
-std::shared_ptr<const IImage> CConstDocumentItem::GetImage()const
+const std::shared_ptr<IImage> CConstDocumentItem::GetImage()const
 {
 	return m_image;
 }
 
-std::shared_ptr<const IParagraph> CConstDocumentItem::GetParagraph()const
+const std::shared_ptr<IParagraph> CConstDocumentItem::GetParagraph()const
 {
 	return m_paragraph;
 }

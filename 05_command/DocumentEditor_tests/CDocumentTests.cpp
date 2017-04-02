@@ -8,20 +8,16 @@ using namespace std;
 struct documentFixture
 {
 	documentFixture()
-		:title("title"),
-		history(),
-		document(title, history)
+		:document()
 	{}
-	string title;
-	CHistory history;
 	CDocument document;
 };
 
 BOOST_FIXTURE_TEST_SUITE(CDocument_, documentFixture)
 	BOOST_AUTO_TEST_SUITE(after_construction)
-		BOOST_AUTO_TEST_CASE(has_preset_title)
+		BOOST_AUTO_TEST_CASE(has_empty_title)
 		{
-			BOOST_CHECK_EQUAL(document.GetTitle(), title);
+			BOOST_CHECK_EQUAL(document.GetTitle(), "");
 		}
 		BOOST_AUTO_TEST_CASE(is_empty)
 		{
@@ -44,7 +40,7 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_, documentFixture)
 		{
 			document.SetTitle("new");
 			document.Undo();
-			BOOST_CHECK_EQUAL(document.GetTitle(), title);
+			BOOST_CHECK_EQUAL(document.GetTitle(), "");
 		}
 		BOOST_AUTO_TEST_CASE(can_redo)
 		{
@@ -93,10 +89,10 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_, documentFixture)
 			auto p1 = document.InsertImage("src/image1.txt", 100, 100);
 			auto p2 = document.InsertImage("src/image2.txt", 200, 200, 0);
 			BOOST_CHECK_EQUAL(document.GetItemsCount(), 2);
-			BOOST_CHECK_EQUAL(p1->GetPath(), "images/image1.txt");
+			BOOST_CHECK_EQUAL(p1->GetWidth(), 100);
 			BOOST_CHECK_EQUAL(
-				document.GetItem(0).GetImage()->GetPath(), 
-				"images/image2.txt");
+				document.GetItem(0).GetImage()->GetWidth(), 
+				200);
 		}
 		BOOST_AUTO_TEST_CASE(can_undo_and_redo)
 		{
@@ -108,6 +104,51 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_, documentFixture)
 			document.Redo();
 			document.Redo();
 			BOOST_CHECK_EQUAL(document.GetItemsCount(), 2);
+		}
+	BOOST_AUTO_TEST_SUITE_END()
+			
+	BOOST_AUTO_TEST_SUITE(ResizeImage_function)
+		BOOST_AUTO_TEST_CASE(can_resize_images)
+		{
+			auto p1 = document.InsertImage("src/image1.txt", 50, 50);
+			document.ResizeImage(0, 100, 200);
+			BOOST_CHECK_EQUAL(p1->GetWidth(), 100);
+			BOOST_CHECK_EQUAL(p1->GetHeight(), 200);
+		}
+		BOOST_AUTO_TEST_CASE(can_undo_and_redo)
+		{
+			auto p1 = document.InsertImage("src/image1.txt", 100, 100);
+			document.ResizeImage(0, 200, 200);
+			document.ResizeImage(0, 300, 300);
+			document.Undo();
+			document.Undo();
+			BOOST_CHECK_EQUAL(p1->GetWidth(), 100);
+			BOOST_CHECK_EQUAL(p1->GetHeight(), 100);
+			document.Redo();
+			document.Redo();
+			BOOST_CHECK_EQUAL(p1->GetWidth(), 300);
+			BOOST_CHECK_EQUAL(p1->GetHeight(), 300);
+		}
+	BOOST_AUTO_TEST_SUITE_END()
+
+	BOOST_AUTO_TEST_SUITE(ReplaceText_function)
+		BOOST_AUTO_TEST_CASE(can_replace_text_in_paragraphs)
+		{
+			auto p1 = document.InsertParagraph("paragraph1");
+			document.ReplaceText(0, "new");
+			BOOST_CHECK_EQUAL(p1->GetText(), "new");
+
+		}
+		BOOST_AUTO_TEST_CASE(can_undo_and_redo)
+		{
+			auto p1 = document.InsertParagraph("paragraph1");
+			document.ReplaceText(0, "new");
+			document.ReplaceText(0, "new1");
+			document.Undo();
+			document.Undo();
+			document.Redo();
+			document.Redo();
+			BOOST_CHECK_EQUAL(p1->GetText(), "new1");
 		}
 	BOOST_AUTO_TEST_SUITE_END()
 
@@ -146,11 +187,12 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_, documentFixture)
 		}
 		BOOST_AUTO_TEST_CASE(can_give_const_access_to_any_element)
 		{
-			auto p1 = document.InsertParagraph("paragraph1");
-			auto p2 = document.InsertImage("src/image2.txt", 200, 200);
-			const CDocument doc(document);
-			BOOST_CHECK(p1 == doc.GetItem(0).GetParagraph());
-			BOOST_CHECK(p2 == doc.GetItem(1).GetImage());
+			document.InsertParagraph("paragraph1");
+			document.InsertImage("src/image2.txt", 200, 200);
+			CDocument const*  constDoc = &document;
+
+			constDoc->GetItem(0).GetParagraph();
+			constDoc->GetItem(1).GetImage();
 		}
 	BOOST_AUTO_TEST_SUITE_END()
 
@@ -158,26 +200,23 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_, documentFixture)
 		BOOST_AUTO_TEST_CASE(can_save_document)
 		{
 			stringstream expectedresult;
+			string imagePath1;
+			string imagePath2;
 			{
-				CHistory tempHist;
-				CDocument tempDoc("title", tempHist);
+				CDocument tempDoc;
 				tempDoc.InsertParagraph("paragraph1");
-				tempDoc.InsertImage("src/realImage.png", 200, 200);
-				tempDoc.InsertImage("src/realImage2.png", 200, 200);
+				auto img1 = tempDoc.InsertImage("src/realImage.png", 200, 200);
+				imagePath1 = img1->GetPath();
+				auto img2 = tempDoc.InsertImage("src/realImage2.png", 200, 200);	
+				imagePath2 = img2->GetPath();
 				tempDoc.DeleteItem(2);
-				ofstream out("test.html");
-				tempDoc.Save(out);
-				tempDoc.Save(expectedresult);
+				tempDoc.Save("test/test.html");
 			}
-			BOOST_CHECK(boost::filesystem::exists(string("images/realImage.png")));
-			BOOST_CHECK(!boost::filesystem::exists(string("images/realImage2.png")));
-
-			ifstream result("test.html");
-			CompareTxtFiles(result, expectedresult);
+			BOOST_CHECK(boost::filesystem::exists("test/" + imagePath1));
+			BOOST_CHECK(!boost::filesystem::exists("test/" + imagePath2));
 		}
 	BOOST_AUTO_TEST_SUITE_END()
-
-	BOOST_AUTO_TEST_CASE(should_throw_exceptions_and_do_not_change_history_if_item_index_is_out_of_range)
+	BOOST_AUTO_TEST_CASE(should_throw_exceptions_if_item_index_is_out_of_range)
 	{
 		string expectedMess("Position is out of range");
 		VerifyException<out_of_range>([&]() {
@@ -187,6 +226,12 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_, documentFixture)
 			document.InsertImage("src/realImage.png", 200, 200, 5); },
 			expectedMess);
 		VerifyException<out_of_range>([&]() {
+			document.ReplaceText(0,""); },
+			expectedMess);
+		VerifyException<out_of_range>([&]() {
+			document.ResizeImage(0, 200, 200); },
+			expectedMess);
+		VerifyException<out_of_range>([&]() {
 			document.DeleteItem(0);},
 			expectedMess);
 		VerifyException<out_of_range>([&]() {
@@ -194,10 +239,8 @@ BOOST_FIXTURE_TEST_SUITE(CDocument_, documentFixture)
 			expectedMess);
 		VerifyException<out_of_range>([]() {
 			CHistory hist;
-			const CDocument doc(CDocument("", hist));
+			const CDocument doc;
 			doc.GetItem(1); },
 			expectedMess);
-		BOOST_CHECK(!history.CanRedo());
-		BOOST_CHECK(!history.CanUndo());
 	}
 BOOST_AUTO_TEST_SUITE_END()

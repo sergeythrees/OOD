@@ -14,12 +14,10 @@ void CDeleteImageCommand::DoExecute()
 {
 	m_items.erase(
 		next(m_items.begin(), m_position));
-	m_item.GetImage()->MustDelete(true);
 }
 
 void CDeleteImageCommand::DoUnexecute()
 {
 	m_items.insert(
 		next(m_items.begin(), m_position), m_item);
-	m_item.GetImage()->MustDelete(false);
 }

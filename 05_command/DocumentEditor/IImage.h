@@ -14,9 +14,7 @@ public:
 
 	//// Изменяет размер изображения
 	virtual void Resize(int width, int height) = 0;
-
-	//// Отметка на удаление
-	virtual void MustDelete(bool mustDelete) = 0;
+	virtual void Save(const std::string & path) = 0;
 
 	virtual ~IImage() = default;
 };

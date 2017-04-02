@@ -11,9 +11,9 @@ public:
 	CConstDocumentItem(std::shared_ptr<IImage> image);
 	// Возвращает указатель на константное изображение, либо nullptr,
 	// если элемент не является изображением
-	std::shared_ptr<const IImage> GetImage()const;
+	const std::shared_ptr<IImage> GetImage()const;
 	// Возвращает указатель на константный параграф, либо nullptr, если элемент не является параграфом
-	std::shared_ptr<const IParagraph> GetParagraph()const;
+	const std::shared_ptr<IParagraph> GetParagraph()const;
 	virtual ~CConstDocumentItem() = default;
 protected:
 	std::shared_ptr<IParagraph> m_paragraph;

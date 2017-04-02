@@ -47,7 +47,9 @@
       <Filter>ExistingItems</Filter>
     </ClCompile>
     <ClCompile Include="CHistoryTests.cpp" />
-    <ClCompile Include="AbstractCommandMock.h" />
+    <ClCompile Include="..\DocumentEditor\SetTextInParagraphCommand.cpp">
+      <Filter>ExistingItems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -99,6 +101,9 @@
       <Filter>ExistingItems</Filter>
     </ClInclude>
     <ClInclude Include="CompareFiles.h" />
+    <ClInclude Include="..\DocumentEditor\SetTextInParagraphCommand.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

@@ -150,6 +150,7 @@
     <ClInclude Include="DeleteImageCommand.h" />
     <ClInclude Include="DeleteParagraphCommand.h" />
     <ClInclude Include="Document.h" />
+    <ClInclude Include="Editor.h" />
     <ClInclude Include="History.h" />
     <ClInclude Include="DocumentItem.h" />
     <ClInclude Include="IDocument.h" />
@@ -163,6 +164,7 @@
     <ClInclude Include="Paragraph.h" />
     <ClInclude Include="ChangeStringCommand.h" />
     <ClInclude Include="ResizeImageCommand.h" />
+    <ClInclude Include="SetTextInParagraphCommand.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -172,6 +174,7 @@
     <ClCompile Include="DeleteImageCommand.cpp" />
     <ClCompile Include="DeleteParagraphCommand.cpp" />
     <ClCompile Include="Document.cpp" />
+    <ClCompile Include="Editor.cpp" />
     <ClCompile Include="History.cpp" />
     <ClCompile Include="DocumentItem.cpp" />
     <ClCompile Include="Image.cpp" />
@@ -182,6 +185,7 @@
     <ClCompile Include="Paragraph.cpp" />
     <ClCompile Include="ChangeStringCommand.cpp" />
     <ClCompile Include="ResizeImageCommand.cpp" />
+    <ClCompile Include="SetTextInParagraphCommand.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

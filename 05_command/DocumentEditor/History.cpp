@@ -60,7 +60,11 @@ void CHistory::AddAndExecuteCommand(ICommandPtr && command)
 			// т.к. команду выполнить не смогли
 			throw;
 		}
-
+		if (m_commands.size() > 10)
+		{
+			m_commands.pop_front();
+			--m_nextCommandIndex;
+		}
 		// Альтернативная реализация через boost.scope_exit (не совсем здесь подходит)
 		//// флажок для утверждения изменений
 		//bool commit = false;

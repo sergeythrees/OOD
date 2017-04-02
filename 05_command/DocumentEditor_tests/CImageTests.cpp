@@ -32,10 +32,11 @@ BOOST_FIXTURE_TEST_SUITE(CImage_, imageFixture)
 		}
 	BOOST_AUTO_TEST_SUITE_END()
 	BOOST_AUTO_TEST_SUITE(after_construction)
-		BOOST_AUTO_TEST_CASE(copy_source_image_to_images_catalog)
+		BOOST_AUTO_TEST_CASE(copy_source_image_to_temp_images_catalog)
 		{
 			ifstream source("src\\" + fileName);
-			ifstream out("images\\" + fileName);
+			ifstream out((filesystem::temp_directory_path() 
+				/ image.GetPath()).generic_string());
 			CompareTxtFiles(source, out);
 		}
 	BOOST_AUTO_TEST_SUITE_END()
@@ -46,26 +47,17 @@ BOOST_FIXTURE_TEST_SUITE(CImage_, imageFixture)
 	}
 	BOOST_AUTO_TEST_CASE(can_get_relative_path)
 	{
-		BOOST_CHECK_EQUAL(image.GetPath(), string("images/" + fileName));
+		BOOST_CHECK_EQUAL(image.GetPath().find("images"), 0);
 	}
 	BOOST_AUTO_TEST_SUITE(after_destruction)
-		BOOST_AUTO_TEST_CASE(must_be_deleted_if_Must_Delete_value_turn_in_true)
+		BOOST_AUTO_TEST_CASE(must_be_deleted_from_temporary_directory)
 		{
+			string uniqueFilePath;
 			{
 				CImage temp(string("src\\" + fileName), width, height);
-				temp.MustDelete(true);
+				uniqueFilePath = temp.GetPath();
 			}
-			ifstream file(string("images\\" + fileName));
-			BOOST_CHECK(!file.is_open());
-		}
-		BOOST_AUTO_TEST_CASE(must_not_be_deleted_if_Must_Delete_value_turn_in_false)
-		{
-			{
-				CImage temp(string("src\\" + fileName), width, height);
-				temp.MustDelete(false);
-			}
-			ifstream file(string("images\\" + fileName));
-			BOOST_CHECK(file.is_open());
+			BOOST_CHECK(!filesystem::exists("temp/" + uniqueFilePath));
 		}
 	BOOST_AUTO_TEST_SUITE_END()
 	

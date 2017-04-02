@@ -7,22 +7,21 @@ using namespace boost;
 using namespace filesystem;
 
 CImage::CImage(const string & filePath, int width, int height)
-	:m_mustDelete(false),
-	m_width(width),
+	:m_width(width),
 	m_height(height)
 {
 	if (!exists(path(filePath)))
 		throw invalid_argument("Invalid file path or not accessible file");
 
-	m_fileName = path(filePath).filename().generic_string();
-	create_directory(path("images"));
-	copy_file(path(filePath), path("images") / m_fileName, copy_option::overwrite_if_exists);
+	m_fileName = filesystem::unique_path().filename().generic_string() 
+		+ path(filePath).filename().extension().generic_string();
+	create_directories(temp_directory_path() / "images");
+	copy_file(filePath, temp_directory_path() / "images" / m_fileName, copy_option::overwrite_if_exists);
 }
 
 CImage::~CImage()
 {
-	if (m_mustDelete)
-		remove(path("images") / m_fileName);
+	remove(temp_directory_path() / "images" / m_fileName);
 }
 
 std::string CImage::GetPath() const
@@ -46,7 +45,8 @@ void CImage::Resize(int width, int height)
 	m_height = height;
 }
 
-void CImage::MustDelete(bool mustDelete)
+void CImage::Save(const std::string & path)
 {
-	m_mustDelete = mustDelete;
+	copy_file(temp_directory_path() / GetPath(),
+		filesystem::path(path) / GetPath(), copy_option::overwrite_if_exists);
 }
