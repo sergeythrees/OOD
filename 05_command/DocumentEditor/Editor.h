@@ -26,8 +26,8 @@ private:
 	void List(std::istream &);
 
 
-	unsigned ReadNumber(std::istream & in);
-	boost::optional<unsigned> ReadPosition(std::istream & in);
+	size_t ReadNumber(std::istream & in);
+	boost::optional<size_t> ReadPosition(std::istream & in);
 	std::string ReadToEndl(std::istream & in);
 
 	CMenu m_menu;

@@ -46,8 +46,8 @@ void CEditor::AddParagraph(istream & in)
 void CEditor::AddImage(istream & in)
 {
 	auto position = ReadPosition(in);
-	unsigned width = ReadNumber(in);
-	unsigned height = ReadNumber(in);
+	auto width = ReadNumber(in);
+	auto height = ReadNumber(in);
 	string path = ReadToEndl(in);
 
 	m_document->InsertImage(path, width, height, position);
@@ -60,7 +60,7 @@ void CEditor::DeleteItem(istream & in)
 
 void CEditor::ReplaceText(istream & in)
 {
-	unsigned index = ReadNumber(in);
+	auto index = ReadNumber(in);
 
 	auto item = m_document->GetItem(index);
 	if (!item.GetParagraph())
@@ -71,9 +71,9 @@ void CEditor::ReplaceText(istream & in)
 
 void CEditor::ResizeImage(istream & in)
 {
-	unsigned index = ReadNumber(in);
-	unsigned width = ReadNumber(in);
-	unsigned height = ReadNumber(in);
+	auto index = ReadNumber(in);
+	auto width = ReadNumber(in);
+	auto height = ReadNumber(in);
 
 	auto item = m_document->GetItem(index);
 	if (!item.GetImage())
@@ -124,7 +124,7 @@ void CEditor::Redo(istream &)
 		cout << "Can't redo" << endl;
 }
 
-unsigned CEditor::ReadNumber(istream & in)
+size_t CEditor::ReadNumber(istream & in)
 {
 	unsigned number;
 	if (!(in >> number))
@@ -134,9 +134,9 @@ unsigned CEditor::ReadNumber(istream & in)
 	return number;
 }
 
-boost::optional<unsigned> CEditor::ReadPosition(istream & in)
+boost::optional<size_t> CEditor::ReadPosition(istream & in)
 {
-	boost::optional<unsigned> position;
+	boost::optional<size_t> position;
 	string pos;
 	in >> pos;
 	if (pos != "end") try
