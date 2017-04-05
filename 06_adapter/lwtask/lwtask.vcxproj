@@ -146,7 +146,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="graphics_lib.cpp" />
+    <ClCompile Include="graphics_lib_pro.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="modern_graphics_lib.cpp" />
+    <ClCompile Include="modern_graphics_lib_pro.cpp" />
+    <ClCompile Include="shape_drawing_lib.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="graphics_lib.h" />
+    <ClInclude Include="graphics_lib_pro.h" />
+    <ClInclude Include="modern_graphics_lib_pro.h" />
+    <ClInclude Include="modern_graphics_lib.h" />
+    <ClInclude Include="shape_drawing_lib.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
