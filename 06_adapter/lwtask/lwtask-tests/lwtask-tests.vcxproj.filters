@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="..\modern_graphics_lib.cpp">
+      <Filter>ExistingItems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ModernGraphiscsAdapter.cpp">
+      <Filter>ExistingItems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ModernGraphiscsClassAdapter.cpp">
+      <Filter>ExistingItems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ModernGraphiscsProClassAdapter.cpp">
+      <Filter>ExistingItems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\graphics_lib_pro.cpp">
+      <Filter>ExistingItems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\modern_graphics_lib_pro.cpp">
+      <Filter>ExistingItems</Filter>
+    </ClCompile>
+    <ClCompile Include="ModernGraphiscsProClassAdapterTests.cpp" />
+    <ClCompile Include="ModernGraphiscsClassAdapterTests.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="..\ModernGraphiscsAdapter.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\modern_graphics_lib.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ModernGraphiscsClassAdapter.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ModernGraphiscsProClassAdapter.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\graphics_lib_pro.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\modern_graphics_lib_pro.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="ExistingItems">
+      <UniqueIdentifier>{c3aa232b-ff10-401e-8935-13a7a72ec25f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

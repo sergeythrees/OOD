@@ -9,7 +9,6 @@ void graphics_lib::CCanvas::MoveTo(int x, int y)
 }
 
 void graphics_lib::CCanvas::LineTo(int x, int y)
-
 {
 	cout << "LineTo (" << x << ", " << y << ")" << endl;
 }

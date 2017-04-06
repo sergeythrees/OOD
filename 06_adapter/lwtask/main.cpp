@@ -5,15 +5,9 @@
 #include "shape_drawing_lib.h"
 #include "modern_graphics_lib.h"
 #include "modern_graphics_lib_pro.h"
-
+#include "ModernGraphiscsObjectAdapter.h"
 
 using namespace std;
-
-
-
-
-
-
 
 // Пространство имен приложения (доступно для модификации)
 namespace app
@@ -39,11 +33,12 @@ void PaintPictureOnCanvas()
 void PaintPictureOnModernGraphicsRenderer()
 {
 	modern_graphics_lib::CModernGraphicsRenderer renderer(cout);
-	(void)&renderer; // устраняем предупреждение о неиспользуемой переменной
+	ModernGraphiscsObjectAdapter adapter(renderer);
+	shape_drawing_lib::CCanvasPainter painter(adapter);
 
-	// TODO: при помощи существующей функции PaintPicture() нарисовать
-	// картину на renderer
-	// Подсказка: используйте паттерн "Адаптер"
+	renderer.BeginDraw();
+	PaintPicture(painter);
+	renderer.EndDraw();
 }
 }
 
