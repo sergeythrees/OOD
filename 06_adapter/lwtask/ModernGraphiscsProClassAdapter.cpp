@@ -33,17 +33,6 @@ void ModernGraphiscsProClassAdapter::MoveTo(int x, int y)
 
 void ModernGraphiscsProClassAdapter::LineTo(int x, int y)
 {
-	modern_graphics_lib_pro
-		::CModernGraphicsRenderer::DrawLine(
-		m_lineBegin, { x,y }, m_color);
-}
-
-void ModernGraphiscsProClassAdapter::BeginDraw()
-{
-	modern_graphics_lib_pro::CModernGraphicsRenderer::BeginDraw();
-}
-
-void ModernGraphiscsProClassAdapter::EndDraw()
-{
-	modern_graphics_lib_pro::CModernGraphicsRenderer::EndDraw();
+	DrawLine(m_lineBegin, { x,y }, m_color);
+	m_lineBegin = { x,y };
 }

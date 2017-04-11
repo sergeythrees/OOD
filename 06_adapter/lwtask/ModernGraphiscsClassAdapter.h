@@ -8,9 +8,9 @@ class ModernGraphiscsClassAdapter :
 	private modern_graphics_lib::CModernGraphicsRenderer
 {
 public:
+	using CModernGraphicsRenderer::BeginDraw;
+	using CModernGraphicsRenderer::EndDraw;
 	ModernGraphiscsClassAdapter(std::ostream& output = std::cout);
-	void BeginDraw();
-	void EndDraw();
 	void MoveTo(int x, int y) override;
 	void LineTo(int x, int y) override;
 private:

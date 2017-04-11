@@ -15,4 +15,5 @@ void ModernGraphiscsObjectAdapter::MoveTo(int x, int y)
 void ModernGraphiscsObjectAdapter::LineTo(int x, int y)
 {
 	m_renderer.DrawLine(m_lineBegin, modern_graphics_lib::CPoint(x, y));
+	m_lineBegin = { x,y };
 }

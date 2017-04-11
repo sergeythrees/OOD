@@ -11,8 +11,8 @@ class ModernGraphiscsProClassAdapter :
 public:
 	ModernGraphiscsProClassAdapter(std::ostream& output = std::cout);
 	void SetColor(uint32_t rgbColor) override;
-	void BeginDraw();
-	void EndDraw();
+	using CModernGraphicsRenderer::BeginDraw;
+	using CModernGraphicsRenderer::EndDraw;
 	void MoveTo(int x, int y) override;
 	void LineTo(int x, int y) override;
 private:

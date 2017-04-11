@@ -2,13 +2,15 @@
 #include <iostream>
 
 using namespace std;
-
-void graphics_lib::CCanvas::MoveTo(int x, int y)
+namespace graphics_lib
 {
-	cout << "MoveTo (" << x << ", " << y << ")" << endl;
-}
+	void CCanvas::MoveTo(int x, int y)
+	{
+		cout << "MoveTo (" << x << ", " << y << ")" << endl;
+	}
 
-void graphics_lib::CCanvas::LineTo(int x, int y)
-{
-	cout << "LineTo (" << x << ", " << y << ")" << endl;
+	void CCanvas::LineTo(int x, int y)
+	{
+		cout << "LineTo (" << x << ", " << y << ")" << endl;
+	}
 }

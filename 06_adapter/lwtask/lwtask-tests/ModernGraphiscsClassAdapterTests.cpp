@@ -4,6 +4,7 @@
 #include <sstream>
 
 using namespace std;
+using namespace modern_graphics_lib;
 
 struct classAdapterFixture
 {
@@ -16,7 +17,7 @@ struct classAdapterFixture
 
 	ostringstream out;
 	ostringstream expectedOut;
-	modern_graphics_lib::CModernGraphicsRenderer renderer;
+	CModernGraphicsRenderer renderer;
 	ModernGraphiscsClassAdapter adapter;
 
 };
@@ -33,13 +34,12 @@ BOOST_FIXTURE_TEST_SUITE(ModernGraphiscsClassAdapter_, classAdapterFixture)
 		adapter.BeginDraw();
 		adapter.MoveTo(1, 1);
 		adapter.LineTo(2, 2);
-		adapter.MoveTo(3, 3);
 		adapter.LineTo(-1, -2);
 		adapter.EndDraw();
 
 		renderer.BeginDraw();
 		renderer.DrawLine({ 1,1 }, { 2,2 });
-		renderer.DrawLine({ 3,3 }, { -1,-2 });
+		renderer.DrawLine({ 2,2 }, { -1,-2 });
 		renderer.EndDraw();
 
 		BOOST_CHECK_EQUAL(out.str(), expectedOut.str());
