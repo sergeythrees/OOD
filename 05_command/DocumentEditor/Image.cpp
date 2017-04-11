@@ -6,8 +6,9 @@ using namespace std;
 using namespace boost;
 using namespace filesystem;
 
-CImage::CImage(const string & filePath, int width, int height)
-	:m_width(width),
+CImage::CImage(const string & filePath, int width, int height, CHistory& history)
+	:m_history(history),
+	m_width(width),
 	m_height(height)
 {
 	if (!exists(path(filePath)))
@@ -46,8 +47,9 @@ int CImage::GetHeight() const
 
 void CImage::Resize(int width, int height)
 {
-	m_width = width;
-	m_height = height;
+	m_history.AddAndExecuteCommand(
+		make_unique<CResizeImageCommand>(
+			m_width, m_height, width, height));
 }
 
 void CImage::Save(const std::string & path)

@@ -5,13 +5,13 @@ using namespace std;
 
 
 
-CConstDocumentItem::CConstDocumentItem(std::shared_ptr<IParagraph> paragraph)
+CConstDocumentItem::CConstDocumentItem( std::shared_ptr<IParagraph>const& paragraph)
 	: m_paragraph(paragraph)
 	, m_image(nullptr)
 {
 }
 
-CConstDocumentItem::CConstDocumentItem(std::shared_ptr<IImage> image)
+CConstDocumentItem::CConstDocumentItem(std::shared_ptr<IImage>const& image)
 	: m_image(image)
 	, m_paragraph(nullptr)
 {

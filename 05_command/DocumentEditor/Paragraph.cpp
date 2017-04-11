@@ -4,8 +4,9 @@
 
 using namespace std;
 
-CParagraph::CParagraph(const string & text)
-	: m_text(text)
+CParagraph::CParagraph(const string & text, CHistory& history)
+	: m_text(text),
+	m_history(history)
 {
 }
 
@@ -16,6 +17,7 @@ string CParagraph::GetText() const
 
 void CParagraph::SetText(const string & text)
 {
-	m_text = text;
+	m_history.AddAndExecuteCommand(
+		make_unique<CChangeStringCommand>(m_text, text));
 }
 

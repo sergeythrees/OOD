@@ -32,7 +32,7 @@ public:
 
 	void Save(const std::string & filePath) const;
 private:
-	std::vector<CDocumentItem> m_items;
+	std::vector<std::shared_ptr<CDocumentItem>> m_items;
 	std::string m_title;
 	CHistory m_history;
 };

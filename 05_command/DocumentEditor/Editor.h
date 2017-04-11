@@ -26,7 +26,7 @@ private:
 	void List(std::istream &);
 
 
-	size_t ReadNumber(std::istream & in);
+	unsigned ReadNumber(std::istream & in);
 	boost::optional<size_t> ReadPosition(std::istream & in);
 	std::string ReadToEndl(std::istream & in);
 

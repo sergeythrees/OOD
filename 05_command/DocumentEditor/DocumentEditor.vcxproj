@@ -148,8 +148,7 @@
     <ClInclude Include="AbstractCommand.h" />
     <ClInclude Include="ConstDocumentItem.h" />
     <ClInclude Include="DecodeHtmlEntities.h" />
-    <ClInclude Include="DeleteImageCommand.h" />
-    <ClInclude Include="DeleteParagraphCommand.h" />
+    <ClInclude Include="DeleteItemCommand.h" />
     <ClInclude Include="Document.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="History.h" />
@@ -158,8 +157,7 @@
     <ClInclude Include="ICommand.h" />
     <ClInclude Include="IImage.h" />
     <ClInclude Include="Image.h" />
-    <ClInclude Include="InsertImageCommand.h" />
-    <ClInclude Include="InsertParagraphCommand.h" />
+    <ClInclude Include="InsertItemCommand.h" />
     <ClInclude Include="IParagraph.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Paragraph.h" />
@@ -172,15 +170,13 @@
   <ItemGroup>
     <ClCompile Include="AbstractCommand.cpp" />
     <ClCompile Include="ConstDocumentItem.cpp" />
-    <ClCompile Include="DeleteImageCommand.cpp" />
-    <ClCompile Include="DeleteParagraphCommand.cpp" />
+    <ClCompile Include="DeleteItemCommand.cpp" />
     <ClCompile Include="Document.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="History.cpp" />
     <ClCompile Include="DocumentItem.cpp" />
     <ClCompile Include="Image.cpp" />
-    <ClCompile Include="InsertImageCommand.cpp" />
-    <ClCompile Include="InsertParagraphCommand.cpp" />
+    <ClCompile Include="InsertItemCommand.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Paragraph.cpp" />

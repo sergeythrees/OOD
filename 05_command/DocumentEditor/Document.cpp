@@ -4,10 +4,8 @@
 #include "Paragraph.h"
 #include "Document.h"
 #include "ChangeStringCommand.h"
-#include "InsertParagraphCommand.h"
-#include "InsertImageCommand.h"
-#include "DeleteImageCommand.h"
-#include "DeleteParagraphCommand.h"
+#include "InsertItemCommand.h"
+#include "DeleteItemCommand.h"
 #include "ResizeImageCommand.h"
 #include "SetTextInParagraphCommand.h"
 #include "DecodeHtmlEntities.h"
@@ -31,9 +29,10 @@ std::string CDocument::GetTitle() const
 std::shared_ptr<IParagraph> CDocument::InsertParagraph(const std::string & text, 
 	const boost::optional<size_t>& position)
 {
-	auto paragraph = make_shared<CParagraph>(text);
+	auto paragraph = make_shared<CParagraph>(text, m_history);
+	auto item = make_shared<CDocumentItem>(paragraph);
 	m_history.AddAndExecuteCommand(
-		make_unique<CInsertParagraphCommand>(m_items, paragraph, position));
+		make_unique<CInsertItemCommand>(m_items, item, position));
 	return paragraph;
 }
 
@@ -41,9 +40,10 @@ std::shared_ptr<IImage> CDocument::InsertImage(const std::string & path,
 	int width, int height, 
 	const boost::optional<size_t>& position)
 {
-	auto image = make_shared<CImage>(path, width, height);
+	auto image = make_shared<CImage>(path, width, height, m_history);
+	auto item = make_shared<CDocumentItem>(image);
 	m_history.AddAndExecuteCommand(
-		make_unique<CInsertImageCommand>(m_items, image, position));
+		make_unique<CInsertItemCommand>(m_items, item, position));
 	return image;
 }
 
@@ -52,9 +52,7 @@ void CDocument::ReplaceText(size_t index, const std::string & text)
 	if (index >= m_items.size())
 		throw out_of_range("Position is out of range");
 
-	m_history.AddAndExecuteCommand(
-		make_unique<SetTextInParagraphCommand>(
-			m_items[index].GetParagraph(), text));
+	m_items[index]->GetParagraph()->SetText(text);
 }
 
 void CDocument::ResizeImage(size_t index, int width, int height)
@@ -62,9 +60,7 @@ void CDocument::ResizeImage(size_t index, int width, int height)
 	if (index >= m_items.size())
 		throw out_of_range("Position is out of range");
 
-	m_history.AddAndExecuteCommand(
-		make_unique<CResizeImageCommand>(
-			m_items[index].GetImage(), width, height));
+	m_items[index]->GetImage()->Resize(width, height);
 }
 
 void CDocument::DeleteItem(size_t index)
@@ -72,12 +68,8 @@ void CDocument::DeleteItem(size_t index)
 	if (index >= m_items.size())
 		throw out_of_range("Position is out of range");
 
-	if (m_items[index].GetImage() != nullptr)
 		m_history.AddAndExecuteCommand(
-			make_unique<CDeleteImageCommand>(m_items, index));
-	else
-		m_history.AddAndExecuteCommand(
-			make_unique<DeleteParagraphCommand>(m_items, index));
+			make_unique<DeleteItemCommand>(m_items, index));
 }
 
 CConstDocumentItem CDocument::GetItem(size_t index) const
@@ -85,7 +77,7 @@ CConstDocumentItem CDocument::GetItem(size_t index) const
 	if (index >= m_items.size())
 		throw out_of_range("Position is out of range");
 	
-	return *(m_items.begin() + index);
+	return *(*(m_items.begin() + index)).get();
 }
 
 CDocumentItem CDocument::GetItem(size_t index)
@@ -93,7 +85,7 @@ CDocumentItem CDocument::GetItem(size_t index)
 	if (index >= m_items.size())
 		throw out_of_range("Position is out of range");
 
-	return *(m_items.begin() + index);
+	return *(*(m_items.begin() + index)).get();
 }
 
 size_t CDocument::GetItemsCount() const
@@ -132,15 +124,15 @@ void CDocument::Save(const std::string & filePath) const
 	stringstream body;
 	for (auto item : m_items)
 	{
-		if (item.GetParagraph())
+		if (item->GetParagraph())
 		{
 			body << "    <p>" 
-				<< DecodeToHtml(item.GetParagraph()->GetText()) 
+				<< DecodeToHtml(item->GetParagraph()->GetText())
 				<< "</p>" << endl;
 		}
-		else if (item.GetImage())
+		else if (item->GetImage())
 		{
-			auto image = item.GetImage();
+			auto image = item->GetImage();
 			body << "    <img src=\"" << image->GetPath()
 				<< "\" height=\"" << image->GetHeight()
 				<< "\" width=\"" << image->GetWidth()

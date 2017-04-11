@@ -7,8 +7,8 @@
 class CConstDocumentItem
 {
 public:
-	CConstDocumentItem(std::shared_ptr<IParagraph> paragraph);
-	CConstDocumentItem(std::shared_ptr<IImage> image);
+	CConstDocumentItem(std::shared_ptr<IParagraph>const& paragraph);
+	CConstDocumentItem(std::shared_ptr<IImage>const& image);
 	// ¬озвращает указатель на константное изображение, либо nullptr,
 	// если элемент не €вл€етс€ изображением
 	const std::shared_ptr<IImage> GetImage()const;

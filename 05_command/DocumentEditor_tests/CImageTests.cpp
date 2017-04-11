@@ -3,6 +3,7 @@
 #include <boost/filesystem.hpp>
 #include "CompareFiles.h"
 #include "VerifyExceptions.h"
+#include "../DocumentEditor/History.h"
 
 using namespace std;
 using namespace boost;
@@ -13,11 +14,13 @@ struct imageFixture
 		:fileName("testImage.txt"),
 		width(100),
 		height(100),
-		image(string("src\\" + fileName), width, height)
+		history(),
+		image(string("src\\" + fileName), width, height, history)
 	{}
 	string fileName;
 	int width;
 	int height;
+	CHistory history;
 	CImage image;
 };
 
@@ -25,8 +28,8 @@ BOOST_FIXTURE_TEST_SUITE(CImage_, imageFixture)
 	BOOST_AUTO_TEST_SUITE(while_construct)
 		BOOST_AUTO_TEST_CASE(throw_exception_if_source_image_is_not_accessible)
 		{
-			VerifyException<invalid_argument>([]() {
-				CImage("C:\\oops.png", 100, 100); },
+			VerifyException<invalid_argument>([&]() {
+				CImage("C:\\oops.png", 100, 100, history); },
 				"Invalid file path or not accessible file");
 		
 		}
@@ -54,7 +57,7 @@ BOOST_FIXTURE_TEST_SUITE(CImage_, imageFixture)
 		{
 			string uniqueFilePath;
 			{
-				CImage temp(string("src\\" + fileName), width, height);
+				CImage temp(string("src\\" + fileName), width, height, history);
 				uniqueFilePath = temp.GetPath();
 			}
 			BOOST_CHECK(!filesystem::exists("temp/" + uniqueFilePath));

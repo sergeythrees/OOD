@@ -55,12 +55,12 @@ void CEditor::AddImage(istream & in)
 
 void CEditor::DeleteItem(istream & in)
 {
-	m_document->DeleteItem(ReadNumber(in));
+	m_document->DeleteItem(static_cast<size_t>(ReadNumber(in)));
 }
 
 void CEditor::ReplaceText(istream & in)
 {
-	auto index = ReadNumber(in);
+	auto index = static_cast<size_t>(ReadNumber(in));
 
 	auto item = m_document->GetItem(index);
 	if (!item.GetParagraph())
@@ -71,7 +71,7 @@ void CEditor::ReplaceText(istream & in)
 
 void CEditor::ResizeImage(istream & in)
 {
-	auto index = ReadNumber(in);
+	auto index = static_cast<size_t>(ReadNumber(in));
 	auto width = ReadNumber(in);
 	auto height = ReadNumber(in);
 
@@ -124,7 +124,7 @@ void CEditor::Redo(istream &)
 		cout << "Can't redo" << endl;
 }
 
-size_t CEditor::ReadNumber(istream & in)
+unsigned CEditor::ReadNumber(istream & in)
 {
 	unsigned number;
 	if (!(in >> number))

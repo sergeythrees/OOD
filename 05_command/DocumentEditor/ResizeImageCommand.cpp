@@ -3,20 +3,21 @@
 
 using namespace std;
 
-CResizeImageCommand::CResizeImageCommand(std::shared_ptr<IImage> image,
+CResizeImageCommand::CResizeImageCommand(int & width, int & height, 
 	int newWidth, int newHeight)
-	: m_image(image),
-	m_width(image->GetWidth()), m_height(image->GetHeight()),
+	: m_width(width), m_height(height),
 	m_newWidth(newWidth) ,m_newHeight(newHeight)
 {
 }
 
 void CResizeImageCommand::DoExecute()
 {
-	m_image->Resize(m_newWidth, m_newHeight);
+	swap(m_width, m_newWidth);
+	swap(m_height, m_newHeight);
 }
 
 void CResizeImageCommand::DoUnexecute()
 {
-	m_image->Resize(m_width, m_height);
+	swap(m_width, m_newWidth);
+	swap(m_height, m_newHeight);
 }

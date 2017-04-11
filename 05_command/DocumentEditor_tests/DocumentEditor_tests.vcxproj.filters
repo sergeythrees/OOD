@@ -31,23 +31,17 @@
     <ClCompile Include="..\DocumentEditor\DocumentItem.cpp">
       <Filter>ExistingItems</Filter>
     </ClCompile>
-    <ClCompile Include="..\DocumentEditor\InsertParagraphCommand.cpp">
-      <Filter>ExistingItems</Filter>
-    </ClCompile>
     <ClCompile Include="..\DocumentEditor\ConstDocumentItem.cpp">
-      <Filter>ExistingItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\DocumentEditor\InsertImageCommand.cpp">
-      <Filter>ExistingItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\DocumentEditor\DeleteImageCommand.cpp">
-      <Filter>ExistingItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\DocumentEditor\DeleteParagraphCommand.cpp">
       <Filter>ExistingItems</Filter>
     </ClCompile>
     <ClCompile Include="CHistoryTests.cpp" />
     <ClCompile Include="..\DocumentEditor\SetTextInParagraphCommand.cpp">
+      <Filter>ExistingItems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DocumentEditor\DeleteItemCommand.cpp">
+      <Filter>ExistingItems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DocumentEditor\InsertItemCommand.cpp">
       <Filter>ExistingItems</Filter>
     </ClCompile>
   </ItemGroup>
@@ -85,23 +79,17 @@
     <ClInclude Include="..\DocumentEditor\DocumentItem.h">
       <Filter>ExistingItems</Filter>
     </ClInclude>
-    <ClInclude Include="..\DocumentEditor\InsertParagraphCommand.h">
-      <Filter>ExistingItems</Filter>
-    </ClInclude>
     <ClInclude Include="..\DocumentEditor\ConstDocumentItem.h">
-      <Filter>ExistingItems</Filter>
-    </ClInclude>
-    <ClInclude Include="..\DocumentEditor\InsertImageCommand.h">
-      <Filter>ExistingItems</Filter>
-    </ClInclude>
-    <ClInclude Include="..\DocumentEditor\DeleteImageCommand.h">
-      <Filter>ExistingItems</Filter>
-    </ClInclude>
-    <ClInclude Include="..\DocumentEditor\DeleteParagraphCommand.h">
       <Filter>ExistingItems</Filter>
     </ClInclude>
     <ClInclude Include="CompareFiles.h" />
     <ClInclude Include="..\DocumentEditor\SetTextInParagraphCommand.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DocumentEditor\DeleteItemCommand.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DocumentEditor\InsertItemCommand.h">
       <Filter>ExistingItems</Filter>
     </ClInclude>
   </ItemGroup>

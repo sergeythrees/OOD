@@ -5,9 +5,10 @@ using namespace std;
 struct paragraphFixture
 {
 	paragraphFixture()
-		:paragraph("text")
+		:history(),
+		paragraph("text", history)
 	{}
-
+	CHistory history;
 	CParagraph paragraph;
 };
 
