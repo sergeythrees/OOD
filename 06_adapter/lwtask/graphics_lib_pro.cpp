@@ -1,13 +1,15 @@
 #include "stdafx.h"
 #include <iostream>
 #include "graphics_lib_pro.h"
+#include <boost\format.hpp>
+#include <stdint.h>
 
 using namespace std;
 namespace graphics_lib_pro
 {
 	void CCanvas::SetColor(uint32_t rgbColor)
 	{
-		cout << "SetColor (#" << rgbColor <<")" << endl;
+		cout << "SetColor (#" << hex << rgbColor << ")" << endl;
 	}
 
 	void CCanvas::MoveTo(int x, int y)

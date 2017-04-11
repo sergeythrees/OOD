@@ -14,16 +14,11 @@ ModernGraphicsProClassAdapter::ModernGraphicsProClassAdapter(std::ostream & outp
 
 void ModernGraphicsProClassAdapter::SetColor(uint32_t rgbColor)
 {
-	ostringstream strm;
-	strm << rgbColor;
-	string rgbString(strm.str());
-	if (rgbString.length() != 6)
-		throw invalid_argument("Invalid color value");
+	float r = ((rgbColor >> 16) & 0x0000FF) / 255.f;
+	float g = ((rgbColor >> 8) & 0x0000FF) / 255.f;
+	float b = (rgbColor & 0x0000FF) / 255.f;
 
-	m_color = { stof(rgbString.substr(0,2)),
-				stof(rgbString.substr(2,2)),
-				stof(rgbString.substr(4,2)), 
-				1.0 };
+	m_color = { r, g, b, 1.f };
 }
 
 void ModernGraphicsProClassAdapter::MoveTo(int x, int y)
