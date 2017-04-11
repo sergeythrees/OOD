@@ -1,14 +1,14 @@
 #include "stdafx.h"
 #include "../modern_graphics_lib.h"
-#include "../ModernGraphiscsObjectAdapter.h"
+#include "../ModernGraphicsObjectAdapter.h"
 #include <sstream>
 
 using namespace std;
 using namespace modern_graphics_lib;
 
-struct adapterFixture
+struct AdapterFixture
 {
-	adapterFixture()
+	AdapterFixture()
 		: out(),
 		expectedOut(),
 		rendererForAdapter(out),
@@ -20,11 +20,11 @@ struct adapterFixture
 	ostringstream expectedOut;
 	CModernGraphicsRenderer renderer;
 	CModernGraphicsRenderer rendererForAdapter;
-	ModernGraphiscsObjectAdapter adapter;
+	ModernGraphicsObjectAdapter adapter;
 
 };
 
-BOOST_FIXTURE_TEST_SUITE(ModernGraphiscsObjectAdapter_, adapterFixture)
+BOOST_FIXTURE_TEST_SUITE(ModernGraphicsObjectAdapter_, AdapterFixture)
 	BOOST_AUTO_TEST_SUITE(after_construction)
 		BOOST_AUTO_TEST_CASE(do_not_change_stream)
 		{

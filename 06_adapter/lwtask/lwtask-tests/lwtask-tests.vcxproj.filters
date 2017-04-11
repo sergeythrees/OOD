@@ -5,43 +5,45 @@
     <ClCompile Include="..\modern_graphics_lib.cpp">
       <Filter>ExistingItems</Filter>
     </ClCompile>
-    <ClCompile Include="..\ModernGraphiscsAdapter.cpp">
-      <Filter>ExistingItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ModernGraphiscsClassAdapter.cpp">
-      <Filter>ExistingItems</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ModernGraphiscsProClassAdapter.cpp">
-      <Filter>ExistingItems</Filter>
-    </ClCompile>
     <ClCompile Include="..\graphics_lib_pro.cpp">
       <Filter>ExistingItems</Filter>
     </ClCompile>
     <ClCompile Include="..\modern_graphics_lib_pro.cpp">
       <Filter>ExistingItems</Filter>
     </ClCompile>
-    <ClCompile Include="ModernGraphiscsProClassAdapterTests.cpp" />
-    <ClCompile Include="ModernGraphiscsClassAdapterTests.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="ModernGraphicsClassAdapterTests.cpp" />
+    <ClCompile Include="ModernGraphicsObjectAdapterTests.cpp" />
+    <ClCompile Include="ModernGraphicsProClassAdapterTests.cpp" />
+    <ClCompile Include="..\ModernGraphicsAdapter.cpp">
+      <Filter>ExistingItems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ModernGraphicsClassAdapter.cpp">
+      <Filter>ExistingItems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ModernGraphicsProClassAdapter.cpp">
+      <Filter>ExistingItems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="..\ModernGraphiscsAdapter.h">
-      <Filter>ExistingItems</Filter>
-    </ClInclude>
     <ClInclude Include="..\modern_graphics_lib.h">
-      <Filter>ExistingItems</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ModernGraphiscsClassAdapter.h">
-      <Filter>ExistingItems</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ModernGraphiscsProClassAdapter.h">
       <Filter>ExistingItems</Filter>
     </ClInclude>
     <ClInclude Include="..\graphics_lib_pro.h">
       <Filter>ExistingItems</Filter>
     </ClInclude>
     <ClInclude Include="..\modern_graphics_lib_pro.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ModernGraphicsClassAdapter.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ModernGraphicsObjectAdapter.h">
+      <Filter>ExistingItems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ModernGraphicsProClassAdapter.h">
       <Filter>ExistingItems</Filter>
     </ClInclude>
   </ItemGroup>

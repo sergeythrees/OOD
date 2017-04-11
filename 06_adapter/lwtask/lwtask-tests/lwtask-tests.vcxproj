@@ -166,9 +166,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\graphics_lib_pro.h" />
-    <ClInclude Include="..\ModernGraphiscsAdapter.h" />
-    <ClInclude Include="..\ModernGraphiscsClassAdapter.h" />
-    <ClInclude Include="..\ModernGraphiscsProClassAdapter.h" />
+    <ClInclude Include="..\ModernGraphicsClassAdapter.h" />
+    <ClInclude Include="..\ModernGraphicsObjectAdapter.h" />
+    <ClInclude Include="..\ModernGraphicsProClassAdapter.h" />
     <ClInclude Include="..\modern_graphics_lib.h" />
     <ClInclude Include="..\modern_graphics_lib_pro.h" />
     <ClInclude Include="stdafx.h" />
@@ -176,15 +176,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\graphics_lib_pro.cpp" />
-    <ClCompile Include="..\ModernGraphiscsAdapter.cpp" />
-    <ClCompile Include="..\ModernGraphiscsClassAdapter.cpp" />
-    <ClCompile Include="..\ModernGraphiscsProClassAdapter.cpp" />
+    <ClCompile Include="..\ModernGraphicsAdapter.cpp" />
+    <ClCompile Include="..\ModernGraphicsClassAdapter.cpp" />
+    <ClCompile Include="..\ModernGraphicsProClassAdapter.cpp" />
     <ClCompile Include="..\modern_graphics_lib.cpp" />
     <ClCompile Include="..\modern_graphics_lib_pro.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ModernGraphiscsProClassAdapterTests.cpp" />
-    <ClCompile Include="ModernGraphiscsObjectAdapterTests.cpp" />
-    <ClCompile Include="ModernGraphiscsClassAdapterTests.cpp" />
+    <ClCompile Include="ModernGraphicsProClassAdapterTests.cpp" />
+    <ClCompile Include="ModernGraphicsObjectAdapterTests.cpp" />
+    <ClCompile Include="ModernGraphicsClassAdapterTests.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

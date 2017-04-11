@@ -5,7 +5,7 @@
 #include "shape_drawing_lib.h"
 #include "modern_graphics_lib.h"
 #include "modern_graphics_lib_pro.h"
-#include "ModernGraphiscsObjectAdapter.h"
+#include "ModernGraphicsObjectAdapter.h"
 
 using namespace std;
 
@@ -33,7 +33,7 @@ void PaintPictureOnCanvas()
 void PaintPictureOnModernGraphicsRenderer()
 {
 	modern_graphics_lib::CModernGraphicsRenderer renderer(cout);
-	ModernGraphiscsObjectAdapter adapter(renderer);
+	ModernGraphicsObjectAdapter adapter(renderer);
 	shape_drawing_lib::CCanvasPainter painter(adapter);
 
 	renderer.BeginDraw();

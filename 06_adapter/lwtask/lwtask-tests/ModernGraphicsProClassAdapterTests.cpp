@@ -1,14 +1,14 @@
 #include "stdafx.h"
-#include "../modern_graphics_lib.h"
-#include "../ModernGraphiscsClassAdapter.h"
+#include "../modern_graphics_lib_pro.h"
+#include "../ModernGraphicsProClassAdapter.h"
 #include <sstream>
 
 using namespace std;
-using namespace modern_graphics_lib;
+using namespace modern_graphics_lib_pro;
 
-struct classAdapterFixture
+struct ProClassAdapterFixture
 {
-	classAdapterFixture()
+	ProClassAdapterFixture()
 		: out(),
 		expectedOut(),
 		renderer(expectedOut),
@@ -18,28 +18,30 @@ struct classAdapterFixture
 	ostringstream out;
 	ostringstream expectedOut;
 	CModernGraphicsRenderer renderer;
-	ModernGraphiscsClassAdapter adapter;
+	ModernGraphicsProClassAdapter adapter;
 
 };
 
-BOOST_FIXTURE_TEST_SUITE(ModernGraphiscsClassAdapter_, classAdapterFixture)
+BOOST_FIXTURE_TEST_SUITE(ModernGraphicsProClassAdapter_, ProClassAdapterFixture)
 	BOOST_AUTO_TEST_SUITE(after_construction)
 		BOOST_AUTO_TEST_CASE(do_not_change_stream)
 		{
 			BOOST_CHECK_EQUAL(out.str(), "");
 		}
 	BOOST_AUTO_TEST_SUITE_END()
-	BOOST_AUTO_TEST_CASE(can_draw_lines_in_modern_graphics_style)
+	BOOST_AUTO_TEST_CASE(can_draw_lines_in_modern_graphics_pro_style)
 	{
 		adapter.BeginDraw();
+		adapter.SetColor(111012);
 		adapter.MoveTo(1, 1);
 		adapter.LineTo(2, 2);
+		adapter.SetColor(123455);
 		adapter.LineTo(-1, -2);
 		adapter.EndDraw();
 
 		renderer.BeginDraw();
-		renderer.DrawLine({ 1,1 }, { 2,2 });
-		renderer.DrawLine({ 2,2 }, { -1,-2 });
+		renderer.DrawLine({ 1,1 }, { 2,2 }, { 11,10,12,1.0 });
+		renderer.DrawLine({ 2,2 }, { -1,-2 }, { 12,34, 55,1.0 });
 		renderer.EndDraw();
 
 		BOOST_CHECK_EQUAL(out.str(), expectedOut.str());

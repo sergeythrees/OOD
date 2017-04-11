@@ -4,12 +4,12 @@
 #include "modern_graphics_lib_pro.h"
 
 
-class ModernGraphiscsProClassAdapter : 
+class ModernGraphicsProClassAdapter : 
 	public graphics_lib_pro::ICanvas,
 	private modern_graphics_lib_pro::CModernGraphicsRenderer
 {
 public:
-	ModernGraphiscsProClassAdapter(std::ostream& output = std::cout);
+	ModernGraphicsProClassAdapter(std::ostream& output = std::cout);
 	void SetColor(uint32_t rgbColor) override;
 	using CModernGraphicsRenderer::BeginDraw;
 	using CModernGraphicsRenderer::EndDraw;

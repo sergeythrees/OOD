@@ -1,18 +1,18 @@
 #include "stdafx.h"
 #include <string>
 #include <sstream>
-#include "ModernGraphiscsProClassAdapter.h"
+#include "ModernGraphicsProClassAdapter.h"
 
 using namespace std;
 
-ModernGraphiscsProClassAdapter::ModernGraphiscsProClassAdapter(std::ostream & output)
+ModernGraphicsProClassAdapter::ModernGraphicsProClassAdapter(std::ostream & output)
 	:modern_graphics_lib_pro::CModernGraphicsRenderer(output),
 	m_lineBegin(0,0), 
 	m_color(00, 00, 00, 00)
 {
 }
 
-void ModernGraphiscsProClassAdapter::SetColor(uint32_t rgbColor)
+void ModernGraphicsProClassAdapter::SetColor(uint32_t rgbColor)
 {
 	ostringstream strm;
 	strm << rgbColor;
@@ -26,12 +26,12 @@ void ModernGraphiscsProClassAdapter::SetColor(uint32_t rgbColor)
 				1.0 };
 }
 
-void ModernGraphiscsProClassAdapter::MoveTo(int x, int y)
+void ModernGraphicsProClassAdapter::MoveTo(int x, int y)
 {
 	m_lineBegin = { x,y };
 }
 
-void ModernGraphiscsProClassAdapter::LineTo(int x, int y)
+void ModernGraphicsProClassAdapter::LineTo(int x, int y)
 {
 	DrawLine(m_lineBegin, { x,y }, m_color);
 	m_lineBegin = { x,y };

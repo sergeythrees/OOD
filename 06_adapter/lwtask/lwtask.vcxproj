@@ -149,9 +149,9 @@
     <ClCompile Include="graphics_lib.cpp" />
     <ClCompile Include="graphics_lib_pro.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ModernGraphiscsAdapter.cpp" />
-    <ClCompile Include="ModernGraphiscsClassAdapter.cpp" />
-    <ClCompile Include="ModernGraphiscsProClassAdapter.cpp" />
+    <ClCompile Include="ModernGraphicsAdapter.cpp" />
+    <ClCompile Include="ModernGraphicsClassAdapter.cpp" />
+    <ClCompile Include="ModernGraphicsProClassAdapter.cpp" />
     <ClCompile Include="modern_graphics_lib.cpp" />
     <ClCompile Include="modern_graphics_lib_pro.cpp" />
     <ClCompile Include="shape_drawing_lib.cpp" />
@@ -160,9 +160,9 @@
   <ItemGroup>
     <ClInclude Include="graphics_lib.h" />
     <ClInclude Include="graphics_lib_pro.h" />
-    <ClInclude Include="ModernGraphiscsProClassAdapter.h" />
-    <ClInclude Include="ModernGraphiscsClassAdapter.h" />
-    <ClInclude Include="ModernGraphiscsObjectAdapter.h" />
+    <ClInclude Include="ModernGraphicsProClassAdapter.h" />
+    <ClInclude Include="ModernGraphicsClassAdapter.h" />
+    <ClInclude Include="ModernGraphicsObjectAdapter.h" />
     <ClInclude Include="modern_graphics_lib_pro.h" />
     <ClInclude Include="modern_graphics_lib.h" />
     <ClInclude Include="shape_drawing_lib.h" />
