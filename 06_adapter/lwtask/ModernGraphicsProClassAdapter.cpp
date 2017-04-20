@@ -14,11 +14,10 @@ ModernGraphicsProClassAdapter::ModernGraphicsProClassAdapter(std::ostream & outp
 
 void ModernGraphicsProClassAdapter::SetColor(uint32_t rgbColor)
 {
-	float r = ((rgbColor >> 16) & 0x0000FF) / 255.f;
-	float g = ((rgbColor >> 8) & 0x0000FF) / 255.f;
-	float b = (rgbColor & 0x0000FF) / 255.f;
-
-	m_color = { r, g, b, 1.f };
+	m_color.r = ((rgbColor >> 16) & 0xFF) / 255.f;
+	m_color.g = ((rgbColor >> 8) & 0xFF) / 255.f;
+	m_color.b = (rgbColor & 0xFF) / 255.f;
+	m_color.a = 1.0;
 }
 
 void ModernGraphicsProClassAdapter::MoveTo(int x, int y)
