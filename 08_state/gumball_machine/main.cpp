@@ -41,7 +41,7 @@ void TestGumballMachine(GumballMachineType & m)
 
 void TestNaiveGumballMachine()
 {
-	naive::CGumballMachine m(5);
+	naive::CGumballMachine m(2);
 	TestGumballMachine(m);
 }
 
@@ -53,10 +53,13 @@ void TestGumballMachineWithState()
 
 int main()
 {
-	TestNaiveGumballMachine();
+	with_state::CGumballMachine machine(2);
+	cout << machine.ToString();
+	machine.TurnCrank();
+	//TestNaiveGumballMachine();
 
 	cout << "\n-----------------\n";
-	TestGumballMachineWithState();
+//	TestGumballMachineWithState();
 
 	return 0;
 }

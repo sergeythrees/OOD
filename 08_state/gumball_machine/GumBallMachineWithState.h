@@ -86,14 +86,14 @@ public:
 	}
 	void EjectQuarter() override
 	{
-		if (m_gumballMachine.GetBallCount > 0)
+		if (m_gumballMachine.GetBallCount() > 0)
 		{
 			m_gumballMachine.SetHasQuarterState();
 			m_gumballMachine.SetSoldOutState();
-			cout << "Quarter returned\n";
+			std::cout << "Quarter returned\n";
 		}
 		else
-			cout << "You can't eject, you haven't inserted a quarter yet\n";
+			std::cout << "You can't eject, you haven't inserted a quarter yet\n";
 	}
 	void TurnCrank() override
 	{

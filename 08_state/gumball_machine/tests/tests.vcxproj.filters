@@ -3,6 +3,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="NaiveGumBallMachine_tests.cpp" />
     <ClCompile Include="GumBallMachineWithState_tests.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -14,7 +15,7 @@
     <ClInclude Include="..\NaiveGumBallMachine.h">
       <Filter>Existing Items</Filter>
     </ClInclude>
-    <ClInclude Include="GumballMachineTestTemplate.h" />
+    <ClInclude Include="TestFunctions.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

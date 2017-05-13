@@ -106,7 +106,13 @@ public:
 	void Refill(unsigned numBalls)
 	{
 		m_count = numBalls;
-		m_state = numBalls > 0 ? State::NoQuarter : State::SoldOut;
+		if (numBalls > 0)
+			if (m_quartersCount == 0)
+				m_state = State::NoQuarter;
+			else
+				m_state = State::HasQuarter;
+		else
+			m_state = State::SoldOut;
 	}
 
 	std::string ToString()const

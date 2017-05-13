@@ -167,11 +167,12 @@
   <ItemGroup>
     <ClInclude Include="..\GumBallMachineWithState.h" />
     <ClInclude Include="..\NaiveGumBallMachine.h" />
-    <ClInclude Include="GumballMachineTestTemplate.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TestFunctions.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="NaiveGumBallMachine_tests.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GumBallMachineWithState_tests.cpp" />
     <ClCompile Include="stdafx.cpp">
