@@ -77,11 +77,9 @@ Machine is waiting for quarter
 				machine.InsertQuarter(); },
 				"You inserted a quarter\n");
 
-			/*machine.InsertQuarter();
-
 			CheckFunctionOutput([&]() {
 				machine.InsertQuarter(); },
-				"You can't insert another quarter\n");*/
+				"You can't insert another quarter\n");
 		}
 
 		/*BOOST_AUTO_TEST_CASE(turn_crank_function_dispense_ball_and_use_quarter)

@@ -227,11 +227,11 @@ Machine is %3%
 private:
 	void AddQuarter()
 	{
-		m_count++;
+		m_quartersCount++;
 	}
 	void UseQuarter()
 	{
-		m_count--;
+		m_quartersCount--;
 	}
 	unsigned GetQuartersCount()const override
 	{
