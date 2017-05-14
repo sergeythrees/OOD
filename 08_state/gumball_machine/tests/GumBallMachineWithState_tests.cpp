@@ -82,77 +82,77 @@ Machine is waiting for quarter
 				"You can't insert another quarter\n");
 		}
 
-		/*BOOST_AUTO_TEST_CASE(turn_crank_function_dispense_ball_and_use_quarter)
+		BOOST_AUTO_TEST_CASE(turn_crank_function_dispense_ball_and_use_quarter)
 		{
 			CheckFunctionOutput([&]() {
 				machine.TurnCrank(); },
-				"You turned...\nA gumball comes rolling out the slot\n");
-		}*/
+				"You turned...\nA gumball comes rolling out the slot...\n");
+		}
 	BOOST_AUTO_TEST_SUITE_END()
-	//struct SoldOutStateWithQuartersFixture : GumballMachineWIthStateFixture
-	//{
-	//	SoldOutStateWithQuartersFixture()
-	//	{
-	//		machine.InsertQuarter();
-	//		for (unsigned i = 0; i < ballsCount; ++i)
-	//		{
-	//			machine.InsertQuarter();
-	//			machine.TurnCrank();
-	//		}
-	//		output.str("");
-	//	}
-	//};
+	struct SoldOutStateWithQuartersFixture : GumballMachineWIthStateFixture
+	{
+		SoldOutStateWithQuartersFixture()
+		{
+			machine.InsertQuarter();
+			for (unsigned i = 0; i < ballsCount; ++i)
+			{
+				machine.InsertQuarter();
+				machine.TurnCrank();
+			}
+			output.str("");
+		}
+	};
 
-	//BOOST_FIXTURE_TEST_SUITE(when_sold_out_state_but_quarters_was_not_ended, SoldOutStateWithQuartersFixture)
-	//	BOOST_AUTO_TEST_CASE(cant_insert_quarter)
-	//	{
-	//		CheckFunctionOutput([&]() {
-	//				machine.InsertQuarter(); },
-	//			"You can't insert a quarter, the machine is sold out\n");
-	//	}
-	//	BOOST_AUTO_TEST_CASE(can_eject_all_quarters)
-	//	{
-	//		CheckFunctionOutput([&]() {
-	//			machine.EjectQuarter(); }, "Quarter returned\n");
-	//	
-	//		CheckFunctionOutput([&]() {
-	//			machine.EjectQuarter(); }, "You haven't inserted a quarter\n");
-	//	}
+	BOOST_FIXTURE_TEST_SUITE(when_sold_out_state_but_quarters_was_not_ended, SoldOutStateWithQuartersFixture)
+		BOOST_AUTO_TEST_CASE(cant_insert_quarter)
+		{
+			CheckFunctionOutput([&]() {
+					machine.InsertQuarter(); },
+				"You can't insert a quarter, the machine is sold out\n");
+		}
+		BOOST_AUTO_TEST_CASE(can_eject_all_quarters)
+		{
+			CheckFunctionOutput([&]() {
+				machine.EjectQuarter(); }, "Quarter returned\n");
+		
+			CheckFunctionOutput([&]() {
+				machine.EjectQuarter(); }, "You can't eject, you haven't inserted a quarter yet\n");
+		}
 
-	//	BOOST_AUTO_TEST_CASE(turn_crank_function_can_not_release_a_ball)
-	//	{
-	//		CheckFunctionOutput([&]() {
-	//			machine.TurnCrank(); }, "You turned but there's no gumballs\n");
-	//	}
-	//BOOST_AUTO_TEST_SUITE_END()
+		BOOST_AUTO_TEST_CASE(turn_crank_function_can_not_release_a_ball)
+		{
+			CheckFunctionOutput([&]() {
+				machine.TurnCrank(); }, "You turned but there's no gumballs\nNo gumball dispensed\n");
+		}
+	BOOST_AUTO_TEST_SUITE_END()
 
-	//struct SoldOutStateWithoutQuartersFixture : GumballMachineWIthStateFixture
-	//{
-	//	SoldOutStateWithoutQuartersFixture()
-	//	{
-	//		for (unsigned i = 0; i < ballsCount; ++i)
-	//		{
-	//			machine.InsertQuarter();
-	//			machine.TurnCrank();
-	//		}
-	//	}
-	//};
-	//BOOST_FIXTURE_TEST_SUITE(when_sold_out_state_and_quarters_was_ended, SoldOutStateWithoutQuartersFixture)
-	//	BOOST_AUTO_TEST_CASE(cant_insert_quarter)
-	//	{
-	//		CheckFunctionOutput([&]() {
-	//				machine.InsertQuarter(); }, "You can't insert a quarter, the machine is sold out\n");
-	//	}
-	//	BOOST_AUTO_TEST_CASE(can_not_eject_quarters)
-	//	{
-	//		CheckFunctionOutput([&]() {
-	//			machine.EjectQuarter(); }, "You can't eject, you haven't inserted a quarter yet\n");
-	//	}
+	struct SoldOutStateWithoutQuartersFixture : GumballMachineWIthStateFixture
+	{
+		SoldOutStateWithoutQuartersFixture()
+		{
+			for (unsigned i = 0; i < ballsCount; ++i)
+			{
+				machine.InsertQuarter();
+				machine.TurnCrank();
+			}
+		}
+	};
+	BOOST_FIXTURE_TEST_SUITE(when_sold_out_state_and_quarters_was_ended, SoldOutStateWithoutQuartersFixture)
+		BOOST_AUTO_TEST_CASE(cant_insert_quarter)
+		{
+			CheckFunctionOutput([&]() {
+					machine.InsertQuarter(); }, "You can't insert a quarter, the machine is sold out\n");
+		}
+		BOOST_AUTO_TEST_CASE(can_not_eject_quarters)
+		{
+			CheckFunctionOutput([&]() {
+				machine.EjectQuarter(); }, "You can't eject, you haven't inserted a quarter yet\n");
+		}
 
-	//	BOOST_AUTO_TEST_CASE(turn_crank_function_can_not_release_a_ball)
-	//	{
-	//		CheckFunctionOutput([&]() {
-	//			machine.TurnCrank(); }, "You turned but there's no gumballs\n");
-	//	}
-	//BOOST_AUTO_TEST_SUITE_END()
+		BOOST_AUTO_TEST_CASE(turn_crank_function_can_not_release_a_ball)
+		{
+			CheckFunctionOutput([&]() {
+				machine.TurnCrank(); }, "You turned but there's no gumballs\nNo gumball dispensed\n");
+		}
+	BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()

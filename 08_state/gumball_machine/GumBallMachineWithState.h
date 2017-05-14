@@ -54,15 +54,17 @@ public:
 	{
 		m_gumballMachine.ReleaseBall();
 		m_gumballMachine.UseQuarter();
-		if (m_gumballMachine.GetQuartersCount() == 0)
-			m_gumballMachine.SetNoQuarterState();
-		else
-			m_gumballMachine.SetHasQuarterState();
-
 		if (m_gumballMachine.GetBallCount() == 0)
 		{
 			std::cout << "Oops, out of gumballs\n";
 			m_gumballMachine.SetSoldOutState();
+		}
+		else
+		{
+			if (m_gumballMachine.GetQuartersCount() == 0)
+				m_gumballMachine.SetNoQuarterState();
+			else
+				m_gumballMachine.SetHasQuarterState();
 		}
 	}
 	std::string ToString() const override
@@ -86,10 +88,8 @@ public:
 	}
 	void EjectQuarter() override
 	{
-		if (m_gumballMachine.GetBallCount() > 0)
+		if (m_gumballMachine.GetQuartersCount() > 0)
 		{
-			m_gumballMachine.SetHasQuarterState();
-			m_gumballMachine.SetSoldOutState();
 			std::cout << "Quarter returned\n";
 		}
 		else
@@ -204,6 +204,7 @@ public:
 	void EjectQuarter()
 	{
 		m_currentState->EjectQuarter();
+		m_quartersCount = 0;
 	}
 	void InsertQuarter()
 	{
@@ -225,11 +226,11 @@ Machine is %3%
 		return (fmt % m_count % (m_count != 1 ? "s" : "") % m_currentState->ToString()).str();
 	}
 private:
-	void AddQuarter()
+	void AddQuarter() override
 	{
 		m_quartersCount++;
 	}
-	void UseQuarter()
+	void UseQuarter() override
 	{
 		m_quartersCount--;
 	}

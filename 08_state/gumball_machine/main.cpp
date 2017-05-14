@@ -53,13 +53,10 @@ void TestGumballMachineWithState()
 
 int main()
 {
-	with_state::CGumballMachine machine(2);
-	cout << machine.ToString();
-	machine.TurnCrank();
-	//TestNaiveGumballMachine();
+	TestNaiveGumballMachine();
 
 	cout << "\n-----------------\n";
-//	TestGumballMachineWithState();
+	TestGumballMachineWithState();
 
 	return 0;
 }
