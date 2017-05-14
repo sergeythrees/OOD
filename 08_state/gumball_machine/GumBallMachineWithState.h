@@ -11,6 +11,7 @@ struct IState
 	virtual void EjectQuarter() = 0;
 	virtual void TurnCrank() = 0;
 	virtual void Dispense() = 0;
+	virtual void Refill() = 0;
 	virtual std::string ToString()const = 0;
 	virtual ~IState() = default;
 };
@@ -67,6 +68,10 @@ public:
 				m_gumballMachine.SetHasQuarterState();
 		}
 	}
+	void Refill() override
+	{
+		throw std::logic_error("Can'not refill machine while dispensing a gumball");
+	}
 	std::string ToString() const override
 	{
 		return "delivering a gumball";
@@ -102,6 +107,14 @@ public:
 	void Dispense() override
 	{
 		std::cout << "No gumball dispensed\n";
+	}
+	void Refill() override
+	{
+		std::cout << "Machine is refilled\n";
+		if (m_gumballMachine.GetQuartersCount() > 0)
+			m_gumballMachine.SetHasQuarterState();
+		else
+			m_gumballMachine.SetNoQuarterState();
 	}
 	std::string ToString() const override
 	{
@@ -144,6 +157,10 @@ public:
 	{
 		std::cout << "No gumball dispensed\n";
 	}
+	void Refill() override
+	{
+		std::cout << "Machine is refilled\n";
+	}
 	std::string ToString() const override
 	{
 		return "waiting for turn of crank";
@@ -176,6 +193,10 @@ public:
 	void Dispense() override
 	{
 		std::cout << "You need to pay first\n";
+	}
+	void Refill() override
+	{
+		std::cout << "Machine is refilled\n";
 	}
 	std::string ToString() const override
 	{
@@ -214,6 +235,18 @@ public:
 	{
 		m_currentState->TurnCrank();
 		m_currentState->Dispense();
+	}
+	void Refill(unsigned ballsCount)
+	{
+		try
+		{
+			m_currentState->Refill();
+			m_count = ballsCount;
+		}
+		catch (const std::logic_error& ex)
+		{
+			std::cout << ex.what() << std::endl;
+		}
 	}
 	std::string ToString()const
 	{

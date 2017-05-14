@@ -46,6 +46,12 @@ Machine is waiting for quarter
 				machine.TurnCrank(); },
 				"You turned but there's no quarter\nYou need to pay first\n");
 		}
+		BOOST_AUTO_TEST_CASE(can_be_refilled)
+		{
+			CheckFunctionOutput([&]() {
+				machine.Refill(1); }, 
+				"Machine is refilled\n");
+		}
 	BOOST_AUTO_TEST_SUITE_END()
 
 	struct has_quarter_state_Fixture : GumballMachineWIthStateFixture
@@ -88,6 +94,15 @@ Machine is waiting for quarter
 				machine.TurnCrank(); },
 				"You turned...\nA gumball comes rolling out the slot...\n");
 		}
+		BOOST_AUTO_TEST_CASE(can_be_refilled)
+		{
+			CheckFunctionOutput([&]() {
+				machine.Refill(1); },
+				"Machine is refilled\n");
+			CheckFunctionOutput([&]() {
+				machine.TurnCrank(); },
+				"You turned...\nA gumball comes rolling out the slot...\nOops, out of gumballs\n");
+		}
 	BOOST_AUTO_TEST_SUITE_END()
 	struct SoldOutStateWithQuartersFixture : GumballMachineWIthStateFixture
 	{
@@ -124,6 +139,15 @@ Machine is waiting for quarter
 			CheckFunctionOutput([&]() {
 				machine.TurnCrank(); }, "You turned but there's no gumballs\nNo gumball dispensed\n");
 		}
+		BOOST_AUTO_TEST_CASE(can_be_refilled)
+		{
+			CheckFunctionOutput([&]() {
+				machine.Refill(1); },
+				"Machine is refilled\n");
+			CheckFunctionOutput([&]() {
+				machine.TurnCrank(); },
+				"You turned...\nA gumball comes rolling out the slot...\nOops, out of gumballs\n");
+		}
 	BOOST_AUTO_TEST_SUITE_END()
 
 	struct SoldOutStateWithoutQuartersFixture : GumballMachineWIthStateFixture
@@ -153,6 +177,15 @@ Machine is waiting for quarter
 		{
 			CheckFunctionOutput([&]() {
 				machine.TurnCrank(); }, "You turned but there's no gumballs\nNo gumball dispensed\n");
+		}
+		BOOST_AUTO_TEST_CASE(can_be_refilled)
+		{
+			CheckFunctionOutput([&]() {
+				machine.Refill(1); },
+				"Machine is refilled\n");
+			CheckFunctionOutput([&]() {
+				machine.TurnCrank(); },
+				"You turned but there's no quarter\nYou need to pay first\n");
 		}
 	BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
