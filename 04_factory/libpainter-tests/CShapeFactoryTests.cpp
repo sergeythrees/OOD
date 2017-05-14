@@ -17,8 +17,8 @@ struct factoryFixture
 	{}
 
 	CShapeFactory factory;
+	ostringstream out; 
 	OStreamCanvas canvas;
-	ostringstream out;
 };
 BOOST_FIXTURE_TEST_SUITE(CShapeFactory_class, factoryFixture)
 	BOOST_AUTO_TEST_CASE(can_create_triangle)

@@ -19,8 +19,8 @@ struct painterFixture
 
 	CPainter painter;
 	CPictureDraft picture;
-	OStreamCanvas canvas;
 	ostringstream out;
+	OStreamCanvas canvas;
 };
 BOOST_FIXTURE_TEST_SUITE(CPainter_class, painterFixture)
 	BOOST_AUTO_TEST_CASE(should_not_change_canvas_if_picture_is_empty)

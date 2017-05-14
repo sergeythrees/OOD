@@ -27,9 +27,6 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CTriangleTests.cpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="VerifyExceptions.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -51,9 +48,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DesignerTests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ShapeTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PictureDraftTests.cpp">
@@ -78,6 +72,9 @@
       <Filter>ExistingItems</Filter>
     </ClCompile>
     <ClCompile Include="CPainterTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CTriangleTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

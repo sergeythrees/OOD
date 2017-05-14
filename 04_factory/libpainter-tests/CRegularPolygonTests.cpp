@@ -32,13 +32,14 @@ struct polygonFixture
 		polygon(Color::Pink, { 0,0 }, 6, 3)
 	{}
 
-	CRegularPolygon polygon;
+	
 	Point center;
 	unsigned radius;
 	unsigned verticesCount;
+	ostringstream strm;
 	OStreamCanvas canvas;
 	Color color;
-	ostringstream strm;
+	CRegularPolygon polygon;
 };
 BOOST_FIXTURE_TEST_SUITE(RegularPolygon_class, polygonFixture)
 	BOOST_AUTO_TEST_SUITE(CalculatePolygonVertices_function)

@@ -16,12 +16,13 @@ struct rectangleFixture
 		rectangle(Color::Pink, { 0,1 }, { 2,0 })
 	{}
 
-	CRectangle rectangle;
+	
 	Point leftTop;
 	Point rightBottom;
-	OStreamCanvas canvas;
-	Color color;
 	ostringstream strm;
+	OStreamCanvas canvas;
+	Color color;	
+	CRectangle rectangle;
 };
 BOOST_FIXTURE_TEST_SUITE(Rectangle_class, rectangleFixture)
 	BOOST_AUTO_TEST_CASE(can_be_drawn)

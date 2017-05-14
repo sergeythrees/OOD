@@ -7,9 +7,9 @@ struct canvasFixture
 {
 	canvasFixture()
 		:canvas(OStreamCanvas(strm)) {}
-
-	OStreamCanvas canvas;
+	
 	ostringstream strm;
+	OStreamCanvas canvas;	
 };
 BOOST_FIXTURE_TEST_SUITE(OStreamCanvas_class, canvasFixture)
 	BOOST_AUTO_TEST_SUITE(by_default)

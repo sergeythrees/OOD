@@ -15,11 +15,11 @@ struct triangleFixture
 		triangle(Color::Pink, { 0,0 }, { 1,1 }, { 2,2 })
 	{}
 
-	CTriangle triangle;
 	vector<Point> vertices;
-	OStreamCanvas canvas;
-	Color color;
 	ostringstream strm;
+	OStreamCanvas canvas;
+	Color color;	
+	CTriangle triangle;
 };
 BOOST_FIXTURE_TEST_SUITE(Triangle_class, triangleFixture)
 		BOOST_AUTO_TEST_CASE(can_be_drawn)
