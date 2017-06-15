@@ -17,6 +17,7 @@ public:
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
 	void SetListItems(std::vector<std::wstring>const& list) override final;
+	void SetTableItems(std::vector<std::pair<float, float>>const& list)override final;
 	void UpdateSelectedHarmonic(float amplitude, FunctionType type, float frequency, float phase) override final;
 	IChartView & GetChartView() override final;
 
@@ -79,4 +80,8 @@ public:
 	CStatic m_freqHeader;
 	CStatic m_phaseHeader;
 	afx_msg void OnBnClickedRadio4();
+	afx_msg void OnBnClickedRadio3();
+	CListBox m_tableView;
+	CListBox m_tableViewY;
+	CListBox m_tableView2;
 };

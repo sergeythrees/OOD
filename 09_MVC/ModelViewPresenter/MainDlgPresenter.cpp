@@ -74,6 +74,7 @@ void CMainDlgPresenter::DeleteHarmonic(int index)
 void CMainDlgPresenter::Update()
 {
 	UpdateView();
+	UpdateList();
 	UpdateChart();
 }
 
@@ -85,6 +86,16 @@ void CMainDlgPresenter::UpdateChart()
 		points.emplace_back(x, m_harmonics.CalculateAt(x));
 	}
 	m_view.GetChartView().SetData(points);
+}
+void CMainDlgPresenter::UpdateList()
+{
+	std::vector<std::pair<float, float>> harmonicsTable;
+	for (float x = 0; x <= 5.0f; x += 0.5f)
+	{
+		harmonicsTable.push_back({ x, m_harmonics.CalculateAt(x) });
+	}
+	m_view.SetTableItems(harmonicsTable);
+
 }
 
 void CMainDlgPresenter::UpdateView()

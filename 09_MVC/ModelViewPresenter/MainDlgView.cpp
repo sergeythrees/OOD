@@ -37,6 +37,8 @@ void CMainDlgView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_STATIC_AMPLITUDE, m_amplitudeHeader);
 	DDX_Control(pDX, IDC_STATIC_FREQ, m_freqHeader);
 	DDX_Control(pDX, IDC_STATIC_PH, m_phaseHeader);
+	DDX_Control(pDX, IDC_LIST1, m_tableView);
+	DDX_Control(pDX, IDC_LIST2, m_tableView2);
 }
 
 void CMainDlgView::SetListItems(std::vector<std::wstring> const& list)
@@ -45,6 +47,17 @@ void CMainDlgView::SetListItems(std::vector<std::wstring> const& list)
 	for (auto & string : list)
 	{
 		m_harmonicsList.AddString(string.c_str());
+	}
+}
+
+void CMainDlgView::SetTableItems(std::vector<std::pair<float, float>> const & list)
+{
+	m_tableView.ResetContent();
+	m_tableView2.ResetContent();
+	for (auto & value : list)
+	{
+		m_tableView.AddString(std::to_wstring(value.first).c_str());
+		m_tableView2.AddString(std::to_wstring(value.second).c_str());
 	}
 }
 
@@ -126,6 +139,7 @@ BEGIN_MESSAGE_MAP(CMainDlgView, CDialogEx)
 	ON_LBN_KILLFOCUS(IDC_HARMONICS_LIST, &CMainDlgView::OnLbnKillfocusHarmonicsList)
 	ON_LBN_SELCANCEL(IDC_HARMONICS_LIST, &CMainDlgView::OnLbnSelcancelHarmonicsList)
 	ON_BN_CLICKED(IDC_RADIO4, &CMainDlgView::OnBnClickedRadio4)
+	ON_BN_CLICKED(IDC_RADIO3, &CMainDlgView::OnBnClickedRadio3)
 END_MESSAGE_MAP()
 
 
@@ -322,5 +336,18 @@ void CMainDlgView::OnLbnSelcancelHarmonicsList()
 
 void CMainDlgView::OnBnClickedRadio4()
 {
+	GetDlgItem(IDC_CHART)->ShowWindow(false);
+	GetDlgItem(IDC_LIST1)->ShowWindow(true);
+	GetDlgItem(IDC_LIST2)->ShowWindow(true);
+	// TODO: Add your control notification handler code here
+}
+
+
+void CMainDlgView::OnBnClickedRadio3()
+{
+	GetDlgItem(IDC_CHART)->ShowWindow(true);
+	GetDlgItem(IDC_LIST1)->ShowWindow(false);
+	GetDlgItem(IDC_LIST2)->ShowWindow(false);
+
 	// TODO: Add your control notification handler code here
 }

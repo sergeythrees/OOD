@@ -20,6 +20,7 @@ public:
 	virtual IChartView & GetChartView() = 0;
 	//virtual ITableView & GetTableView() = 0;
 	virtual void SetListItems(std::vector<std::wstring> const& list) = 0;
+	virtual void SetTableItems(std::vector<std::pair<float, float>> const& list) = 0;
 	virtual void UpdateSelectedHarmonic(float amplitude, FunctionType type, float frequency, float phase) = 0;
 	// Signals
 	virtual sig::connection DoOnInit(const InitSignal::slot_type & handler) = 0;

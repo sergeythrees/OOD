@@ -23,6 +23,7 @@ public:
 private:
 	void UpdateChart();
 	void UpdateView();
+	void UpdateList();
 private:
 	IHarmonics & m_harmonics;
 	IMainDlgView & m_view;
