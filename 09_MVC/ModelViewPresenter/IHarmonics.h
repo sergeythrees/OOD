@@ -10,7 +10,7 @@ using IHarmonicPtr = std::shared_ptr<IHarmonic>;
 class IHarmonics
 {
 public:
-	typedef sig::signal<void()> HarmonicsChangeSignal;
+	typedef sig::signal<void()> HarmonicsUpdateSignal;
 
 	virtual ~IHarmonics() = default;
 	
@@ -21,10 +21,10 @@ public:
 
 	virtual size_t GetCount() const = 0;
 
-	virtual sig::connection DoOnChangeHarmonics(const HarmonicsChangeSignal::slot_type & handler) = 0;
+	virtual sig::connection SetHandlerToUpdateHarmonics(const HarmonicsUpdateSignal::slot_type & handler) = 0;
 };
 
-static std::wstring ToString(const std::shared_ptr<IHarmonic> pHarmonic)
+static std::wstring ToString(const std::shared_ptr<IHarmonic> harmonic)
 {
 	auto ToSignedString = [](double value) {
 		std::wostringstream strm;
@@ -39,15 +39,15 @@ static std::wstring ToString(const std::shared_ptr<IHarmonic> pHarmonic)
 	};
 
 	std::wostringstream strm;
-	strm << pHarmonic->GetAmplitude() << L"*" << functions.at(pHarmonic->GetType()) << L"(";
-	if (pHarmonic->GetFrequency() != 1)
+	strm << harmonic->GetAmplitude() << L"*" << functions.at(harmonic->GetType()) << L"(";
+	if (harmonic->GetFrequency() != 1)
 	{
-		strm << pHarmonic->GetFrequency() << L"*x";
+		strm << harmonic->GetFrequency() << L"*x";
 	}
 	else
 	{
 		strm << L"x";
 	}
-	strm << (pHarmonic->GetPhase() != 0 ? ToSignedString(pHarmonic->GetPhase()) : L"") << L")";
+	strm << (harmonic->GetPhase() != 0 ? ToSignedString(harmonic->GetPhase()) : L"") << L")";
 	return strm.str();
 }

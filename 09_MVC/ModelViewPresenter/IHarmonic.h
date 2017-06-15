@@ -5,7 +5,7 @@
 class IHarmonic
 {
 public:
-	typedef sig::signal<void()> HarmonicChangeSignal;
+	typedef sig::signal<void()> HarmonicUpdateSignal;
 
 	virtual ~IHarmonic() = default;
 	
@@ -21,7 +21,7 @@ public:
 	virtual float GetPhase() const = 0;
 	virtual void SetPhase(float phase) = 0;
 
-	virtual sig::connection DoOnChangeHarmonic(const HarmonicChangeSignal::slot_type & handler) = 0;
+	virtual sig::connection SetHandlerToUpdateHarmonic(const HarmonicUpdateSignal::slot_type & handler) = 0;
 
 	virtual float CalculateAt(float x) const = 0;
 };

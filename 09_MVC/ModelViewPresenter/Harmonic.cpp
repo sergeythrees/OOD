@@ -27,7 +27,7 @@ void CHarmonic::SetType(FunctionType type)
 	if (m_function != type)
 	{
 		m_function = type;
-		m_harmonicChangeSignal();
+		m_harmonicUpdateSignal();
 	}
 
 }
@@ -42,7 +42,7 @@ void CHarmonic::SetAmplitude(float amplitude)
 	if (m_amplitude != amplitude)
 	{
 		m_amplitude = amplitude;
-		m_harmonicChangeSignal();
+		m_harmonicUpdateSignal();
 	}
 }
 
@@ -56,7 +56,7 @@ void CHarmonic::SetFrequency(float frequency)
 	if (m_frequency != frequency)
 	{
 		m_frequency = frequency;
-		m_harmonicChangeSignal();
+		m_harmonicUpdateSignal();
 	}
 }
 
@@ -70,7 +70,7 @@ void CHarmonic::SetPhase(float phase)
 	if (m_phase != phase)
 	{
 		m_phase = phase;
-		m_harmonicChangeSignal();
+		m_harmonicUpdateSignal();
 	}
 }
 
@@ -84,7 +84,7 @@ float CHarmonic::CalculateAt(float x) const
 	return m_amplitude * functions.at(m_function)(m_frequency * x + m_phase);
 }
 
-sig::connection CHarmonic::DoOnChangeHarmonic(const HarmonicChangeSignal::slot_type & handler)
+sig::connection CHarmonic::SetHandlerToUpdateHarmonic(const HarmonicUpdateSignal::slot_type & handler)
 {
-	return m_harmonicChangeSignal.connect(handler);
+	return m_harmonicUpdateSignal.connect(handler);
 }

@@ -84,42 +84,42 @@ IChartView & CMainDlgView::GetChartView()
 	return m_chart;
 }
 
-sig::connection CMainDlgView::DoOnInit(const InitSignal::slot_type & handler)
+sig::connection CMainDlgView::SetHandlerToInit(const InitSignal::slot_type & handler)
 {
 	return m_initSignal.connect(handler);
 }
 
-sig::connection CMainDlgView::DoOnAmplitudeChange(const ChangeHarmonicSignal::slot_type & handler)
+sig::connection CMainDlgView::SetHandlerToAmplitudeUpdate(const UpdateHarmonicSignal::slot_type & handler)
 {
 	return m_changeAmplitudeSignal.connect(handler);
 }
 
-sig::connection CMainDlgView::DoOnFrequencyChange(const ChangeHarmonicSignal::slot_type & handler)
+sig::connection CMainDlgView::SetHandlerToFrequencyUpdate(const UpdateHarmonicSignal::slot_type & handler)
 {
 	return m_changeFrequencySignal.connect(handler);
 }
 
-sig::connection CMainDlgView::DoOnPhaseChange(const ChangeHarmonicSignal::slot_type & handler)
+sig::connection CMainDlgView::SetHandlerToPhaseUpdate(const UpdateHarmonicSignal::slot_type & handler)
 {
 	return m_changePhaseSignal.connect(handler);
 }
 
-sig::connection CMainDlgView::DoOnFunctionTypeChange(const ChangeFunctionTypeSignal::slot_type & handler)
+sig::connection CMainDlgView::SetHandlerToFunctionTypeUpdate(const UpdateFunctionTypeSignal::slot_type & handler)
 {
 	return m_changeFunctionType.connect(handler);
 }
 
-sig::connection CMainDlgView::DoOnDeleteHarmonic(const DeleteHarmonicSignal::slot_type & handler)
+sig::connection CMainDlgView::SetHandlerToDeleteHarmonic(const DeleteHarmonicSignal::slot_type & handler)
 {
 	return m_deleteHarmonicSignal.connect(handler);
 }
 
-sig::connection CMainDlgView::DoOnAddHarmonic(const AddHarmonicSignal::slot_type & handler)
+sig::connection CMainDlgView::SetHandlerToAddHarmonic(const AddHarmonicSignal::slot_type & handler)
 {
 	return m_addHarmonicSignal.connect(handler);
 }
 
-sig::connection CMainDlgView::DoOnChangeSelect(const ChangeSelectionSignal::slot_type & handler)
+sig::connection CMainDlgView::SetHandlerToUpdateSelect(const UpdateSelectionSignal::slot_type & handler)
 {
 	return 	m_changeSelection.connect(handler);
 }
@@ -206,17 +206,17 @@ HCURSOR CMainDlgView::OnQueryDragIcon()
 
 void CMainDlgView::OnKillFocusAmplitude()
 {
-	UpdateDataAndSaveSelect(m_amplitudeEdit, m_changeAmplitudeSignal);
+	UpdateEditBoxValues(m_amplitudeEdit, m_changeAmplitudeSignal);
 }
 
 void CMainDlgView::OnKillFocusPhase()
 {
-	UpdateDataAndSaveSelect(m_phaseEdit, m_changePhaseSignal);
+	UpdateEditBoxValues(m_phaseEdit, m_changePhaseSignal);
 }
 
 void CMainDlgView::OnKillFocusFrequency()
 {
-	UpdateDataAndSaveSelect(m_frequencyEdit, m_changeFrequencySignal);
+	UpdateEditBoxValues(m_frequencyEdit, m_changeFrequencySignal);
 }
 
 void CMainDlgView::EnableEdit(bool enable)
@@ -232,15 +232,14 @@ void CMainDlgView::EnableEdit(bool enable)
 	GetDlgItem(IDC_BUTTON_DELETE)->EnableWindow(enable);
 }
 
-void CMainDlgView::UpdateDataAndSaveSelect(CEdit & edit, ChangeHarmonicSignal & signal)
+void CMainDlgView::UpdateEditBoxValues(CEdit & edit, UpdateHarmonicSignal & signal)
 {
 	if (UpdateData())
 	{
 		int index = m_harmonicsList.GetCurSel();
 		if (index >= 0)
-		{
 			signal(index, utils::GetEditValue(edit));
-		}
+
 		m_harmonicsList.SetCurSel(index);
 	}
 }

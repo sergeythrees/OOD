@@ -21,15 +21,14 @@ public:
 	void UpdateSelectedHarmonic(float amplitude, FunctionType type, float frequency, float phase) override final;
 	IChartView & GetChartView() override final;
 
-	// Signals
-	sig::connection DoOnInit(const InitSignal::slot_type & handler) override final;
-	sig::connection DoOnAmplitudeChange(const ChangeHarmonicSignal::slot_type & handler) override final;
-	sig::connection DoOnFrequencyChange(const ChangeHarmonicSignal::slot_type & handler) override final;
-	sig::connection DoOnPhaseChange(const ChangeHarmonicSignal::slot_type & handler) override final;
-	sig::connection DoOnFunctionTypeChange(const ChangeFunctionTypeSignal::slot_type & handler) override final;
-	sig::connection DoOnDeleteHarmonic(const DeleteHarmonicSignal::slot_type & handler) override final;
-	sig::connection DoOnAddHarmonic(const AddHarmonicSignal::slot_type & handler) override final;
-	sig::connection DoOnChangeSelect(const ChangeSelectionSignal::slot_type & handler) override final;
+	sig::connection SetHandlerToInit(const InitSignal::slot_type & handler) override final;
+	sig::connection SetHandlerToAmplitudeUpdate(const UpdateHarmonicSignal::slot_type & handler) override final;
+	sig::connection SetHandlerToFrequencyUpdate(const UpdateHarmonicSignal::slot_type & handler) override final;
+	sig::connection SetHandlerToPhaseUpdate(const UpdateHarmonicSignal::slot_type & handler) override final;
+	sig::connection SetHandlerToFunctionTypeUpdate(const UpdateFunctionTypeSignal::slot_type & handler) override final;
+	sig::connection SetHandlerToDeleteHarmonic(const DeleteHarmonicSignal::slot_type & handler) override final;
+	sig::connection SetHandlerToAddHarmonic(const AddHarmonicSignal::slot_type & handler) override final;
+	sig::connection SetHandlerToUpdateSelect(const UpdateSelectionSignal::slot_type & handler) override final;
 
 // Implementation
 protected:
@@ -49,16 +48,16 @@ private:
 
 	void EnableEdit(bool enable);
 
-	void UpdateDataAndSaveSelect(CEdit & edit, ChangeHarmonicSignal & signal);
+	void UpdateEditBoxValues(CEdit & edit, UpdateHarmonicSignal & signal);
 
 	InitSignal m_initSignal;
-	ChangeHarmonicSignal m_changeAmplitudeSignal;
-	ChangeHarmonicSignal m_changeFrequencySignal;
-	ChangeHarmonicSignal m_changePhaseSignal;
-	ChangeFunctionTypeSignal m_changeFunctionType;
+	UpdateHarmonicSignal m_changeAmplitudeSignal;
+	UpdateHarmonicSignal m_changeFrequencySignal;
+	UpdateHarmonicSignal m_changePhaseSignal;
+	UpdateFunctionTypeSignal m_changeFunctionType;
 	AddHarmonicSignal m_addHarmonicSignal;
 	DeleteHarmonicSignal m_deleteHarmonicSignal;
-	ChangeSelectionSignal m_changeSelection;
+	UpdateSelectionSignal m_changeSelection;
 	
 	CChartView m_chart;
 

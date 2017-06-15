@@ -21,7 +21,7 @@ public:
 	void SetPhase(float phase) override final;
 
 	float CalculateAt(float x) const override final;
-	sig::connection DoOnChangeHarmonic(const HarmonicChangeSignal::slot_type & handler) override final;
+	sig::connection SetHandlerToUpdateHarmonic(const HarmonicUpdateSignal::slot_type & handler) override final;
 
 private:
 	float m_amplitude;
@@ -29,5 +29,5 @@ private:
 	float m_frequency;
 	float m_phase;
 
-	HarmonicChangeSignal m_harmonicChangeSignal;
+	HarmonicUpdateSignal m_harmonicUpdateSignal;
 };

@@ -16,10 +16,10 @@ public:
 	void DeleteHarmonic(size_t index) override final;
 
 	size_t GetCount() const override final;
-	sig::connection DoOnChangeHarmonics(const HarmonicsChangeSignal::slot_type & handler) override final;
+	sig::connection SetHandlerToUpdateHarmonics(const HarmonicsUpdateSignal::slot_type & handler) override final;
 
 private:
 	std::vector<IHarmonicPtr> m_harmonics;
-	HarmonicsChangeSignal m_harmonicsChangeSignal;
+	HarmonicsUpdateSignal m_harmonicsUpdateSignal;
 };
 

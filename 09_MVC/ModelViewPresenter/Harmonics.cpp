@@ -33,9 +33,9 @@ IHarmonicPtr CHarmonics::GetHarmonic(size_t index) const
 
 void CHarmonics::AddHarmonic(float amplitude,FunctionType type, float frequency, float phase)
 {
-	auto pHarmonic = std::make_shared<CHarmonic>(amplitude, type, frequency, phase);
-	m_harmonics.push_back(pHarmonic);
-	m_harmonicsChangeSignal();
+	auto harmonic = std::make_shared<CHarmonic>(amplitude, type, frequency, phase);
+	m_harmonics.push_back(harmonic);
+	m_harmonicsUpdateSignal();
 }
 
 void CHarmonics::DeleteHarmonic(size_t index)
@@ -45,7 +45,7 @@ void CHarmonics::DeleteHarmonic(size_t index)
 		throw std::out_of_range("Out of range");
 	}
 	m_harmonics.erase(m_harmonics.begin() + index);
-	m_harmonicsChangeSignal();
+	m_harmonicsUpdateSignal();
 }
 
 size_t CHarmonics::GetCount() const
@@ -53,11 +53,11 @@ size_t CHarmonics::GetCount() const
 	return m_harmonics.size();
 }
 
-sig::connection CHarmonics::DoOnChangeHarmonics(const HarmonicsChangeSignal::slot_type & handler)
+sig::connection CHarmonics::SetHandlerToUpdateHarmonics(const HarmonicsUpdateSignal::slot_type & handler)
 {
 	std::for_each(m_harmonics.begin(), m_harmonics.end(), [&](auto & harmonic) {
-		harmonic->DoOnChangeHarmonic(handler);
+		harmonic->SetHandlerToUpdateHarmonic(handler);
 	});
 
-	return m_harmonicsChangeSignal.connect(handler);
+	return m_harmonicsUpdateSignal.connect(handler);
 }

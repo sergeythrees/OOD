@@ -11,47 +11,43 @@ CMainDlgPresenter::CMainDlgPresenter(IHarmonics & harmonics, IMainDlgView & view
 	: m_harmonics(harmonics)
 	, m_view(view)
 {
-	m_view.DoOnAddHarmonic(std::bind(&CMainDlgPresenter::AddDefaultHarmonic, this));
-	m_view.DoOnAmplitudeChange(std::bind(&CMainDlgPresenter::ChangeAmplitude, this, ph::_1, ph::_2));
-	m_view.DoOnDeleteHarmonic(std::bind(&CMainDlgPresenter::DeleteHarmonic, this, ph::_1));
-	m_view.DoOnFrequencyChange(std::bind(&CMainDlgPresenter::ChangeFrequency, this, ph::_1, ph::_2));
-	m_view.DoOnFunctionTypeChange(std::bind(&CMainDlgPresenter::ChangeFunctionType, this, ph::_1, ph::_2));
-	m_view.DoOnInit(std::bind(&CMainDlgPresenter::Update, this));
-	m_view.DoOnPhaseChange(std::bind(&CMainDlgPresenter::ChangePhase, this, ph::_1, ph::_2));
-	m_view.DoOnChangeSelect(std::bind(&CMainDlgPresenter::ChangeSelection, this, ph::_1));
-	m_harmonics.DoOnChangeHarmonics(std::bind(&CMainDlgPresenter::Update, this));
+	m_view.SetHandlerToAddHarmonic(std::bind(&CMainDlgPresenter::AddDefaultHarmonic, this));
+	m_view.SetHandlerToAmplitudeUpdate(std::bind(&CMainDlgPresenter::UpdateAmplitude, this, ph::_1, ph::_2));
+	m_view.SetHandlerToDeleteHarmonic(std::bind(&CMainDlgPresenter::DeleteHarmonic, this, ph::_1));
+	m_view.SetHandlerToFrequencyUpdate(std::bind(&CMainDlgPresenter::UpdateFrequency, this, ph::_1, ph::_2));
+	m_view.SetHandlerToFunctionTypeUpdate(std::bind(&CMainDlgPresenter::UpdateFunctionType, this, ph::_1, ph::_2));
+	m_view.SetHandlerToInit(std::bind(&CMainDlgPresenter::Update, this));
+	m_view.SetHandlerToPhaseUpdate(std::bind(&CMainDlgPresenter::UpdatePhase, this, ph::_1, ph::_2));
+	m_view.SetHandlerToUpdateSelect(std::bind(&CMainDlgPresenter::UpdateSelection, this, ph::_1));
+	m_harmonics.SetHandlerToUpdateHarmonics(std::bind(&CMainDlgPresenter::Update, this));
 
 }
 
-void CMainDlgPresenter::ChangeFrequency(int index, float frequency)
+void CMainDlgPresenter::UpdateFrequency(int index, float frequency)
+{
+	m_harmonics.GetHarmonic(index)->SetFrequency(frequency);
+}
+
+void CMainDlgPresenter::UpdatePhase(int index, float phase)
+{
+	m_harmonics.GetHarmonic(index)->SetPhase(phase);
+}
+
+void CMainDlgPresenter::UpdateAmplitude(int index, float amplitude)
+{
+	m_harmonics.GetHarmonic(index)->SetAmplitude(amplitude);
+}
+
+void CMainDlgPresenter::UpdateFunctionType(int index, FunctionType functionType)
+{
+	m_harmonics.GetHarmonic(index)->SetType(functionType);
+}
+
+void CMainDlgPresenter::UpdateSelection(int index)
 {
 	auto harmonic = m_harmonics.GetHarmonic(index);
-	harmonic->SetFrequency(frequency);
-}
-
-void CMainDlgPresenter::ChangePhase(int index, float phase)
-{
-	auto harmonic = m_harmonics.GetHarmonic(index);
-	harmonic->SetPhase(phase);
-}
-
-void CMainDlgPresenter::ChangeAmplitude(int index, float amplitude)
-{
-	auto harmonic = m_harmonics.GetHarmonic(index);
-	harmonic->SetAmplitude(amplitude);
-}
-
-void CMainDlgPresenter::ChangeFunctionType(int index, FunctionType functionType)
-{
-	auto harmonic = m_harmonics.GetHarmonic(index);
-	harmonic->SetType(functionType);
-}
-
-void CMainDlgPresenter::ChangeSelection(int index)
-{
-	auto pHarmonic = m_harmonics.GetHarmonic(index);
-	m_view.UpdateSelectedHarmonic(pHarmonic->GetAmplitude(), pHarmonic->GetType(),
-		pHarmonic->GetFrequency(), pHarmonic->GetPhase());
+	m_view.UpdateSelectedHarmonic(harmonic->GetAmplitude(), harmonic->GetType(),
+		harmonic->GetFrequency(), harmonic->GetPhase());
 }
 
 void CMainDlgPresenter::AddDefaultHarmonic()
@@ -62,8 +58,8 @@ void CMainDlgPresenter::AddDefaultHarmonic()
 void CMainDlgPresenter::AddHarmonic(float aplitude,FunctionType type, float frequency, float phase)
 {
 	m_harmonics.AddHarmonic(aplitude, type, frequency, phase);
-	auto pHarmonic = m_harmonics.GetHarmonic(m_harmonics.GetCount() - 1);
-	pHarmonic->DoOnChangeHarmonic(std::bind(&CMainDlgPresenter::Update, this));
+	m_harmonics.GetHarmonic(m_harmonics.GetCount() - 1)
+		->SetHandlerToUpdateHarmonic(std::bind(&CMainDlgPresenter::Update, this));
 }
 
 void CMainDlgPresenter::DeleteHarmonic(int index)
@@ -102,12 +98,7 @@ void CMainDlgPresenter::UpdateView()
 {
 	std::vector<std::wstring> harmonicsStr;
 	for (size_t i = 0; i < m_harmonics.GetCount(); ++i)
-	{
-		auto pHarmonic = m_harmonics.GetHarmonic(i);
-		harmonicsStr.push_back(ToString(pHarmonic));
-	}
+		harmonicsStr.push_back(ToString(m_harmonics.GetHarmonic(i)));
 	m_view.SetListItems(harmonicsStr);
-
-
 }
 

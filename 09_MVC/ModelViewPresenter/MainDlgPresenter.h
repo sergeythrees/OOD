@@ -9,22 +9,21 @@ class CMainDlgPresenter
 {
 public:
 	CMainDlgPresenter(IHarmonics & harmonics, IMainDlgView & view);
-
-	void ChangeFrequency(int index, float frequency);
-	void ChangePhase(int index, float phase);
-	void ChangeAmplitude(int index, float amplitude);
-	void ChangeFunctionType(int index, FunctionType functionType);
-	void ChangeSelection(int index);
+private:
+	void UpdateFrequency(int index, float frequency);
+	void UpdatePhase(int index, float phase);
+	void UpdateAmplitude(int index, float amplitude);
+	void UpdateFunctionType(int index, FunctionType functionType);
+	void UpdateSelection(int index);
 	void AddDefaultHarmonic();
 	void AddHarmonic(float aplitude, FunctionType  type, float frequency, float phase);
 	void DeleteHarmonic(int index);
+	
 	void Update();
-
-private:
 	void UpdateChart();
 	void UpdateView();
 	void UpdateList();
-private:
+
 	IHarmonics & m_harmonics;
 	IMainDlgView & m_view;
 };
